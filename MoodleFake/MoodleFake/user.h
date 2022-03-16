@@ -12,5 +12,7 @@ struct User {
 	string Class;
 };
 
-void addAcc(User acc);
+void addAcc(User*& acc);
+void getAcc(User*& acc);
+User* login(string username, string password);
 

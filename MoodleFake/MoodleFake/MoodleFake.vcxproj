@@ -143,7 +143,9 @@
     <ClCompile Include="course.cpp" />
     <ClCompile Include="date.cpp" />
     <ClCompile Include="MoodleFake.cpp" />
+    <ClCompile Include="schoolYear.cpp" />
     <ClCompile Include="semester.cpp" />
+    <ClCompile Include="staff.cpp" />
     <ClCompile Include="student.cpp" />
     <ClCompile Include="user.cpp" />
   </ItemGroup>
@@ -152,7 +154,9 @@
     <ClInclude Include="course.h" />
     <ClInclude Include="date.h" />
     <ClInclude Include="mark.h" />
+    <ClInclude Include="schoolYear.h" />
     <ClInclude Include="semester.h" />
+    <ClInclude Include="staff.h" />
     <ClInclude Include="student.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
