@@ -14,7 +14,7 @@ user
 		Last name, 	string
 		Gender, 	bool 1/nam 0/nữ
 		Date of Birth, 	integer	dd/mm/yyyy
-		Social ID	long long
+		Social ID	string
 		Các khóa học đã đăng kí: course id
 	staff
 		first name,	string
