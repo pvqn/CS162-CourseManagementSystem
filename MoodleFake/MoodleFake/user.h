@@ -5,13 +5,10 @@
 using namespace std;
 
 struct User {
+	User* next;
 	string username;
 	string password;
 	string role;
 	string Class;
-
-	User(string username, string password, string role, string Class) :
-		username(username), password(password), role(role), Class(Class) {};
-	User() {};
 };
 
