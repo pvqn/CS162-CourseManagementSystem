@@ -12,5 +12,5 @@ struct User {
 	string Class;
 };
 
-//Hello
+void addAcc(User acc);
 
