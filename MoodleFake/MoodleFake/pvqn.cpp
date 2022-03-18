@@ -83,3 +83,14 @@ void viewcourse_student(Semester *head, string id)
         head = head->next;
     }
 }
+void viewclass(Class* head)
+{
+    int i = 0;
+    cout << "Here is the list of classes" << endl;
+    while (head)
+    {
+        cout << i + 1 << ". " << head->ClassName << endl;
+        head = head->next;
+        ++i;
+    }
+}

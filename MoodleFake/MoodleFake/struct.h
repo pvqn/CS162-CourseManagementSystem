@@ -14,17 +14,17 @@ struct Date {
 	{};
 };
 struct Student {
-	Student* next;
+	Student* next=nullptr;
 	string id;
 	string firstName;
 	string lastName;
 	bool gender;
-	Date* dob; // date of birth
+	Date dob; // date of birth
 	string socialId;
 	string courseID;
 };
 struct User {
-	User* next;
+	User* next=nullptr;
 	string username;
 	string password;
 	string role;
@@ -38,8 +38,8 @@ struct Mark {
 };
 struct Class
 {
-	Class* next;                   // Create "ClassList" for searching
-	Student* StudentList;           // Create "StudentList"
+	Class* next=nullptr;                   // Create "ClassList" for searching
+	Student* StudentList = nullptr;           // Create "StudentList"
 	string ClassName;
 };
 struct student_list
