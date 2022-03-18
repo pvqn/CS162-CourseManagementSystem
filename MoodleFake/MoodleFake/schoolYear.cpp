@@ -2,10 +2,10 @@
 
 void setCurrentYear(int year) {
     string path = "data/" + to_string(year);
-    mkdir(path.c_str());
+    _mkdir(path.c_str());
 
     path = "csvFile/" + to_string(year);
-    mkdir(path.c_str());
+    _mkdir(path.c_str());
 
     path = "data/cache/currentYear.txt";
     ofstream fout(path);

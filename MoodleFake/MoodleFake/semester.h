@@ -1,5 +1,4 @@
 #pragma once
-#include <direct.h>
 #include "struct.h"
 using namespace std;
 

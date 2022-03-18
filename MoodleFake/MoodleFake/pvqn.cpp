@@ -2,8 +2,8 @@
 #include "struct.h"
 using namespace std;
 Date getcurrentdate () {
-    std::time_t t = std::time(0);   // get time now
-    std::tm* now = std::localtime(&t);
+    time_t t = time(0);   // get time now
+    tm* now = localtime(&t);
     Date cur;
     cur.year = now->tm_year + 1900;
     cur.month = now->tm_mon + 1;

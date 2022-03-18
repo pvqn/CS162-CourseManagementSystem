@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <direct.h>
 using namespace std;
 struct Date {
 	int day, month, year;
