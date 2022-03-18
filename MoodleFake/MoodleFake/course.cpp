@@ -1,3 +1,3 @@
-#include "course.h"
+#include "struct.h"
 
 

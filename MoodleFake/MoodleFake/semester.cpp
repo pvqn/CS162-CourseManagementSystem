@@ -1,4 +1,4 @@
-#include "semester.h"
+#include "struct.h"
 void setCurrentSemester(int year, int term, Date start, Date end) {
 	string path = "data/" + to_string(year) + '/' + to_string(term) + "/info.txt";
 	ofstream fout(path);

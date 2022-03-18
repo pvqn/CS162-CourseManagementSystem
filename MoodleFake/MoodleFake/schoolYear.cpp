@@ -1,4 +1,4 @@
-#include "schoolYear.h"
+#include "struct.h"
 
 void setCurrentYear(int year) {
     string path = "data/" + to_string(year);

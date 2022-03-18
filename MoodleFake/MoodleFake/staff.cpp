@@ -1,6 +1,5 @@
-#include "staff.h"
-
-
+#include "schoolYear.h"
+#include "semester.h"
 void createSchoolYear() {
 	int year;
 	cout << "Year(yyyy): ";

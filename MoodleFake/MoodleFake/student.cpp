@@ -1,5 +1,4 @@
-#include "student.h"
-#include "classes.h"
+#include "struct.h"
 void ViewClass( Class *ClassList ) // view HS trong lop
 {
     string Name;
@@ -17,5 +16,15 @@ void ViewClass( Class *ClassList ) // view HS trong lop
     {
         cout << (++index) << ". " << Person->firstName << ' ' << Person->lastName << '\n';
         Person = Person->next;
+    }
+}
+
+void ViewCourseList( Course *CourseList ) // Danh sach khoa hoc
+{
+    Course *cur = CourseList;
+    while( cur )
+    {
+        cout << cur->id << ": " << cur->name << '\n';   // Print ID and name
+        cur = cur->next;
     }
 }
