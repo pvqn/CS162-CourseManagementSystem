@@ -143,7 +143,10 @@
     <ClCompile Include="course.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="MoodleFake.cpp" />
-    <ClCompile Include="pvqn.cpp" />
+    <ClCompile Include="pvqn.cpp">
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
     <ClCompile Include="schoolYear.cpp" />
     <ClCompile Include="semester.cpp" />
     <ClCompile Include="staff.cpp" />
