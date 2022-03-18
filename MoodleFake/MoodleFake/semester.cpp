@@ -2,18 +2,28 @@
 void setCurrentSemester(int year, int term, Date start, Date end) {
 	string path = "data/" + to_string(year) + '/' + to_string(term) + "/info.txt";
 	ofstream fout(path);
-	fout << year << '\n';
-	fout << term << '\n';
-	fout << start.day << ' ' << start.month << ' ' << start.year << '\n';
-	fout << end.day << ' ' << end.month << ' ' << end.year << '\n';
+	fout << year << endl;
+	fout << term << endl;
+	fout << start.day << ' ';
+	fout << start.month << ' ';
+	fout << start.year << endl;
+	fout << end.day << ' ';
+	fout << end.month << ' ';
+	fout << end.year << endl;
 	fout.close();
 
 	path = "data/cache/currentSemester.txt";
 	fout.open(path);
-	fout << year << '\n';
-	fout << term << '\n';
-	fout << start.day << ' ' << start.month << ' ' << start.year << '\n';
-	fout << end.day << ' ' << end.month << ' ' << end.year << '\n';
+	fout << year << endl;
+	fout << term << endl;
+
+	fout << start.day << ' ';
+	fout << start.month << ' ';
+	fout << start.year << ' ' << endl;
+
+	fout << end.day << ' ';
+	fout << end.month << ' ';
+	fout << end.year << endl;
 	fout.close();
 
 	path = "data/" + to_string(year) + '/' + to_string(term);
