@@ -1,7 +1,6 @@
 #pragma once
-#include <string>
 #include <direct.h>
-#include <fstream>
+#include "struct.h"
 using namespace std;
 void setCurrentYear(int year);
 int getCurrentYear();

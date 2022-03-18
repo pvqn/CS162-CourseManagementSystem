@@ -1,8 +1,5 @@
 #include <ctime>
-#include "date.h"
-#include "semester.h"
-#include "course.h"
-#include <iostream>
+#include "struct.h"
 using namespace std;
 Date getcurrentdate () {
     std::time_t t = std::time(0);   // get time now

@@ -1,6 +1,4 @@
-#include "student.h"
-#include "classes.h"
-#include "course.h"
+#include "struct.h"
 void ViewClass( Class *ClassList ) // view HS trong lop
 {
     string Name;

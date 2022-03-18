@@ -1,7 +1,4 @@
-﻿#include "classes.h"
-#include "user.h"
-#include <iostream>
-#include <fstream>
+﻿#include "struct.h"
 #include <direct.h>
 
 using namespace std;

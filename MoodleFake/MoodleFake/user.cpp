@@ -1,6 +1,4 @@
 #include "user.h"
-#include <iostream>
-#include <fstream>
 
 using namespace std;
 
