@@ -157,6 +157,7 @@
     <ClInclude Include="classes.h" />
     <ClInclude Include="course.h" />
     <ClInclude Include="display.h" />
+    <ClInclude Include="pvqn.h" />
     <ClInclude Include="schoolYear.h" />
     <ClInclude Include="semester.h" />
     <ClInclude Include="staff.h" />

@@ -1,24 +1,48 @@
 #include "struct.h"
-void ViewClass( Class *ClassList ) // view HS trong lop
+#include "pvqn.h"
+
+void displayclass_student() // display class students
 {
-    string Name;
-    cout << "Enter class name: "; cin >> Name;
-    Class *cur = ClassList;
-    while( cur && cur->ClassName != Name ) cur = cur->next;
-    if( !cur )
+    system("clrscr");
+
+    string Classname;
+    cout << "Enter class name: "; cin >> Classname;
+
+    string path = "data/classes/classList.txt";
+    ifstream fin(path);
+    bool Find = false;
+    while (!fin.eof())
     {
-        cout << "The class is not exist.";
+        string Name;
+        fin >> Name;
+        if (Name == Classname)
+        {
+            Find = true;
+            break;
+        }
+    }
+    fin.close();
+
+    if (!Find)
+    {
+        cout << "This class is not exist !";
         return;
     }
-    Student *Person = cur->StudentList;
+
+    path = "data/classes/" + Classname + "/studentList.txt";
+    fin.open(path);
+    cout << "Student list of this class: " << '\n';
     int index = 0;
-    while( Person )
+    while (!fin.eof())
     {
-        cout << (++index) << ". " << Person->firstName << ' ' << Person->lastName << '\n';
-        Person = Person->next;
+        string Name;
+        fin >> Name; 
+        cout << ++index << ' ' << Name << '\n';
     }
+    fin.close();
 }
 
+/*
 void ViewCourseList( Course *CourseList ) // Danh sach khoa hoc
 {
     Course *cur = CourseList;
@@ -28,3 +52,4 @@ void ViewCourseList( Course *CourseList ) // Danh sach khoa hoc
         cur = cur->next;
     }
 }
+*/
