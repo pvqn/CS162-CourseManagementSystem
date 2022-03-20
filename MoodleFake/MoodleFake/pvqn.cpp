@@ -1,4 +1,4 @@
-#include <ctime>
+﻿#include <ctime>
 #include "struct.h"
 using namespace std;
 Date getcurrentdate () {
@@ -39,10 +39,6 @@ bool compare(Date cur, Date start, Date end)
 }
 void displaycourse_student(Course *display, int i)
 {
-    if (!i)
-    {
-        cout << "Courses in this semester: " << endl;
-    }
     cout << i + 1 << "." << endl;
     cout << "Course id: " << display->id << endl;
     cout << "Course name: " << display->name << endl;
@@ -70,7 +66,10 @@ void viewcourse_student(Semester *head, string id)
                     if (studentcur->id == id)
                     {
                         // neu student id co trong khoa nay, them vao mang course[]
-                       
+                        if (!i)
+                        {
+                            cout << "Courses in this semester: " << endl;
+                        }
                         displaycourse_student(cur, i);
                         ++i;
                         break;
@@ -93,4 +92,59 @@ void viewclass(Class* head)
         head = head->next;
         ++i;
     }
+}
+/* pass string id
+* kiểm tra đã đăng kí bao nhiêu course
+* kiểm tra có giờ nào chung không
+* xu li chinh
+*   in ra list cac khoa hoc hoc ki nay mo, cho hoc sinh chon so
+*   kiem tra hoc sinh da co trong lop hoc nay chua
+*   kiem tra co trung session hay kong
+*   kiem tra co qua 5 course hay khong
+*   neu tat ca deu khong, them student id vao cuoi student list
+*/
+// xu li dang ki hoc phan
+bool checkhowmanycourse(Semester* now, string id)
+{
+    int sum = 0;
+    Course* cur = now->course_cur;
+    while (cur)
+    {
+        student_list* pcur = cur->student;
+        while (pcur)
+        {
+            if (pcur->id == id)
+            {
+                ++sum;
+                break;
+            }
+            pcur = pcur->next;
+        }
+        cur = cur->next;
+    }
+    if (sum >= 5) return false;
+    return true;
+}
+bool issamesession(Semester* now, string id, string s1, string s2, Course*cur)
+{
+    Course* current = now->course_cur;
+    while (current)
+    {
+        student_list* pcur = current->student;
+        while (pcur)
+        {
+            if (pcur->id == id && current->ses1 == s1 &&
+                current->ses2 == s2 && current != cur)
+            {
+                return false;
+            }
+            pcur = pcur->next;
+        }
+        current = current->next;
+    }
+    return true;
+}
+void enrolledcoure(Semester* now, string id)
+{
+    
 }
