@@ -1,0 +1,25 @@
+data
+	Year (Ex: 2021)
+		Semester (Ex: 1)
+			coureses
+				course ID (Ex: CS162)
+					info_Of_Course.txt
+					mark.txt //Mark of all student in the class, include the student ID to indentify
+				courseList.txt
+			students
+				student ID (Ex: 21125158)
+					course.txt
+					mark.txt
+			info_Of_Semester.txt
+	cache
+		currentAcc.txt
+		currentClass.txt
+		currentCourse.txt
+		currentSemester.txt
+		currentYear.txt
+	classes
+		class ID (Ex: 21APCS)
+			Student Info (Ex: 21125158.txt)
+			Student Mark (Ex: 21125158_mark.txt)
+		classList.txt
+	account.txt
