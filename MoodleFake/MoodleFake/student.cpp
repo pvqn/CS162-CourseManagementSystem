@@ -7,7 +7,7 @@ void displayclass_student() // display class students
 
     string Classname;
     cout << "Enter class name: "; cin >> Classname;
-
+    // Find class is exit or not
     string path = "data/classes/classList.txt";
     ifstream fin(path);
     bool Find = false;
@@ -22,24 +22,41 @@ void displayclass_student() // display class students
         }
     }
     fin.close();
-
+    // The case: class is not exist
     if (!Find)
     {
         cout << "This class is not exist !";
         return;
     }
-
-    path = "data/classes/" + Classname + "/studentList.txt";
+    // Create student list ID
+    path = "data/classes/" + Classname + "/studentID.txt";
     fin.open(path);
-    cout << "Student list of this class: " << '\n';
-    int index = 0;
-    while (!fin.eof())
-    {
-        string Name;
-        fin >> Name; 
-        cout << ++index << ' ' << Name << '\n';
-    }
+    int Number_of_student; cin >> Number_of_student;
+    int* studentList = new int[Number_of_student];
+    for (int i = 0; i < Number_of_student; ++i) cin >> studentList[i];
+    delete[] studentList;
     fin.close();
+    // Display student information
+    for (int i = 0; i < Number_of_student; ++i)
+    {
+        path = "data/classes/" + Classname + '/' + to_string(studentList[i]) + ".txt";
+
+        int No;
+        string ID, First_name, Last_name, socialID;
+        bool Gender;
+        Date DOB;
+
+        fin.open(path);
+        fin >> No >> ID >> First_name;
+        fin.ignore(); getline(fin, Last_name);
+        fin >> Gender;
+        fin >> DOB.day >> DOB.month >> DOB.year;
+        fin >> socialID;
+
+        cout << No << ' ' << ID << ' ' << First_name << ' ' << Last_name << '\n';
+
+        fin.close();
+    }
 }
 
 /*
