@@ -212,31 +212,7 @@ void enrolledcoure(Semester* now, string id)
         }
     }
 }
-void viewenrolledcourse(Semester* now)
-{
-    Course* cur = now->course_cur; // khoa hoc hien tai trong ki nay
-    int i = 0;
-    while (cur)
-    {
-        student_list* studentcur = cur->student; // student list trong khoa hoc nay
-        while (studentcur)
-        {
-            if (studentcur->id == id)
-            {
-                // neu student id co trong khoa nay, them vao mang course[]
-                if (!i)
-                {
-                    cout << "Courses that you enrolled: " << endl;
-                }
-                displaycourse_student(cur, i);
-                ++i;
-                break;
-            }
-            else studentcur = studentcur->next;
-        }
-        cur = cur->next;
-    }
-}
+
 void removedenrolledcourse(Semester* now, string id)
 {
     displaymenuforcourseregistration(now);
