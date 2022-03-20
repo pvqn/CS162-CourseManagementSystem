@@ -136,13 +136,24 @@ bool issamesession(Semester* now, string id, string s1, string s2, Course*cur)
             if (pcur->id == id && current->ses1 == s1 &&
                 current->ses2 == s2 && current != cur)
             {
-                return false;
+                return true;
             }
             pcur = pcur->next;
         }
         current = current->next;
     }
-    return true;
+    return false;
+}
+bool isstudentexisted(Course* cur, string id)
+{
+    student_list *pcur = cur->student;
+    while (pcur)
+    {
+        if (pcur->id == id)
+            return true;
+        pcur = pcur->next;
+    }
+    return false;
 }
 void enrolledcoure(Semester* now, string id)
 {
