@@ -19,6 +19,7 @@ data
 		currentYear.txt
 	classes
 		class ID (Ex: 21APCS)
+			StudentList.txt
 			Student Info (Ex: 21125158.txt)
 			Student Mark (Ex: 21125158_mark.txt)
 		classList.txt
