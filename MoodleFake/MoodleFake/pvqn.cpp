@@ -155,7 +155,60 @@ bool isstudentexisted(Course* cur, string id)
     }
     return false;
 }
+void displaymenuforcourseregistration(Semester* now)
+{
+    Course* pcur = now->course_cur;
+    int i = 0;
+    while (pcur)
+    {
+        if (!i)
+        {
+            cout << "Courses in this semester: " << endl;
+        }
+        displaycourse_student(pcur, i);
+        pcur = pcur->next;
+    }
+}
+Course* findcourse(Semester* now, int i)
+{
+    int t = 1;
+    Course* pcur = now->course_cur;
+    while (t != i)
+    {
+        pcur = pcur->next;
+    }
+    return pcur;
+}
 void enrolledcoure(Semester* now, string id)
 {
-    
+    displaymenuforcourseregistration(now);
+    while (true)
+    {
+        int i = 0;
+        cout << "enter the number to enroll a course, press 0 to stop: ";
+        cin >> i;
+        if (!i) break;
+        Course* find = findcourse(now, i);
+        if (!isstudentexisted(find, id)
+            && !issamesession(now, id, find->ses1, find->ses2, find)
+            && checkhowmanycourse(now, id))
+        {
+            student_list* pcur = find->student;
+            if (!pcur)
+            {
+                pcur = new student_list;
+                pcur->id = id;
+            }
+            else
+            {
+                while (pcur->next)
+                {
+                    pcur = pcur->next;
+                }
+                pcur->next = new student_list;
+                pcur = pcur->next;
+                pcur->id = id;
+            }
+        }
+    }
 }
