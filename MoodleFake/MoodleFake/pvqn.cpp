@@ -104,6 +104,7 @@ void viewclass(Class* head)
 *   neu tat ca deu khong, them student id vao cuoi student list
 */
 // xu li dang ki hoc phan
+// kiểm tra đã đăng kí bao nhiêu course
 bool checkhowmanycourse(Semester* now, string id)
 {
     int sum = 0;
@@ -125,6 +126,7 @@ bool checkhowmanycourse(Semester* now, string id)
     if (sum >= 5) return false;
     return true;
 }
+//kiểm tra có giờ nào chung không
 bool issamesession(Semester* now, string id, string s1, string s2, Course*cur)
 {
     Course* current = now->course_cur;
@@ -144,6 +146,7 @@ bool issamesession(Semester* now, string id, string s1, string s2, Course*cur)
     }
     return false;
 }
+//  kiem tra hoc sinh da co trong lop hoc nay chua
 bool isstudentexisted(Course* cur, string id)
 {
     student_list *pcur = cur->student;
@@ -155,6 +158,7 @@ bool isstudentexisted(Course* cur, string id)
     }
     return false;
 }
+//in ra list cac khoa hoc hoc ki nay mo, cho hoc sinh chon so
 void displaymenuforcourseregistration(Semester* now)
 {
     Course* pcur = now->course_cur;
@@ -169,6 +173,7 @@ void displaymenuforcourseregistration(Semester* now)
         pcur = pcur->next;
     }
 }
+//tim kiem dia chi course duoc chon
 Course* findcourse(Semester* now, int i)
 {
     int t = 1;
@@ -179,6 +184,7 @@ Course* findcourse(Semester* now, int i)
     }
     return pcur;
 }
+// xu li chinh phan dang ki hoc phan
 void enrolledcoure(Semester* now, string id)
 {
     displaymenuforcourseregistration(now);
@@ -212,6 +218,7 @@ void enrolledcoure(Semester* now, string id)
         }
     }
 }
+// in ra cac khoa da dang ki
 void viewenrolledcourse(Semester* now)
 {
     Course* cur = now->course_cur; // khoa hoc hien tai trong ki nay
@@ -237,6 +244,7 @@ void viewenrolledcourse(Semester* now)
         cur = cur->next;
     }
 }
+// khong dang ki 1 khoa nao do, tuong tu nhu dang ki hoc phan
 void removedenrolledcourse(Semester* now, string id)
 {
     displaymenuforcourseregistration(now);
