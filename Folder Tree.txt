@@ -19,8 +19,10 @@ data
 		currentYear.txt
 	classes
 		class ID (Ex: 21APCS)
-			StudentList.txt
-			Student Info (Ex: 21125158.txt)
-			Student Mark (Ex: 21125158_mark.txt)
+			Student ID     (StudentID.txt) 	  // Di so lop va ID hoc sinh
+			Student Info   (Ex: 21125158.txt) // Chi chua thong tin ca nhan 
+			Student Course (Ex: 21125158_course) (Folder)
+				courseList.txt
+				Course Mark  (Ex: PH212_mark.txt)
 		classList.txt
 	account.txt
