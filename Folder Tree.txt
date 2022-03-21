@@ -11,6 +11,11 @@ data
 					course.txt
 					mark.txt
 			info_Of_Semester.txt
+			courseList.txt
+				Ex: CS162
+				    Introduction to Computer Science II
+				    PH212
+				    General Physic II
 	cache
 		currentAcc.txt
 		currentClass.txt
