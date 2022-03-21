@@ -59,14 +59,35 @@ void displayclass_student() // display class students
     }
 }
 
-/*
-void ViewCourseList( Course *CourseList ) // Danh sach khoa hoc
+void displaycourse_list() // In ra danh sach cac khoa hoc
 {
-    Course *cur = CourseList;
-    while( cur )
+    // Find the year and the semester
+    Date today = getcurrentdate();
+    int Year = today.year, Term = 0;
+    if (today.month < 9) --Year;
+    ifstream fin;
+    for (int i = 1; i <= 3; ++i)
     {
-        cout << cur->id << ": " << cur->name << '\n';   // Print ID and name
-        cur = cur->next;
+        string path = "data/" + to_string(Year) + "/" + char(i+48) +"/info_Of_Semester.txt";
+        fin.open(path);
+        Date Start, End;
+        fin >> Start.day >> Start.month >> Start.year;
+        fin >> End.day >> End.month >> End.year;
+        fin.close();
+        if (compare(today, Start, End))
+        {
+            Term = i;
+            break;
+        }
     }
+    // Print the course list of this semester
+    string path = "data/" + to_string(Year) + '/' + to_string(Term) + "/courseList.txt";
+    fin.open(path);
+    while (!fin.eof())
+    {
+        string cur;
+        fin >> cur;
+        cout << cur << '\n';
+    }
+    fin.close();
 }
-*/
