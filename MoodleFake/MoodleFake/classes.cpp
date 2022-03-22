@@ -3,7 +3,20 @@
 
 using namespace std;
 
-void createClass(string className) {
+void createClass(string className, Class*& classes) {
+	//Thêm lớp mới vào linked list của Class
+	Class* newClass = new Class;
+	newClass->ClassName = className;
+	newClass->next = NULL;
+	if (classes == NULL) classes = newClass;
+	else {
+		Class* lastClass = classes;
+		while (lastClass->next != NULL)
+			lastClass = lastClass->next;
+		lastClass->next = newClass;
+	}
+
+	//Tạo file chứa class mới
 	string path = "data/classes/" + className; // Tạo file class, trong class chứa info học sinh của class đó
 	_mkdir(path.c_str()); // Tạo thư mục theo đường dẫn path
 	ofstream out;

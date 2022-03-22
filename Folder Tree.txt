@@ -1,0 +1,33 @@
+data
+	Year (Ex: 2021)
+		Semester (Ex: 1)
+			coureses
+				course ID (Ex: CS162)
+					info_Of_Course.txt
+					mark.txt //Mark of all student in the class, include the student ID to indentify
+				courseList.txt
+			students
+				student ID (Ex: 21125158)
+					course.txt
+					mark.txt
+			info_Of_Semester.txt
+			courseList.txt
+				Ex: CS162
+				    Introduction to Computer Science II
+				    PH212
+				    General Physic II
+	cache
+		currentAcc.txt
+		currentClass.txt
+		currentCourse.txt
+		currentSemester.txt
+		currentYear.txt
+	classes
+		class ID (Ex: 21APCS)
+			Student ID     (StudentID.txt) 	  // Di so lop va ID hoc sinh
+			Student Info   (Ex: 21125158.txt) // Chi chua thong tin ca nhan 
+			Student Course (Ex: 21125158_course) (Folder)
+				courseList.txt
+				Course Mark  (Ex: PH212_mark.txt)
+		classList.txt
+	account.txt

@@ -1,4 +1,4 @@
-#include <ctime>
+﻿#include <ctime>
 #include "struct.h"
 using namespace std;
 Date getcurrentdate () {
@@ -39,10 +39,6 @@ bool compare(Date cur, Date start, Date end)
 }
 void displaycourse_student(Course *display, int i)
 {
-    if (!i)
-    {
-        cout << "Courses in this semester: " << endl;
-    }
     cout << i + 1 << "." << endl;
     cout << "Course id: " << display->id << endl;
     cout << "Course name: " << display->name << endl;
@@ -70,7 +66,10 @@ void viewcourse_student(Semester *head, string id)
                     if (studentcur->id == id)
                     {
                         // neu student id co trong khoa nay, them vao mang course[]
-                       
+                        if (!i)
+                        {
+                            cout << "Courses in this semester: " << endl;
+                        }
                         displaycourse_student(cur, i);
                         ++i;
                         break;
@@ -92,5 +91,185 @@ void viewclass(Class* head)
         cout << i + 1 << ". " << head->ClassName << endl;
         head = head->next;
         ++i;
+    }
+}
+/* pass string id
+* kiểm tra đã đăng kí bao nhiêu course
+* kiểm tra có giờ nào chung không
+* xu li chinh
+*   in ra list cac khoa hoc hoc ki nay mo, cho hoc sinh chon so
+*   kiem tra hoc sinh da co trong lop hoc nay chua
+*   kiem tra co trung session hay kong
+*   kiem tra co qua 5 course hay khong
+*   neu tat ca deu khong, them student id vao cuoi student list
+*/
+// xu li dang ki hoc phan
+// kiểm tra đã đăng kí bao nhiêu course
+bool checkhowmanycourse(Semester* now, string id)
+{
+    int sum = 0;
+    Course* cur = now->course_cur;
+    while (cur)
+    {
+        student_list* pcur = cur->student;
+        while (pcur)
+        {
+            if (pcur->id == id)
+            {
+                ++sum;
+                break;
+            }
+            pcur = pcur->next;
+        }
+        cur = cur->next;
+    }
+    if (sum >= 5) return false;
+    return true;
+}
+//kiểm tra có giờ nào chung không
+bool issamesession(Semester* now, string id, string s1, string s2, Course*cur)
+{
+    Course* current = now->course_cur;
+    while (current)
+    {
+        student_list* pcur = current->student;
+        while (pcur)
+        {
+            if (pcur->id == id && current->ses1 == s1 &&
+                current->ses2 == s2 && current != cur)
+            {
+                return true;
+            }
+            pcur = pcur->next;
+        }
+        current = current->next;
+    }
+    return false;
+}
+//  kiem tra hoc sinh da co trong lop hoc nay chua
+bool isstudentexisted(Course* cur, string id)
+{
+    student_list *pcur = cur->student;
+    while (pcur)
+    {
+        if (pcur->id == id)
+            return true;
+        pcur = pcur->next;
+    }
+    return false;
+}
+//in ra list cac khoa hoc hoc ki nay mo, cho hoc sinh chon so
+void displaymenuforcourseregistration(Semester* now)
+{
+    Course* pcur = now->course_cur;
+    int i = 0;
+    while (pcur)
+    {
+        if (!i)
+        {
+            cout << "Courses in this semester: " << endl;
+        }
+        displaycourse_student(pcur, i);
+        pcur = pcur->next;
+    }
+}
+//tim kiem dia chi course duoc chon
+Course* findcourse(Semester* now, int i)
+{
+    int t = 1;
+    Course* pcur = now->course_cur;
+    while (t != i)
+    {
+        pcur = pcur->next;
+    }
+    return pcur;
+}
+// xu li chinh phan dang ki hoc phan
+void enrolledcoure(Semester* now, string id)
+{
+    displaymenuforcourseregistration(now);
+    while (true)
+    {
+        int i = 0;
+        cout << "enter the number to enroll a course, press 0 to stop: ";
+        cin >> i;
+        if (!i) break;
+        Course* find = findcourse(now, i);
+        if (!isstudentexisted(find, id)
+            && !issamesession(now, id, find->ses1, find->ses2, find)
+            && checkhowmanycourse(now, id))
+        {
+            student_list* pcur = find->student;
+            if (!pcur)
+            {
+                pcur = new student_list;
+                pcur->id = id;
+            }
+            else
+            {
+                while (pcur->next)
+                {
+                    pcur = pcur->next;
+                }
+                pcur->next = new student_list;
+                pcur = pcur->next;
+                pcur->id = id;
+            }
+        }
+    }
+}
+// in ra cac khoa da dang ki
+void viewenrolledcourse(Semester* now)
+{
+    Course* cur = now->course_cur; // khoa hoc hien tai trong ki nay
+    int i = 0;
+    while (cur)
+    {
+        student_list* studentcur = cur->student; // student list trong khoa hoc nay
+        while (studentcur)
+        {
+            if (studentcur->id == id)
+            {
+                // neu student id co trong khoa nay, them vao mang course[]
+                if (!i)
+                {
+                    cout << "Courses that you enrolled: " << endl;
+                }
+                displaycourse_student(cur, i);
+                ++i;
+                break;
+            }
+            else studentcur = studentcur->next;
+        }
+        cur = cur->next;
+    }
+}
+// khong dang ki 1 khoa nao do, tuong tu nhu dang ki hoc phan
+void removedenrolledcourse(Semester* now, string id)
+{
+    displaymenuforcourseregistration(now);
+    while (true)
+    {
+        int i = 0;
+        cout << "enter the number to remove a course, press 0 to stop: ";
+        cin >> i;
+        if (!i) break;
+        Course* find = findcourse(now, i);
+        student_list* pcur = find->student;
+        student_list* dummy = new student_list;
+        dummy->next = pcur;
+        pcur = dummy;
+        while (pcur->next)
+        {
+            if (pcur->next->id == id)
+            {
+                student_list* temp = pcur->next;
+                pcur->next = pcur->next->next;
+                delete temp;
+                pcur = dummy->next;
+                return;
+            }
+            else pcur = pcur->next;
+        }
     }
 }

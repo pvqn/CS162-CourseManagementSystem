@@ -50,3 +50,16 @@ User* login(string username, string password) {
 	return NULL;
 }
 
+void changePass(User*& account, string newPass) {
+	User* acc = NULL;
+	getAcc(acc);
+	
+	while (acc != NULL) {
+		if (acc->username == account->username) {
+			account->password = newPass;
+			break;
+		}
+		else acc = acc->next;
+	}
+}
+

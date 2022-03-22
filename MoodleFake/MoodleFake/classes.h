@@ -2,7 +2,5 @@
 #include "struct.h"
 using namespace std;
 
-
-
-void createClass(string className);
+void createClass(string className, Class*& classes);
 
