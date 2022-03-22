@@ -51,7 +51,7 @@ User* login(string username, string password) {
 }
 
 void changePass(User*& account, string newPass) {
-	User* acc;
+	User* acc = NULL;
 	getAcc(acc);
 	
 	while (acc != NULL) {

@@ -16,7 +16,8 @@ void createSchoolYear() {
 	}
 }
 
-void getStudentFromCSV(string courseID, Student*& student) {
+void addStudentFromCSV(string courseID, Student*& student) {
+	Student* curStd = NULL;
 	Student* std = NULL;
 	int No;
 	string id;
@@ -29,6 +30,7 @@ void getStudentFromCSV(string courseID, Student*& student) {
 	string path = "csvFile/course/" + courseID + ".csv";
 	ifstream fin(path);
 	while (!fin.eof()) {
+		//Get student info from file .csv
 		getline(fin, id, ',');
 		getline(fin, firstName, ',');
 		getline(fin, lastName, ',');
@@ -38,21 +40,27 @@ void getStudentFromCSV(string courseID, Student*& student) {
 		fin >> dob.year; fin.ignore();
 		getline(fin, socialId, '\n');
 
-		student->id = id;
-		student->firstName = firstName;
-		student->lastName = lastName;
-		student->gender = gender;
-		student->dob.day = dob.day;
-		student->dob.month = dob.month;
-		student->dob.year = dob.year;
-		student->socialId = socialId;
-		student->courseID = courseID;
-
-		student = student->next;
+		//Add student info to Student Linked List
+		std = new Student;
+		curStd = new Student;
+		std->id = id;
+		std->firstName = firstName;
+		std->lastName = lastName;
+		std->gender = gender;
+		std->dob.day = dob.day;
+		std->dob.month = dob.month;
+		std->dob.year = dob.year;
+		std->socialId = socialId;
+		std->courseID = courseID;
+		std->next = NULL;
+		if (student == NULL) {
+			student = std;
+			curStd = student;
+		}
+		else {
+			curStd->next = std;
+			curStd = std;
+		}
 	}
 	fin.close();
-}
-
-void addStudentFromCSV(string classID) {
-	//Dang lam :))
 }
