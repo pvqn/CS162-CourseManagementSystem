@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+// HEAD
 #include "struct.h"
 //void setCurrentSemester(int year, int term, Date start, Date end) {
 //	string path = "data/" + to_string(year) + '/' + to_string(term) + "/info.txt";
@@ -50,17 +50,17 @@
 //	
 //
 //}
-void setCurrentSemester(int year, int term, Date start,Date end)
+
+void setCurrentSemester(int year, int term, Date start, Date end)
 {
 	ofstream fout;
 	fout.open("ouput_semester.txt");
 
-=======
-﻿#include "struct.h"
+}
 void setCurrentSemester(int year, int term, Date start, Date end) {
 	string path = "data/" + to_string(year) + '/' + to_string(term) + "/info.txt";
 	ofstream fout(path);
->>>>>>> 4721181f85f83214196216fde0364355879f3ba6
+//>>>>>>> 4721181f85f83214196216fde0364355879f3ba6
 	fout << year << endl;
 	fout << term << endl;
 	fout << start.day << ' ';
@@ -71,8 +71,8 @@ void setCurrentSemester(int year, int term, Date start, Date end) {
 	fout << end.year << endl;
 
 	fout.close();
-<<<<<<< HEAD
-=======
+//<<<<<<< HEAD
+
 
 	path = "data/cache/currentSemester.txt";
 	fout.open(path);
@@ -120,5 +120,5 @@ Semester getCurrentSemester() { //Lấy thông tin của Semester hiện tại
 	currentSemester.endDate = Date(endday, endmonth, endyear);
 
 	return currentSemester;
->>>>>>> 4721181f85f83214196216fde0364355879f3ba6
+//>>>>>>> 4721181f85f83214196216fde0364355879f3ba6
 }

@@ -219,7 +219,7 @@ void enrolledcoure(Semester* now, string id)
     }
 }
 // in ra cac khoa da dang ki
-void viewenrolledcourse(Semester* now)
+void viewenrolledcourse(Semester* now, string id)
 {
     Course* cur = now->course_cur; // khoa hoc hien tai trong ki nay
     int i = 0;
