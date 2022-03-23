@@ -2,12 +2,6 @@
 
 using namespace std;
 
-//void createAcc(User* head) { //create new user
-//	User* tmp = head->next;
-//	head->next = new User;
-//	head->next->next = tmp;
-//}
-
 void addAcc(User*& acc) {
 	ofstream out;
 	out.open("data/accounts.txt", ios::app);
@@ -57,6 +51,25 @@ void changePass(User*& account, string newPass) {
 	while (acc != NULL) {
 		if (acc->username == account->username) {
 			account->password = newPass;
+			break;
+		}
+		else acc = acc->next;
+	}
+}
+
+void viewUserProfile(User*& account) {
+	User* acc;
+	getAcc(acc);
+
+	while (acc != NULL) {
+		if (acc->username == account->username) {
+			cout << "Username: " << acc->username;
+			cout << "Password: ";
+			for (int i = 1; i < account->password.length(); i++) {
+				cout << '*';
+			}
+			cout << "Role: " << acc->role;
+			cout << "Class: " << acc->Class;
 			break;
 		}
 		else acc = acc->next;

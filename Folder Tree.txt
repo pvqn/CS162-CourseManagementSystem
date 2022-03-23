@@ -31,3 +31,9 @@ data
 				Course Mark  (Ex: PH212_mark.txt)
 		classList.txt
 	account.txt
+csvFile
+	Year (Ex: 2021)
+		Semester (Ex: 1)
+			File (Ex: CS162.csv)
+	classes
+		Class name (Ex: 21APCS2.csv)
