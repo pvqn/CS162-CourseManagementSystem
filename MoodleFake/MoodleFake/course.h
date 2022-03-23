@@ -4,4 +4,5 @@
 using namespace std;
 
 
+void addCourse(Course* pCourse, Course* newCourse);
 
