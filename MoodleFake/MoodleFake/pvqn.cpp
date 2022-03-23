@@ -37,6 +37,51 @@ bool compare(Date cur, Date start, Date end)
     }
     else return false;
 }
+// MON 1 / TUE 2 / WED 3 / THU 4/ FRI 5/ SAT 6, S1 (07:30) 1, S2 (09:30) 2, S3(13:30) 3 and S4 (15:30) 4
+void displaysession(string id)
+{
+    string d;
+    switch (id[0])
+    {
+    case '1':
+        d = "MON ";
+        break;
+    case '2':
+        d = "TUE ";
+        break; 
+    case '3':
+        d = "WED ";
+        break;
+    case '4':
+        d = "THU ";
+        break;
+    case '5':
+        d = "FRI ";
+        break;
+    case '6':
+        d = "SAT ";
+        break;
+    default:
+        break;
+    }
+    switch (id[1])
+    {
+    case '1':
+        d += "7:30";
+        break;
+    case '2':
+        d += "9:30";
+        break;
+    case '3':
+        d += "13:30";
+        break;
+    case '4':
+        d += "15:30";
+        break;
+    default:
+        break;
+    }
+}
 void displaycourse_student(Course *display, int i)
 {
     cout << i + 1 << "." << endl;
