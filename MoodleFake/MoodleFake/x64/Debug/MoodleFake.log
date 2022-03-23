@@ -1,2 +1,2 @@
-﻿  staff.cpp
-  MoodleFake.vcxproj -> E:\Cs162 ver 2\cs162---moodle\MoodleFake\x64\Debug\MoodleFake.exe
+﻿  pvqn.cpp
+C:\Users\Win10\Desktop\Course KHTN\2021 - 2022 HK2\CS162\My Moodle\Moodle\MoodleFake\MoodleFake\pvqn.cpp(231,35): error C2065: 'id': undeclared identifier
