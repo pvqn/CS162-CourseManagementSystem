@@ -1,2 +1,3 @@
-﻿  pvqn.cpp
-C:\Users\Win10\Desktop\Course KHTN\2021 - 2022 HK2\CS162\My Moodle\Moodle\MoodleFake\MoodleFake\pvqn.cpp(231,35): error C2065: 'id': undeclared identifier
+﻿  semester.cpp
+C:\Users\Win10\Desktop\Course KHTN\2021 - 2022 HK2\CS162\My Moodle\Moodle\MoodleFake\MoodleFake\semester.cpp(60,6): error C2084: function 'void setCurrentSemester(int,int,Date,Date)' already has a body
+C:\Users\Win10\Desktop\Course KHTN\2021 - 2022 HK2\CS162\My Moodle\Moodle\MoodleFake\MoodleFake\semester.cpp(54): message : see previous definition of 'setCurrentSemester'
