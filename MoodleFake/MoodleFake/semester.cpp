@@ -122,3 +122,32 @@ Semester getCurrentSemester() { //Lấy thông tin của Semester hiện tại
 	return currentSemester;
 //>>>>>>> 4721181f85f83214196216fde0364355879f3ba6
 }
+void Create_newSemester(Semester* Scur, int year)
+{
+	string path = "data/" + to_string(year) + "/Semester/info_Of_Semester.txt";
+	Semester* s = new Semester;
+
+	ifstream fin(path);
+	fin >> s->year >> s->term;
+	fin >> s->startDate.day >> s->startDate.month >> s->startDate.year;
+	fin >> s->endDate.day >> s->endDate.month >> s->endDate.year;
+	fin.close();
+	//s->Course
+
+	Scur = s; /// Since we just need to create one semester
+
+
+	path = "data/currentSemester.txt";
+	ofstream fout(path);
+
+	if (s->term == 1) fout << "Term Spring/" << s->year << endl;
+	if (s->term == 2) fout << "Term Summer/" << s->year << endl;
+	if (s->term == 3) fout << "Term Winter/" << s->year << endl;
+
+	fout << "Time start <" << s->startDate.day << "/" << s->startDate.month;
+	fout << "/" << s->startDate.year << endl;
+
+	fout << "Time End <" << s->endDate.day << "/" << s->endDate.month;
+	fout << "/" << s->endDate.year << endl;
+	fout.close();
+}
