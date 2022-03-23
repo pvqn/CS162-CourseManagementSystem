@@ -151,3 +151,15 @@ void Create_newSemester(Semester* Scur, int year)
 	fout << "/" << s->endDate.year << endl;
 	fout.close();
 }
+
+void CourseRegister(Date& start, Date& end)
+{
+
+	string path = "data/staff/semester/CourseRegister.txt";
+	ifstream fin(path);
+	
+	fin >> start.day >> start.month >> start.year;
+	fin >> end.day >> end.month >> end.year;
+
+	fin.close();
+}
