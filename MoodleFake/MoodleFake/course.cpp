@@ -70,6 +70,7 @@ void updateCourse(Course* pCourse, string id)
 			cout << "Please input again" << endl << endl;
 			continue;
 		}
+		else break;
 	}
 	if (option == 0) return;
 
@@ -121,7 +122,42 @@ void updateCourse(Course* pCourse, string id)
 void DeleteCourse(Course* pCourse, string id)
 {
 	Course* pCur = pCourse;
+	Course* pBefore_Cur = nullptr;
+	while (pCur->id != id && pCur != nullptr)
+	{
+		pBefore_Cur = pCur;
+		pCur = pCur->next;
+	}
+	if (pCur == nullptr) return;
 
-	while (pCur->id != id) pCur = pCur->next;
+	int option;
+	while (true)
+	{
+		cout << "Are you sure to delete this course: " << endl;
+		cout << "Input your option: " << endl;
+		cout << "1. Yes" << endl;
+		cout << "2. No" << endl;
+		cin >> option;
+		system("cls");
+		if (option > 2 || option < 1)
+		{
+			cout << "Please input again" << endl << endl;
+			continue;
+		}
+		else break;
+	}
+	if (option == 2) return;
+	
+	if (pBefore_Cur == nullptr)
+	{
+		pBefore_Cur = pCur->next;
+		delete pCur;
+	}
+	else
+	{
+		pBefore_Cur->next = pCur->next;
+		delete pCur;
+	}
+
 }
 
