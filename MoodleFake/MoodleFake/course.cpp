@@ -42,4 +42,8 @@ void view_Course(Course* pCur, Semester* Scur)
 	}
 	fout.close();
 }
+void updateCourse(Course* pCur, string id)
+{
+
+}
 
