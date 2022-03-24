@@ -120,6 +120,8 @@ void updateCourse(Course* pCourse, string id)
 
 void DeleteCourse(Course* pCourse, string id)
 {
+	Course* pCur = pCourse;
 
+	while (pCur->id != id) pCur = pCur->next;
 }
 
