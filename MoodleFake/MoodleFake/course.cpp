@@ -118,3 +118,8 @@ void updateCourse(Course* pCourse, string id)
 	system("cls");
 }
 
+void DeleteCourse(Course* pCourse, string id)
+{
+
+}
+
