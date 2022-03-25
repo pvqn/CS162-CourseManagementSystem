@@ -16,6 +16,7 @@ data
 				    Introduction to Computer Science II
 				    PH212
 				    General Physic II
+			courseRegister.txt
 	cache
 		currentAcc.txt
 		currentClass.txt
