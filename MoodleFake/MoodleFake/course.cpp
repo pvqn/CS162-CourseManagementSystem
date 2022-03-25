@@ -27,20 +27,17 @@ void addCourse(Course* pCourse, Course* newCourse)
 
 void view_Course(Course* pCur, Semester* Scur)
 {
-	string path = "data/" + to_string(Scur->year) + "/" + to_string(Scur->term) + "/courses/courseList.txt";
-	ofstream fout(path);
 	while (pCur != nullptr)
 	{
-		fout << pCur->id << endl;
-		fout << pCur->name << endl;
-		fout << pCur->teacher << endl;
-		fout << pCur->nCredits << endl;
-		fout << pCur->maxCapacity << endl;
-		fout << pCur->day1 << " : " << pCur->ses1 << endl;
-		fout << pCur->day2 << " : " << pCur->ses2 << endl;
+		cout << pCur->id << endl;
+		cout << pCur->name << endl;
+		cout << pCur->teacher << endl;
+		cout << pCur->nCredits << endl;
+		cout << pCur->maxCapacity << endl;
+		cout << pCur->day1 << " : " << pCur->ses1 << endl;
+		cout << pCur->day2 << " : " << pCur->ses2 << endl;
 		pCur = pCur->next;
 	}
-	fout.close();
 }
 void updateCourse(Course* pCourse, string id)
 {
