@@ -38,7 +38,7 @@ bool compare(Date cur, Date start, Date end)
     else return false;
 }
 // MON 1 / TUE 2 / WED 3 / THU 4/ FRI 5/ SAT 6, S1 (07:30) 1, S2 (09:30) 2, S3(13:30) 3 and S4 (15:30) 4
-void displaysession(string id)
+string displaysession(string id)
 {
     string d;
     switch (id[0])
@@ -81,6 +81,7 @@ void displaysession(string id)
     default:
         break;
     }
+    return d;
 }
 void displaycourse_student(Course *display, int i)
 {
@@ -89,8 +90,8 @@ void displaycourse_student(Course *display, int i)
     cout << "Course name: " << display->name << endl;
     cout << "Course's instructor: " << display->teacher << endl;
     cout << "Number of credits: " << display->nCredits << endl;
-    cout << "First session: " << display->ses1;
-    cout << "Second session: " << display->ses1;
+    cout << "First session: " << displaysession(display->ses1);
+    cout << "Second session: " << displaysession(display->ses2);
 }
 void viewcourse_student(Semester *head, string id)
 {
@@ -317,4 +318,8 @@ void removedenrolledcourse(Semester* now, string id)
             else pcur = pcur->next;
         }
     }
+}
+void displaymenu()
+{
+
 }
