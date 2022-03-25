@@ -1,4 +1,5 @@
 #include "struct.h"
+#include "pvqn.h"
 
 void addCourse(Course* pCourse, Course* newCourse)
 {
@@ -34,8 +35,10 @@ void view_Course(Course* pCur, Semester* Scur)
 		cout << pCur->teacher << endl;
 		cout << pCur->nCredits << endl;
 		cout << pCur->maxCapacity << endl;
-		cout << pCur->day1 << " : " << pCur->ses1 << endl;
-		cout << pCur->day2 << " : " << pCur->ses2 << endl;
+		string str1 = displaysession(pCur->day1 + pCur->ses1);
+		string str2 = displaysession(pCur->day2 + pCur->ses2);
+		cout << str1 << endl;
+		cout << str2 << endl;
 		pCur = pCur->next;
 	}
 }
