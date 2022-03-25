@@ -33,15 +33,38 @@ void getAcc(User*& acc) {
 	fin.close();
 }
 
-User* login(string username, string password) {
+bool checkUserExist(string username, string password) {
+	// Exist: true
+	// Does't exist: false
 	User* acc;
 	getAcc(acc);
 	while (acc != NULL) {
-		if (username == acc->username && password == acc->password)
-			return acc;
+		if (username == acc->username && password == acc->password) {
+			return true;
+			break;
+		}
 		else acc = acc->next;
 	}
-	return NULL;
+	return false;
+}
+
+bool login(string username, string password) {
+	// Student: true
+	// Staff: false
+	User* acc;
+	getAcc(acc);
+	while (acc != NULL) {
+		if (username.find("@student") != string::npos
+			&& username == acc->username && password == acc->password) {  //Account of student
+			return true;
+			break;
+		}
+		else if (username == acc->username && password == acc->password) {
+			return false;
+			break;
+		}
+		else acc = acc->next;
+	}
 }
 
 void changePass(User*& account, string newPass) {
