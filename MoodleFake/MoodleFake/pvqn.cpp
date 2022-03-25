@@ -319,7 +319,9 @@ void removedenrolledcourse(Semester* now, string id)
         }
     }
 }
-void displaymenu()
+void displaylogin(string &user, string &password)
 {
+    cout << "> user: "; cin >> user;
+    cout << "> password: "; cin >> password;
 
 }
