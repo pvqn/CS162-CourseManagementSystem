@@ -16,7 +16,7 @@ void createSchoolYear() {
 	}
 }
 
-void addStudentFromCSV(string courseID, Student*& student) {
+void addStudentFromCSV(string className,string courseID, Student*& student) {
 	Student* curStd = NULL;
 	Student* std = NULL;
 	int No;
@@ -27,7 +27,7 @@ void addStudentFromCSV(string courseID, Student*& student) {
 	Date dob;
 	string socialId;
 
-	string path = "csvFile/course/" + courseID + ".csv";
+	string path = "csvFile/classes/" + className + ".csv";
 	ifstream fin(path);
 	while (!fin.eof()) {
 		//Get student info from file .csv
