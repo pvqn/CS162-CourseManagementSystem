@@ -326,5 +326,44 @@ void displaylogin(string &user, string &password)
 }
 void display(bool isstudent)
 {
-    
+    switch (isstudent)
+    {
+    case 1:
+        cout << "1. view info " << endl;
+        cout << "2. change password" << endl;
+        cout << "a course registration session is active" << endl;
+        cout << "   3. enroll in a course" << endl;
+        cout << "   4. view a list of enrolled courses" << endl;
+        cout << "   5. remove a course" << endl;
+        cout << "a course resgistration session is closed" << endl;
+        cout << "   6. view a list of courses in this semester" << endl;
+        cout << "7. log out " << endl;
+        break;
+    case 0:
+        cout << "1. view info" << endl;
+        cout << "2. change password" << endl;
+        cout << "3. create a school year" << endl;
+        cout << "4. create a class" << endl;
+        cout << "5. add new student" << endl;
+        cout << "beginning of a semester :" << endl;
+        cout << "   6. create a semester" << endl;
+        cout << "   7. create a course registration" << endl;
+        cout << "   8. add a course to semester" << endl;
+        cout << "   9. view the list of courses in the semester" << endl;
+        cout << "   10. update course information" << endl;
+        cout << "   11. delete a course" << endl;
+        cout << "12. view a list of classes" << endl;
+        cout << "13. view a list of students in a class" << endl;
+        cout << "14. view a list of courses in the system" << endl;
+        cout << "15. view a list of students in a course" << endl;
+        cout << "16. export a list of students in a course to a csv file" << endl;
+        cout << "17. import the scoreboard of a course" << endl;
+        cout << "18. view the scoreboard of a course" << endl;
+        cout << "19. update a student result" << endl;
+        cout << "20. view the scoreboard of a class" << endl;
+        cout << "21. log out" << endl;
+        break;
+    default:
+        break;
+    }
 }
