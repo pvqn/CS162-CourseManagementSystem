@@ -323,5 +323,8 @@ void displaylogin(string &user, string &password)
 {
     cout << "> user: "; cin >> user;
     cout << "> password: "; cin >> password;
-
+}
+void display(bool isstudent)
+{
+    
 }

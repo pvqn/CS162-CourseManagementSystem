@@ -18,11 +18,29 @@ data
 				    General Physic II
 			courseRegister.txt
 	cache
-		currentAcc.txt
+		(currentAcc.txt
 		currentClass.txt
 		currentCourse.txt
 		currentSemester.txt
-		currentYear.txt
+		currentYear.txt)
+		// tạo thủ công folder, chỉ in lại dữ liệu
+		Semester 
+			coureses
+				course ID (Ex: CS162)
+					info_Of_Course.txt
+					mark.txt //Mark of all student in the class, include the student ID to indentify
+				courseList.txt
+			students
+				student ID (Ex: 21125158)
+					course.txt
+					mark.txt
+			info_Of_Semester.txt
+			courseList.txt
+				Ex: CS162
+				    Introduction to Computer Science II
+				    PH212
+				    General Physic II
+			courseRegister.txt
 	classes
 		class ID (Ex: 21APCS)
 			Student ID     (StudentID.txt) 	  // Di so lop va ID hoc sinh
