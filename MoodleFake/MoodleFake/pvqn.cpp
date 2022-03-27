@@ -95,38 +95,29 @@ void displaycourse_student(Course *display, int i)
 }
 void viewcourse_student(Semester *head, string id)
 {
-    int i = 0;
-
-    Date cur = getcurrentdate(); // bien lay ngay hien tai
-    while (head)
+    int i = 0;         
+    Course* cur = head->course_cur; // khoa hoc hien tai trong ki nay
+    while (cur)
     {
-        if (compare(cur, head->startDate, head->endDate)) // so sanh
+        student_list* studentcur = cur->student; // student list trong khoa hoc nay
+        while (studentcur)
         {
-           
-            Course* cur = head->course_cur; // khoa hoc hien tai trong ki nay
-            while (cur)
+            if (studentcur->id == id)
             {
-                student_list* studentcur = cur->student; // student list trong khoa hoc nay
-                while (studentcur)
+                // neu student id co trong khoa nay, them vao mang course[]
+                if (!i)
                 {
-                    if (studentcur->id == id)
-                    {
-                        // neu student id co trong khoa nay, them vao mang course[]
-                        if (!i)
-                        {
-                            cout << "Courses in this semester: " << endl;
-                        }
-                        displaycourse_student(cur, i);
-                        ++i;
-                        break;
-                    }
-                    else studentcur = studentcur->next;
+                    cout << "Courses in this semester: " << endl;
                 }
-                cur = cur->next;
+                displaycourse_student(cur, i);
+                ++i;
+                break;
             }
+            else studentcur = studentcur->next;
         }
-        head = head->next;
+        cur = cur->next;
     }
+       
 }
 void viewclass(Class* head)
 {
@@ -324,7 +315,7 @@ void displaylogin(string &user, string &password)
     cout << "> user: "; cin >> user;
     cout << "> password: "; cin >> password;
 }
-void display(bool isstudent)
+void displaymenu(bool isstudent)
 {
     switch (isstudent)
     {
@@ -366,4 +357,37 @@ void display(bool isstudent)
     default:
         break;
     }
+}
+Semester* getdatafromcache()
+{
+    Semester* s = new Semester;
+    string path = "cache/Semester/coureses/courseList";
+    ifstream fin;
+    fin.open(path);
+    string id;
+    while (fin >> id)
+    {
+        if (!s->course_cur)
+        {
+            s->course_cur = new Course;
+            s->course_cur->id = id;
+            fin >> id; // do not read name of the course
+        }
+        else
+        {
+            s->course_cur->next = new Course;
+            s->course_cur = s->course_cur->next;
+            s->course_cur->id = id;
+            fin >> id; // do not read name of the course
+        }
+    }
+    fin.close();
+    path = "cache/Semester/info_Of_Semester.txt";
+    fin.open(path);
+    fin >> s->year>>s->term;
+    fin >> s->startDate.day >> s->startDate.month >> s->startDate.year;
+    fin >> s->endDate.day >> s->endDate.month >> s->endDate.year;
+    fin.close();
+
+    return s;
 }
