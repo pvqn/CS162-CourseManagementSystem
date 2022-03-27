@@ -91,3 +91,40 @@ void displaycourse_list() // In ra danh sach cac khoa hoc
     }
     fin.close();
 }
+
+void displaycourse_studentList()
+{
+    //  Enter the year and the semester
+    int Year = 0, Term = 0;
+    cout << "Please input the year: "; cin >> Year;
+    cout << "Please input the semester: "; cin >> Term;
+    
+    // Print student in this course
+    string Course_name;
+    cout << "Please enter course name ( Example CS162 ): "; cin >> Course_name;
+    string path = "data/" + to_string(Year) + '/' + to_string(Term) + "/courseList.txt";
+    bool Check = false;
+    ifstream fin;
+    fin.open(path);
+    while (!fin.eof())
+    {
+        string cur; fin >> cur;
+        if (cur == Course_name) Check = true;
+    }
+    fin.close();
+    if (!Check)
+    {
+        cout << "Your finding course is not exist !";
+        return;
+    }
+    path = "data/" + to_string(Year) + '/' + to_string(Term) + "/" + Course_name + "/studentList.txt";
+    fin.open(path);
+    while (!fin.eof())
+    {
+        string ID, Name;
+        fin >> ID;
+        fin.ignore(); getline(fin, Name);
+        cout << ID << ' ' << Name << '\n';
+    }
+    fin.close();
+}

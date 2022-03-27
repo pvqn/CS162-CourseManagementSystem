@@ -4,6 +4,7 @@ data
 			coureses
 				course ID (Ex: CS162)
 					info_Of_Course.txt
+					studentList.txt // Student ID and student's name in this course
 					mark.txt //Mark of all student in the class, include the student ID to indentify
 				courseList.txt
 			students

@@ -58,7 +58,7 @@
 //
 //}
 void setCurrentSemester(int year, int term, Date start, Date end) {
-	string path = "data/" + to_string(year) + '/' + to_string(term) + "/info.txt";
+	string path = "data/" + to_string(year) + '/' + to_string(term) + "/info_Of_Semester.txt";
 	ofstream fout(path);
 //>>>>>>> 4721181f85f83214196216fde0364355879f3ba6
 	fout << year << endl;
