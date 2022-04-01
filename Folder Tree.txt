@@ -6,6 +6,9 @@ data
 					info_Of_Course.txt
 					studentList.txt // Student ID and student's name in this course
 					mark.txt //Mark of all student in the class, include the student ID to indentify
+						// StudentID Mid Final Other Total
+					StudentList.csv // Du lieu tren he thong
+					Teacher.csv // Du lieu giao vien nhap
 				courseList.txt
 			students
 				student ID (Ex: 21125158)
@@ -54,6 +57,6 @@ data
 csvFile
 	Year (Ex: 2021)
 		Semester (Ex: 1)
-			File (Ex: CS162.csv)
+			Course (Ex: CS162.csv)
 	classes
 		Class name (Ex: 21APCS2.csv)
