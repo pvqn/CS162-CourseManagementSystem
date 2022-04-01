@@ -50,7 +50,7 @@ data
 				courseList.txt
 				Course Mark  (Ex: PH212_mark.txt)
 		classList.txt
-	account.txt
+	accounts.txt
 csvFile
 	Year (Ex: 2021)
 		Semester (Ex: 1)

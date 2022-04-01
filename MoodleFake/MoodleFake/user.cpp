@@ -1,4 +1,4 @@
-#include "user.h"
+﻿#include "user.h"
 
 using namespace std;
 
@@ -6,7 +6,15 @@ void addAcc(User*& acc) {
 	ofstream out;
 	out.open("data/accounts.txt", ios::app);
 	out << acc->username << ' ' << acc->password << ' '
-		<< acc->role << ' ' << acc->Class << '\n'; //In th�ng tin user ra file account.txt
+		<< acc->role << ' ' << acc->Class << '\n'; //In thông tin user ra file account.txt
+	out.close();
+}
+
+void resetAcc(User* acc) { // Ghi lại toàn bộ acc vào file account.txt
+	ofstream out;
+	out.open("data/accounts.txt", ios::out);
+	out << acc->username << ' ' << acc->password << ' '
+		<< acc->role << ' ' << acc->Class << '\n'; //In thông tin user ra file account.txt
 	out.close();
 }
 
@@ -36,7 +44,7 @@ void getAcc(User*& acc) {
 bool checkUserExist(string username, string password) {
 	// Exist: true
 	// Does't exist: false
-	User* acc;
+	User* acc = NULL;
 	getAcc(acc);
 	while (acc != NULL) {
 		if (username == acc->username && password == acc->password) {
@@ -48,18 +56,20 @@ bool checkUserExist(string username, string password) {
 	return false;
 }
 
-bool login(string username, string password) {
+bool login(string username, string password, User*& account) {
 	// Student: true
 	// Staff: false
-	User* acc;
+	User* acc = NULL;
 	getAcc(acc);
 	while (acc != NULL) {
 		if (username.find("@student") != string::npos
 			&& username == acc->username && password == acc->password) {  //Account of student
+			account = acc;
 			return true;
 			break;
 		}
 		else if (username == acc->username && password == acc->password) {
+			account = acc;
 			return false;
 			break;
 		}
@@ -70,29 +80,31 @@ bool login(string username, string password) {
 void changePass(User*& account, string newPass) {
 	User* acc = NULL;
 	getAcc(acc);
+	User* tmp = acc;
 	
-	while (acc != NULL) {
-		if (acc->username == account->username) {
+	while (tmp != NULL) {
+		if (tmp->username == account->username) {
 			account->password = newPass;
+			resetAcc(account);
 			break;
 		}
-		else acc = acc->next;
+		else tmp = tmp->next;
 	}
 }
 
 void viewUserProfile(User*& account) {
-	User* acc;
+	User* acc = NULL;
 	getAcc(acc);
 
 	while (acc != NULL) {
 		if (acc->username == account->username) {
-			cout << "Username: " << acc->username;
-			cout << "Password: ";
-			for (int i = 1; i < account->password.length(); i++) {
+			cout << endl << "Username: " << acc->username ;
+			cout << endl << "Password: ";
+			for (int i = 0; i < account->password.length(); i++) {
 				cout << '*';
 			}
-			cout << "Role: " << acc->role;
-			cout << "Class: " << acc->Class;
+			cout << endl << "Role: " << acc->role;
+			cout << endl << "Class: " << acc->Class;
 			break;
 		}
 		else acc = acc->next;
