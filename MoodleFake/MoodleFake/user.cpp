@@ -11,10 +11,12 @@ void addAcc(User*& acc) {
 }
 
 void resetAcc(User* acc) { // Ghi lại toàn bộ acc vào file account.txt
-	ofstream out;
-	out.open("data/accounts.txt", ios::out);
-	out << acc->username << ' ' << acc->password << ' '
-		<< acc->role << ' ' << acc->Class << '\n'; //In thông tin user ra file account.txt
+	ofstream out("data/accounts.txt");
+	while (acc != NULL) {
+		out << acc->username << ' ' << acc->password << ' '
+			<< acc->role << ' ' << acc->Class << '\n';  //In thông tin user ra file account.txt
+		acc = acc->next;
+	}
 	out.close();
 }
 
@@ -77,19 +79,24 @@ bool login(string username, string password, User*& account) {
 	}
 }
 
-void changePass(User*& account, string newPass) {
+void changePass(User* account) {
 	User* acc = NULL;
 	getAcc(acc);
-	User* tmp = acc;
+	User* reset = acc;
+
+	string newPass;
+	cout << "Input your new password: ";
+	cin >> newPass;
 	
-	while (tmp != NULL) {
-		if (tmp->username == account->username) {
-			account->password = newPass;
-			resetAcc(account);
+	while (acc != NULL) {
+		if (acc->username == account->username) {
+			acc->password = newPass;
 			break;
 		}
-		else tmp = tmp->next;
+		else acc = acc->next;
 	}
+	resetAcc(reset);
+	delete reset;
 }
 
 void viewUserProfile(User*& account) {

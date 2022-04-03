@@ -1,5 +1,9 @@
 #include "schoolYear.h"
 #include "semester.h"
+#include "user.h"
+#include "struct.h"
+#include "classes.h"
+
 
 void createSchoolYear() {
 	int year;
@@ -17,7 +21,7 @@ void createSchoolYear() {
 	}
 }
 
-void addStudentFromCSV(string className,string courseID, Student*& student) {
+void importStudentFromCSV(string className, Student*& student) {
 	Student* curStd = NULL;
 	Student* std = NULL;
 	int No;
@@ -52,7 +56,6 @@ void addStudentFromCSV(string className,string courseID, Student*& student) {
 		std->dob.month = dob.month;
 		std->dob.year = dob.year;
 		std->socialId = socialId;
-		std->courseID = courseID;
 		std->next = NULL;
 		if (student == NULL) {
 			student = std;
@@ -183,4 +186,30 @@ void ImportCourseScore()
 		fout << '\n';
 	}
 	fin.open(path_in); fout.open(path_out);
+}
+
+void staffChoice(User* acc, Class*& classes) {
+	int choice;
+	cout << "Input your choice: ";
+	cin >> choice;
+	switch (choice)
+	{
+	case 1:
+		viewUserProfile(acc);
+		break;
+	case 2:
+		changePass(acc);
+		break;
+	case 3:
+		createSchoolYear();
+		break;
+	case 4:
+		createClass(classes);
+		break;
+	case 5:
+		//importStudentFromCSV();
+		break;
+	default:
+		break;
+	}
 }
