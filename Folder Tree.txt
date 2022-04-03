@@ -5,10 +5,9 @@ data
 				course ID (Ex: CS162)
 					info_Of_Course.txt
 					studentList.txt // Student ID and student's name in this course
-					mark.txt //Mark of all student in the class, include the student ID to indentify
-						// StudentID Mid Final Other Total
-					StudentList.csv // Du lieu tren he thong
-					Teacher.csv // Du lieu giao vien nhap
+					mark.txt //Mark of all student in the course, include the student ID to indentify
+						// StudentID Total Mid Final Other
+				// Cầu xin là thứ tự SV ở file studentList.txt và mark.txt giống nhau hic
 				courseList.txt
 			students
 				student ID (Ex: 21125158)
@@ -32,10 +31,11 @@ data
 			coureses
 				course ID (Ex: CS162)
 					info_Of_Course.txt
+					studentList.txt // Student ID and student's name in this course
 					mark.txt //Mark of all student in the class, include the student ID to indentify
 				courseList.txt
 			students
-				student ID (Ex: 21125158)
+				student ID (Ex: 21125158) (Folder)
 					course.txt
 					mark.txt
 			info_Of_Semester.txt
@@ -47,8 +47,8 @@ data
 			courseRegister.txt
 	classes
 		class ID (Ex: 21APCS)
-			Student ID     (StudentID.txt) 	  // Di so lop va ID hoc sinh
-			Student Info   (Ex: 21125158.txt) // Chi chua thong tin ca nhan 
+			Student List   (studentList.txt)	// ID hoc sinh
+			Student Info   (Ex: 21125158.txt)	// Chi chua thong tin ca nhan 
 			Student Course (Ex: 21125158_course) (Folder)
 				courseList.txt
 				Course Mark  (Ex: PH212_mark.txt)
@@ -58,5 +58,6 @@ csvFile
 	Year (Ex: 2021)
 		Semester (Ex: 1)
 			Course (Ex: CS162.csv)
+			Teacher (Ex: CS162_teacher.csv) // File csv GV upload
 	classes
 		Class name (Ex: 21APCS2.csv)

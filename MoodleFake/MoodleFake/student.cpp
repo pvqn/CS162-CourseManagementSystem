@@ -61,27 +61,9 @@ void displayclass_student() // display class students
 
 void displaycourse_list() // In ra danh sach cac khoa hoc
 {
-    // Find the year and the semester
-    Date today = getcurrentdate();
-    int Year = today.year, Term = 0;
-    if (today.month < 9) --Year;
-    ifstream fin;
-    for (int i = 1; i <= 3; ++i)
-    {
-        string path = "data/" + to_string(Year) + "/" + char(i+48) +"/info_Of_Semester.txt";
-        fin.open(path);
-        Date Start, End;
-        fin >> Start.day >> Start.month >> Start.year;
-        fin >> End.day >> End.month >> End.year;
-        fin.close();
-        if (compare(today, Start, End))
-        {
-            Term = i;
-            break;
-        }
-    }
     // Print the course list of this semester
-    string path = "data/" + to_string(Year) + '/' + to_string(Term) + "/courseList.txt";
+    string path = "data/cache/Semester/coureses/courseList.txt";
+    ifstream fin;
     fin.open(path);
     while (!fin.eof())
     {
@@ -94,15 +76,11 @@ void displaycourse_list() // In ra danh sach cac khoa hoc
 
 void displaycourse_studentList()
 {
-    //  Enter the year and the semester
-    int Year = 0, Term = 0;
-    cout << "Please input the year: "; cin >> Year;
-    cout << "Please input the semester: "; cin >> Term;
     
     // Print student in this course
     string Course_name;
     cout << "Please enter course name ( Example CS162 ): "; cin >> Course_name;
-    string path = "data/" + to_string(Year) + '/' + to_string(Term) + "/courseList.txt";
+    string path = "data/cache/Semester/coureses/courseList.txt";
     bool Check = false;
     ifstream fin;
     fin.open(path);
@@ -117,7 +95,7 @@ void displaycourse_studentList()
         cout << "Your finding course is not exist !";
         return;
     }
-    path = "data/" + to_string(Year) + '/' + to_string(Term) + "/" + Course_name + "/studentList.txt";
+    path = "data/cache/Semester/coureses" + Course_name + "/studentList.txt";
     fin.open(path);
     while (!fin.eof())
     {
