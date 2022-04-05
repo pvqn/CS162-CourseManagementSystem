@@ -358,36 +358,89 @@ void displaymenu(bool isstudent)
         break;
     }
 }
-Semester* getdatafromcache()
+Semester* getdatafromcache(Date &startreg, Date &endreg)
 {
     Semester* s = new Semester;
+    Semester* temp = s;
     string path = "cache/Semester/coureses/courseList";
     ifstream fin;
     fin.open(path);
     string id;
+    // nhap id cua course hien tai trong semester
     while (fin >> id)
     {
         if (!s->course_cur)
         {
             s->course_cur = new Course;
             s->course_cur->id = id;
-            fin >> id; // do not read name of the course
+            fin >> s->course_cur->name; // do not read name of the course
         }
         else
         {
             s->course_cur->next = new Course;
             s->course_cur = s->course_cur->next;
             s->course_cur->id = id;
-            fin >> id; // do not read name of the course
+            fin >> s->course_cur->name; // do not read name of the course
         }
     }
     fin.close();
     path = "cache/Semester/info_Of_Semester.txt";
     fin.open(path);
+    // doc nam hoc, doc hoc ki
     fin >> s->year>>s->term;
+    // doc ngay bat dau hoc ki
     fin >> s->startDate.day >> s->startDate.month >> s->startDate.year;
+    // doc ngay ket thuc hoc ki
     fin >> s->endDate.day >> s->endDate.month >> s->endDate.year;
     fin.close();
-
-    return s;
+    // doc ngay bat dau dang ki hoc phan
+    path = "cache/Semester/courseRegister.txt";
+    fin.open(path);
+    fin >> startreg.day >> startreg.month >> startreg.year;
+    fin >> endreg.day >> endreg.month >> endreg.month;
+    fin.close();
+    // doc thong tin trong cac khoa hoc
+    Course *cur = s->course_cur;
+    while (cur)
+    {
+        // doc co thong tin trong khoa hoc
+            path = "cache/Semester/courses" + cur->id+"info_Of_Course.txt";
+            fin.open(path);
+                fin >> cur->teacher >> cur->nCredits >> cur->maxCapacity >> cur->ses1 >> cur->ses2;
+            fin.close();
+        // doc student list trong khoa hoc
+            path = "cache/Semester/courses" + cur->id + "studentList.txt";
+            fin.open(path);
+                string input;
+                student_list *in = cur->student;
+                if (fin >> input)
+                {
+                    in = new student_list;
+                    in->id=input; 
+                    while (fin >> input)
+                    {
+                            in->next = new student_list;
+                            in = in->next;
+                            in->id = input;
+                    }
+                }
+            fin.close();
+        // doc mark cua student
+            path = "cache/Semester/courses" + cur->id + "mark.txt";
+            fin.open(path);
+            student_list* t = cur->student;
+            while (t)
+            {
+                string nul;
+                if (fin >> nul)
+                {
+                    fin>>t->mark.
+                }
+                else break;
+                t = t->next;
+            }
+            fin.close();
+        cur = cur->next;
+    }
+    return temp;
 }

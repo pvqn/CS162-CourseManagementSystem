@@ -32,10 +32,10 @@ struct User {
 	string Class;
 };
 struct Mark {
-	float totalMark;
-	float finalMark;
-	float midtermMark;
-	float otherMark;
+	float totalMark=0;
+	float finalMark=0;
+	float midtermMark=0;
+	float otherMark=0;
 };
 struct Class
 {
