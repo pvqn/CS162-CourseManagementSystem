@@ -45,8 +45,10 @@ data
 				    PH212
 				    General Physic II
 			courseRegister.txt
+		csvFile
+			Course (Ex: CS162.csv) // Clone file for teacher to input
 	classes
-		class ID (Ex: 21APCS)
+		class ID (Ex: 21APCS) (folder)
 			Student List   (studentList.txt)	// ID hoc sinh
 			Student Info   (Ex: 21125158.txt)	// Chi chua thong tin ca nhan 
 			Student Course (Ex: 21125158_course) (Folder)
@@ -57,7 +59,6 @@ data
 csvFile
 	Year (Ex: 2021)
 		Semester (Ex: 1)
-			Course (Ex: CS162.csv)
-			Teacher (Ex: CS162_teacher.csv) // File csv GV upload
+			Course (Ex: CS162.csv) // Source file
 	classes
 		Class name (Ex: 21APCS2.csv)
