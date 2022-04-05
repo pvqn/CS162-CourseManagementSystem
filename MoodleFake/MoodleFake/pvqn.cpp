@@ -425,7 +425,7 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
                     }
                 }
             fin.close();
-        // doc mark cua student
+        // doc mark cua student neu co
             path = "cache/Semester/courses" + cur->id + "mark.txt";
             fin.open(path);
             student_list* t = cur->student;
@@ -434,7 +434,7 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
                 string nul;
                 if (fin >> nul)
                 {
-                    fin>>t->mark.
+                    fin >> t->mark.totalMark >> t->mark.finalMark >> t->mark.midtermMark >> t->mark.otherMark;
                 }
                 else break;
                 t = t->next;
