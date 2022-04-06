@@ -127,19 +127,12 @@ void ExportCourseStudentList()
 	Mark.close();
 }
 
-void ImportCourseScore()
+void ImportCourseScore() // Import + Update
 {
-	//  Enter the year and the semester
-	int Year = 0, Term = 0;
-	cout << "Please input the year: "; cin >> Year;
-	cout << "Please input the semester: "; cin >> Term;
-
-	// Print student in this course
 	ifstream fin; ofstream fout;
 	string Course_name;
-
 	cout << "Please enter course name ( Example CS162 ): "; cin >> Course_name;
-	string path = "data/" + to_string(Year) + '/' + to_string(Term) + "/courseList.txt";
+	string path = "data/cache/Semester/coureses/courseList.txt";
 	bool Check = false;
 	fin.open(path);
 	while (!fin.eof())
@@ -154,8 +147,8 @@ void ImportCourseScore()
 		return;
 	}
 
-	string path_in = "data/" + to_string(Year) + '/' + to_string(Term) + "/" + Course_name + "/Teacher.csv";
-	string path_out = "data/" + to_string(Year) + '/' + to_string(Term) + "/" + Course_name + "/StudentList.csv";
+	string path_in = "data/cache/csvFile/" + Course_name + "_teacher.csv";
+	string path_out = "data/cache/csvFile/" + Course_name + ".csv";
 	fin.open(path_in); fout.open(path_out);
 	while (!fin.eof())
 	{
@@ -165,8 +158,9 @@ void ImportCourseScore()
 	}
 	fin.close(); fout.close();
 
-	path_in = "data/" + to_string(Year) + '/' + to_string(Term) + "/" + Course_name + "/StudentList.csv";
-	path_in = "data/" + to_string(Year) + '/' + to_string(Term) + "/" + Course_name + "/mark.txt";
+	// Update mark.txt in course
+	path_in = "data/cache/csvFile/" + Course_name + ".csv";
+	path_out = "data/cache/Semester/coureses/" + Course_name + "/mark.txt";
 	fin.open(path_in); fout.open(path_out);
 	while (!fin.eof())
 	{
@@ -186,6 +180,44 @@ void ImportCourseScore()
 		fout << '\n';
 	}
 	fin.open(path_in); fout.open(path_out);
+
+	// Update mark.txt in students folder
+	path_in = "data/cache/Semester/coureses/" + Course_name + "/mark.txt";
+
+	fin.open(path_in);
+	while (!fin.eof())
+	{
+		string ID, Total, Mid, Final, Other;
+		fin >> ID >> Total >> Mid >> Final >> Other;
+		path_out = "data/cache/Semester/students/" + ID + "/" + Course_name + "/_mark.txt";
+		fout.open(path_out);
+		fout << Total << '\n' << Mid << '\n' << Final << '\n' << Other << '\n';
+		fout.close();
+	}
+	fin.close();
+
+	// Update mark in classes
+	path_in = "data/cache/Semester/coureses/" + Course_name + "/mark.txt";
+	fin.open(path_in);
+	while (!fin.eof())
+	{
+		string ID, Total, Mid, Final, Other, classID;
+		fin >> ID >> Total >> Mid >> Final >> Other;
+		// Find class
+		ifstream FindClass;
+		string path_class = "data/cache/Semester/students/" + ID + "/class.txt";
+		FindClass.open(path_class);
+		FindClass >> classID;
+		FindClass.close();
+		// Update mark
+		path_out = "data/classes/" + classID + "/" + ID + "_course/" + Course_name + "_mark.txt";
+		fout.open(path_out);
+		fout << Total << '\n' << Mid << '\n' << Final << '\n' << Other << '\n';
+		fout.close();
+	}
+	fin.close();
+
+	// Not yet !!!!!!!!!!!!!!!!!
 }
 
 void staffChoice(User* acc, Class*& classes) {
