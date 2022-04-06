@@ -11,8 +11,9 @@ data
 				courseList.txt
 			students
 				student ID (Ex: 21125158)
+					class.txt  // Class of the student
 					course.txt
-					mark.txt
+					course mark ( Ex: CS162_mark.txt )
 			info_Of_Semester.txt
 			courseList.txt
 				Ex: CS162
@@ -36,8 +37,9 @@ data
 				courseList.txt
 			students
 				student ID (Ex: 21125158) (Folder)
+					class.txt  // Class of the student
 					course.txt
-					mark.txt
+					course mark ( Ex: CS162_mark.txt )
 			info_Of_Semester.txt
 			courseList.txt
 				Ex: CS162
@@ -46,7 +48,8 @@ data
 				    General Physic II
 			courseRegister.txt
 		csvFile
-			Course (Ex: CS162.csv) // Clone file for teacher to input
+			Course (Ex: CS162.csv) // Clone file to export 
+			Teacher (Ex: CS162_teacher.csv) // File teacher upload
 	classes
 		class ID (Ex: 21APCS) (folder)
 			Student List   (studentList.txt)	// ID hoc sinh
