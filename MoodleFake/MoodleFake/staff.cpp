@@ -3,6 +3,9 @@
 #include "user.h"
 #include "struct.h"
 #include "classes.h"
+#include <iostream>
+#include <iomanip>
+#include <stdlib.h>
 
 
 void createSchoolYear() {
@@ -244,4 +247,66 @@ void staffChoice(User* acc, Class*& classes) {
 	default:
 		break;
 	}
+}
+
+void viewScoreboardOfCourse() // In bang diem mon hoc
+{
+	system("clrscr");
+	ifstream fin; ofstream fout;
+	string Course_name;
+	cout << "Please enter course name ( Example CS162 ): "; cin >> Course_name;
+	string path = "data/cache/Semester/coureses/courseList.txt";
+	bool Check = false;
+	fin.open(path);
+	while (!fin.eof())
+	{
+		string cur; fin >> cur;
+		if (cur == Course_name) Check = true;
+	}
+	fin.close();
+	if (!Check)
+	{
+		cout << "Your finding course is not exist !";
+		return;
+	}
+
+	string path_in = "data/cache/csvFile/" + Course_name + ".csv";
+	fin.open(path_in);
+
+	cout << setw(3) << left << "No"; cout << '|';
+	cout << setw(12) << left << "Student ID"; cout << '|';
+	cout << setw(40) << right << "Full name"; cout << '|';
+	cout << setw(6) << right << "Total"; cout << '|';
+	cout << setw(6) << right << "Mid"; cout << '|';
+	cout << setw(6) << right << "Final"; cout << '|';
+	cout << setw(6) << right << "Other"; cout << '\n';
+	cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
+	cout << setw(85) << "-" << endl;	// fill 85 ky tu '-'
+	cout << setfill(' ');
+	while (!fin.eof())
+	{
+		string current;
+		getline(fin, current);
+		if (current.size() == 0) break;
+		string List[7]; // No, ID, Full name, Total, Mid, Final, Other
+		int cnt = 0;
+		for (int i = 0; i < current.size(); ++i)
+		{
+			if (current[i] == ',')
+			{
+				++cnt;
+				continue;
+			}
+			List[cnt] += current[i];
+		}
+		cout << setw(3) << left << List[0]; cout << '|';
+		cout << setw(12) << left << List[1]; cout << '|';
+		cout << setw(40) << right << List[2]; cout << '|';
+		cout << setw(6) << right << List[3]; cout << '|';
+		cout << setw(6) << right << List[4]; cout << '|';
+		cout << setw(6) << right << List[5]; cout << '|';
+		cout << setw(6) << right << List[6]; cout << '\n';
+	}
+
+	fin.close();
 }
