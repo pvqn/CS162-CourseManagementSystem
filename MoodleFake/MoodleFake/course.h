@@ -4,9 +4,10 @@
 using namespace std;
 
 
-void addCourse(Course* pCourse, Course* newCourse);
+void addCourse(Course* pCourse);
 void view_Course(Course* pCur, Semester* Scur);
-void updateCourse(Course* pCur, string id);
+void updateCourse(Course* pCur);
 
-void DeleteCourse(Course* pCourse, string id);
+void DeleteCourse(Course* pCourse);
+Course* add();
 
