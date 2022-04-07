@@ -310,3 +310,121 @@ void viewScoreboardOfCourse() // In bang diem mon hoc
 
 	fin.close();
 }
+
+void viewScoreinClass()
+{
+	string classname;
+	cout << "Please enter the class: "; cin >> classname;
+	ifstream fin; ofstream out;
+
+	// Check the class is exist or not
+	string path_in = "data/classes/classList.txt";
+	fin.open(path_in);
+	bool check = false;
+	while (!fin.eof())
+	{
+		string current;
+		getline(fin, current);
+		if (classname == current) check = true;
+	}
+	fin.close();
+	if (!check)
+	{
+		cout << "This class is not exist !";
+		return;
+	}
+
+	// Print score board
+	cout << setw(3) << left << "No"; cout << '|';
+	cout << setw(12) << left << "Student ID"; cout << '|';
+	cout << setw(40) << right << "Full name"; cout << '|';
+	path_in = "data/cache/Semester/courseList.txt";
+	fin.open(path_in);
+	int course_cnt = 0;
+	while (!fin.eof())
+	{
+		string course_name;
+		getline(fin, course_name);
+		if (course_name.size() == 0) break;
+		cout << setw(10) << right << course_name; cout << '|';
+		++course_cnt;
+		getline(fin, course_name);
+	}
+	fin.close();
+	cout << setw(5) << right << "GPA"; cout << '|';
+	cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
+	cout << setw(64 + (course_cnt * 11) ) << "-" << endl;	// fill ky tu '-'
+	cout << setfill(' ');
+
+	int No = 0; float total_GPA = 0;
+	string path_student = "data/classes/" + classname + "/classList.txt";
+	fin.open(path_student);
+	while (!fin.eof())
+	{
+		string studentID;
+		getline(fin, studentID);
+		if (studentID.size() == 0) break;
+
+		// Print student info
+		cout << setw(3) << left << ++No; cout << '|';
+		cout << setw(12) << left << studentID; cout << '|';
+		ifstream fin_name;
+		string path_name = "data/classes/" + classname + "/" + studentID + ".txt";
+		fin_name.open(path_name);
+		string First, Last;
+		getline(fin_name, First); getline(fin_name, First);
+		getline(fin_name, Last);
+		First += " " + Last;
+		cout << setw(40) << right << First; cout << '|';
+		fin_name.close();
+
+		// Print score board
+		ifstream fin_course; int total_credit = 0; float total_score = 0;
+		fin_course.open("data/cache/Semester/courseList.txt");
+
+		while (!fin_course.eof())
+		{
+			string course_name; float Total; int credit;
+			getline(fin_course, course_name);
+			if (course_name.size() == 0) break;
+
+			string path_mark = "data/classes/" + classname + "/" + studentID + "_course/" + course_name + "_mark.txt";
+			ifstream fin_mark;
+			fin_mark.open(path_mark);
+			if (fin_mark.fail())
+			{
+				cout << setw(10) << "N/A"; cout << '|';
+				continue;
+			}
+			fin_mark >> Total;
+			fin_mark.close();
+			cout << setw(10) << Total; cout << '|';
+
+			string path_credit = "data/cache/Semester/courses/" + course_name + "/info_Of_Course.txt";
+			ifstream fin_credit;
+			fin_credit.open(path_credit);
+			string current; for (int i = 0; i < 3; ++i) getline(fin_credit, current);
+			fin_credit >> credit;
+			fin_credit.close();
+			total_credit += credit;
+			if (0 <= Total && Total <= 3.9) total_score += 0;
+			if (4.0 <= Total && Total <= 5.4) total_score += 1 * credit;
+			if (5.5 <= Total && Total <= 6.9) total_score += 2 * credit;
+			if (7.0 <= Total && Total <= 8.4) total_score += 3 * credit;
+			if (8.0 <= Total && Total <= 10 ) total_score += 4 * credit;
+		}
+
+		fin_course.close();
+		cout << setw(5) << right << total_score / total_credit; cout << '|';
+		total_GPA += total_score / total_credit;
+		cout << '\n';
+	}
+	fin.close();
+
+	total_GPA /= No;
+	cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
+	cout << setw(64 + (course_cnt * 11)) << "-" << endl;	// fill ky tu '-'
+	cout << setfill(' ');
+	cout << setw(59 + (course_cnt * 11)) << right << "Averange GPA"; cout << '|';
+	cout << setw(3) << fixed << setprecision(2) << right << total_GPA; cout << '|';
+}
