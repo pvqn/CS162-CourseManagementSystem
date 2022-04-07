@@ -8,7 +8,6 @@ user
 	tên đăng nhập
 	password
 	student
-		No	integer
 		Student ID, 	string
 		First name, 	string
 		Last name, 	string
