@@ -1,9 +1,25 @@
 #include "struct.h"
 #include "pvqn.h"
-
-void addCourse(Course* pCourse, Course* newCourse)
+Course* add()
+{
+	Course* cCur = nullptr;
+	cin.ignore();
+	getline(cin, cCur->id);
+	getline(cin, cCur->name);
+	getline(cin, cCur->teacher);
+	cin >> cCur->nCredits;
+	cin >> cCur->maxCapacity;
+	cin.ignore();
+	getline(cin, cCur->day1);
+	getline(cin, cCur->ses1);
+	getline(cin, cCur->day2);
+	getline(cin, cCur->ses2);
+	return cCur;
+}
+void addCourse(Course* pCourse)
 {
 	Course* pCur = pCourse;
+	Course* newCourse = add();
 
 	while (pCur != nullptr)
 	{
@@ -42,8 +58,11 @@ void view_Course(Course* pCur, Semester* Scur)
 		pCur = pCur->next;
 	}
 }
-void updateCourse(Course* pCourse, string id)
+void updateCourse(Course* pCourse)
 {
+	string id;
+	cin.ignore();
+	getline(cin, id);
 	Course* pCur = pCourse;
 	while (pCur != nullptr && pCur->id != id)
 	{
@@ -119,8 +138,11 @@ void updateCourse(Course* pCourse, string id)
 	system("cls");
 }
 
-void DeleteCourse(Course* pCourse, string id)
+void DeleteCourse(Course* pCourse)
 {
+	string id;
+	cin.ignore();
+	getline(cin, id);
 	Course* pCur = pCourse;
 	Course* pBefore_Cur = nullptr;
 	while (pCur->id != id && pCur != nullptr)
