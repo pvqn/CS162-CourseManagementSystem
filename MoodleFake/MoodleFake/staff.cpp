@@ -275,13 +275,13 @@ void viewScoreboardOfCourse() // In bang diem mon hoc
 
 	cout << setw(3) << left << "No"; cout << '|';
 	cout << setw(12) << left << "Student ID"; cout << '|';
-	cout << setw(40) << right << "Full name"; cout << '|';
+	cout << setw(30) << right << "Full name"; cout << '|';
 	cout << setw(6) << right << "Total"; cout << '|';
 	cout << setw(6) << right << "Mid"; cout << '|';
 	cout << setw(6) << right << "Final"; cout << '|';
 	cout << setw(6) << right << "Other"; cout << '\n';
 	cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
-	cout << setw(85) << "-" << endl;	// fill 85 ky tu '-'
+	cout << setw(75) << "-" << endl;	// fill 75 ky tu '-'
 	cout << setfill(' ');
 	while (!fin.eof())
 	{
@@ -301,7 +301,7 @@ void viewScoreboardOfCourse() // In bang diem mon hoc
 		}
 		cout << setw(3) << left << List[0]; cout << '|';
 		cout << setw(12) << left << List[1]; cout << '|';
-		cout << setw(40) << right << List[2]; cout << '|';
+		cout << setw(30) << right << List[2]; cout << '|';
 		cout << setw(6) << right << List[3]; cout << '|';
 		cout << setw(6) << right << List[4]; cout << '|';
 		cout << setw(6) << right << List[5]; cout << '|';
@@ -337,7 +337,7 @@ void viewScoreinClass()
 	// Print score board
 	cout << setw(3) << left << "No"; cout << '|';
 	cout << setw(12) << left << "Student ID"; cout << '|';
-	cout << setw(40) << right << "Full name"; cout << '|';
+	cout << setw(30) << right << "Full name"; cout << '|';
 	path_in = "data/cache/Semester/courseList.txt";
 	fin.open(path_in);
 	int course_cnt = 0;
@@ -353,7 +353,7 @@ void viewScoreinClass()
 	fin.close();
 	cout << setw(5) << right << "GPA"; cout << '|';
 	cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
-	cout << setw(64 + (course_cnt * 11) ) << "-" << endl;	// fill ky tu '-'
+	cout << setw(54 + (course_cnt * 11) ) << "-" << endl;	// fill ky tu '-'
 	cout << setfill(' ');
 
 	int No = 0; float total_GPA = 0;
@@ -375,7 +375,7 @@ void viewScoreinClass()
 		getline(fin_name, First); getline(fin_name, First);
 		getline(fin_name, Last);
 		First += " " + Last;
-		cout << setw(40) << right << First; cout << '|';
+		cout << setw(30) << right << First; cout << '|';
 		fin_name.close();
 
 		// Print score board
@@ -423,8 +423,8 @@ void viewScoreinClass()
 
 	total_GPA /= No;
 	cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
-	cout << setw(64 + (course_cnt * 11)) << "-" << endl;	// fill ky tu '-'
+	cout << setw(54 + (course_cnt * 11)) << "-" << endl;	// fill ky tu '-'
 	cout << setfill(' ');
-	cout << setw(59 + (course_cnt * 11)) << right << "Averange GPA"; cout << '|';
+	cout << setw(49 + (course_cnt * 11)) << right << "Averange GPA"; cout << '|';
 	cout << setw(3) << fixed << setprecision(2) << right << total_GPA; cout << '|';
 }
