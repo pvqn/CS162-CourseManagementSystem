@@ -19,7 +19,7 @@ struct Student {
 	string id;
 	string firstName;
 	string lastName;
-	bool gender;
+	string gender;
 	Date dob; // date of birth
 	string socialId;
 	string courseID;

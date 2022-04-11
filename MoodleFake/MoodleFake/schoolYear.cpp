@@ -1,4 +1,5 @@
 #include "struct.h"
+#include <ctime>
 
 void setCurrentYear(int year) {
     string path = "data/" + to_string(year);
@@ -14,9 +15,9 @@ void setCurrentYear(int year) {
 }
 
 int getCurrentYear() {
-    string path = "data/cache/currentYear.txt";
-    ifstream fin(path);
-    int year; fin >> year;
-    fin.close();
+    time_t current_time;
+    current_time = time(NULL);
+    int year;
+    year = 1970 + current_time / 31537970;
     return year;
 }

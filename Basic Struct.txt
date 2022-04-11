@@ -11,7 +11,7 @@ user
 		Student ID, 	string
 		First name, 	string
 		Last name, 	string
-		Gender, 	bool 1/nam 0/nữ
+		Gender, 	string
 		Date of Birth, 	integer	dd/mm/yyyy
 		Social ID	string
 		Các khóa học đã đăng kí: course id

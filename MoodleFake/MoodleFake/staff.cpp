@@ -25,24 +25,26 @@ void createSchoolYear() {
 }
 
 void importStudentFromCSV(string className, Student*& student) {
-	Student* curStd = NULL;
+	Student* curStd = student;
 	Student* std = NULL;
 	int No;
 	string id;
 	string firstName;
 	string lastName;
-	bool gender;
+	string gender;
 	Date dob;
 	string socialId;
 
 	string path = "csvFile/classes/" + className + ".csv";
 	ifstream fin(path);
-	while (!fin.eof()) {
+	string sub; getline(fin, sub);
+	while (fin >> No) {
 		//Get student info from file .csv
+		fin.ignore();
 		getline(fin, id, ',');
 		getline(fin, firstName, ',');
-		getline(fin, lastName, ',');
-		fin >> gender; fin.ignore();
+		getline(fin, lastName, ','); 
+		getline(fin, gender, ',');
 		fin >> dob.day; fin.ignore();
 		fin >> dob.month; fin.ignore();
 		fin >> dob.year; fin.ignore();
@@ -50,7 +52,6 @@ void importStudentFromCSV(string className, Student*& student) {
 
 		//Add student info to Student Linked List
 		std = new Student;
-		curStd = new Student;
 		std->id = id;
 		std->firstName = firstName;
 		std->lastName = lastName;
@@ -66,11 +67,57 @@ void importStudentFromCSV(string className, Student*& student) {
 		}
 		else {
 			curStd->next = std;
-			curStd = std;
+			curStd = curStd->next;
 		}
 	}
+
 	fin.close();
 }
+
+void addStudent(string className, Student*& student) {
+	string year = to_string(getCurrentYear());
+	Student* std = student;
+	importStudentFromCSV(className, student);
+
+	string path = "data/classes/" + className + "/studentList.txt";
+	ofstream fout(path.c_str());
+	while (std != NULL) {
+		fout << std->id << '\n';
+		std = std->next;
+	}
+	fout.close();
+	
+	while (student != NULL) {
+		path = "data/" + year + "/1/students/" + student->id;
+		_mkdir(path.c_str());
+
+		path = "data/" + year + "/1/students/" + student->id + "/" + className + ".txt";
+		ofstream fout(path);
+		fout << className;
+		fout.close();
+
+		path = "data/classes/" + className + "/" + student->id + "_course";
+		_mkdir(path.c_str());
+
+		path = "data/classes/" + className + "/studentList.txt";
+		fout.open(path, ios::app);
+		fout << student->id << "\n";
+		fout.close();
+
+		path = "data/classes/" + className + "/" + student->id + ".txt";
+		fout.open(path, 'w');
+		fout << student->id << "\n";
+		fout << student->firstName << "\n";
+		fout << student->lastName << "\n";
+		fout << student->gender << "\n";
+		fout << student->dob.day << "/" << student->dob.month << "/" << student->dob.year << "\n";
+		fout << student->socialId;
+		fout.close();
+		
+		student = student->next;
+	}
+}
+
 
 void ExportCourseStudentList()
 {
@@ -223,30 +270,35 @@ void ImportCourseScore() // Import + Update
 	// Not yet !!!!!!!!!!!!!!!!!
 }
 
-void staffChoice(User* acc, Class*& classes) {
-	int choice;
-	cout << "Input your choice: ";
-	cin >> choice;
-	switch (choice)
-	{
-	case 1:
-		viewUserProfile(acc);
-		break;
-	case 2:
-		changePass(acc);
-		break;
-	case 3:
-		createSchoolYear();
-		break;
-	case 4:
-		createClass(classes);
-		break;
-	case 5:
-		//importStudentFromCSV();
-		break;
-	default:
-		break;
-	}
+void staffChoice(User* acc, Class*& classes, Student*& student) {
+	int choice = 0;
+	string className;
+	do {
+		cout << "\nInput your choice: ";
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			viewUserProfile(acc);
+			break;
+		case 2:
+			changePass(acc);
+			break;
+		case 3:
+			createSchoolYear();
+			break;
+		case 4:
+			createClass(classes);
+			break;
+		case 5:
+			cout << "Input class name: ";
+			cin >> className;
+			addStudent(className, student);
+			break;
+		default:
+			break;
+		}
+	} while (choice != 21);
 }
 
 void viewScoreboardOfCourse() // In bang diem mon hoc

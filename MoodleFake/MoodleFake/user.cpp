@@ -37,7 +37,7 @@ void getAcc(User*& acc) {
 		}
 		else {
 			uCur->next = u;
-			uCur = u;
+			uCur = uCur->next;
 		}
 	}
 	fin.close();

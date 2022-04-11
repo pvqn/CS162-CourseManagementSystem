@@ -5,7 +5,7 @@ using namespace std;
 
 void createClass(Class*& classes) {
 	string className;
-	cout << "Input the class's name: ";
+	cout << "Input the class name: ";
 	cin >> className;
 	//Thêm lớp mới vào linked list của Class
 	Class* newClass = new Class;
