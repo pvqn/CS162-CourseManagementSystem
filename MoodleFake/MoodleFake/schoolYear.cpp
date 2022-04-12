@@ -8,10 +8,10 @@ void setCurrentYear(int year) {
     path = "csvFile/" + to_string(year);
     _mkdir(path.c_str());
 
-    path = "data/cache/currentYear.txt";
-    ofstream fout(path);
-    fout << year;
-    fout.close();
+    //path = "data/cache/currentYear.txt";
+    //ofstream fout(path);
+    //fout << year;
+    //fout.close();
 }
 
 int getCurrentYear() {
