@@ -1,5 +1,6 @@
 #include "struct.h"
 #include "pvqn.h"
+#include "user.h"
 #include <iomanip>
 #include <iostream>
 
@@ -154,4 +155,35 @@ void viewScoreboard()
 
     }
     fin.close();
+}
+
+void studentChoice(User* acc) {
+    int choice = 0;
+    do {
+        cout << "\nInput your choice: ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1: //View info 
+            viewUserProfile(acc);
+            break;
+        case 2: //Change password
+            changePass(acc);
+            break;
+        case 3: //Enroll in a course
+
+            break;
+        case 4: //View a list of enrolled courses
+
+            break;
+        case 5: //remove a course
+
+            break;
+        case 6: //view a list of courses in this semester
+
+            break;
+        default:
+            break;
+        }
+    } while (choice != 7);
 }

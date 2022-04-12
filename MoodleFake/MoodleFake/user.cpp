@@ -64,15 +64,15 @@ bool login(string username, string password, User*& account) {
 	User* acc = NULL;
 	getAcc(acc);
 	while (acc != NULL) {
-		if (username.find("@student") != string::npos
-			&& username == acc->username && password == acc->password) {  //Account of student
+		if (username.find("@staff") != string::npos
+			&& username == acc->username && password == acc->password) {  //Account of staff
 			account = acc;
-			return true;
+			return false;
 			break;
 		}
 		else if (username == acc->username && password == acc->password) {
 			account = acc;
-			return false;
+			return true;
 			break;
 		}
 		else acc = acc->next;
@@ -96,6 +96,7 @@ void changePass(User* account) {
 		else acc = acc->next;
 	}
 	resetAcc(reset);
+	cout << "Action Success!\n";
 	delete reset;
 }
 

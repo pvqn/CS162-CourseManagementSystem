@@ -6,6 +6,7 @@
 #include "semester.h"
 #include "course.h"
 #include "schoolYear.h"
+#include "student.h"
 
 using namespace std;
 
@@ -21,10 +22,11 @@ int main()
 	string password;
 
 	displaylogin(username, password);
-	displaymenu(login(username, password, account));
-	//viewUserProfile(account);
-	//changePass(account);
-	staffChoice(account, classes, student);
+	if (displaymenu(login(username, password, account)))
+		studentChoice(account); // student
+	else // staff
+		staffChoice(account, classes, student);
+
 	//Create_newSemester(semCur);
 	//CourseRegister(startSem, endSem, s);
 	//addCourse(courseCur);

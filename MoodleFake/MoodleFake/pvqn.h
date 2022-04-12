@@ -8,4 +8,4 @@ void viewclass(Class* head);
 string displaysession(string id);
 void displaylogin(string& user, string& password);
 void removedenrolledcourse(Semester* now, string id);
-void displaymenu(bool isstudent);
+bool displaymenu(bool isstudent);

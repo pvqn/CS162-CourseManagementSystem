@@ -26,4 +26,7 @@ void createClass(Class*& classes) {
 	out.open("data/classes/classList.txt", ios::app); // File classList chứa toàn bộ các class đã tạo (chỉ chứa tên)
 	out << className << '\n';
 	out.close();
+
+
+	cout << "Class has been created successfully!\n";
 }

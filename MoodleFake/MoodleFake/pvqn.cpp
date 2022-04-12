@@ -315,48 +315,49 @@ void displaylogin(string &user, string &password)
     cout << "> user: "; cin >> user;
     cout << "> password: "; cin >> password;
 }
-void displaymenu(bool isstudent)
+bool displaymenu(bool isStudent)
 {
-    switch (isstudent)
+    switch (isStudent)
     {
     case 1:
-        cout << "1. view info " << endl;
-        cout << "2. change password" << endl;
-        cout << "a course registration session is active" << endl;
-        cout << "   3. enroll in a course" << endl;
-        cout << "   4. view a list of enrolled courses" << endl;
-        cout << "   5. remove a course" << endl;
-        cout << "a course resgistration session is closed" << endl;
-        cout << "   6. view a list of courses in this semester" << endl;
-        cout << "7. log out " << endl;
+        cout << "1. View info " << endl;
+        cout << "2. Change password" << endl;
+        cout << "A course registration session is active" << endl;
+        cout << "   3. Enroll in a course" << endl;
+        cout << "   4. View a list of enrolled courses" << endl;
+        cout << "   5. Remove a course" << endl;
+        cout << "A course resgistration session is closed" << endl;
+        cout << "   6. View a list of courses in this semester" << endl;
+        cout << "7. Log out " << endl;
         break;
     case 0:
-        cout << "1. view info" << endl;
-        cout << "2. change password" << endl;
-        cout << "3. create a school year" << endl;
-        cout << "4. create a class" << endl;
-        cout << "5. add new student" << endl;
-        cout << "beginning of a semester :" << endl;
-        cout << "   6. create a semester" << endl;
-        cout << "   7. create a course registration" << endl;
-        cout << "   8. add a course to semester" << endl;
-        cout << "   9. view the list of courses in the semester" << endl;
-        cout << "   10. update course information" << endl;
-        cout << "   11. delete a course" << endl;
-        cout << "12. view a list of classes" << endl;
-        cout << "13. view a list of students in a class" << endl;
-        cout << "14. view a list of courses in the system" << endl;
-        cout << "15. view a list of students in a course" << endl;
-        cout << "16. export a list of students in a course to a csv file" << endl;
-        cout << "17. import the scoreboard of a course" << endl;
-        cout << "18. view the scoreboard of a course" << endl;
-        cout << "19. update a student result" << endl;
-        cout << "20. view the scoreboard of a class" << endl;
-        cout << "21. log out" << endl;
+        cout << "1. View info" << endl;
+        cout << "2. Change password" << endl;
+        cout << "3. Create a school year" << endl;
+        cout << "4. Create a class" << endl;
+        cout << "5. Add new students" << endl;
+        cout << "Beginning of a semester :" << endl;
+        cout << "   6. Create a semester" << endl;
+        cout << "   7. Create a course registration" << endl;
+        cout << "   8. Add a course to semester" << endl;
+        cout << "   9. View the list of courses in the semester" << endl;
+        cout << "   10. Update course information" << endl;
+        cout << "   11. Delete a course" << endl;
+        cout << "12. View a list of classes" << endl;
+        cout << "13. View a list of students in a class" << endl;
+        cout << "14. View a list of courses in the system" << endl;
+        cout << "15. View a list of students in a course" << endl;
+        cout << "16. Export a list of students in a course to a csv file" << endl;
+        cout << "17. Import the scoreboard of a course" << endl;
+        cout << "18. View the scoreboard of a course" << endl;
+        cout << "19. Update a student result" << endl;
+        cout << "20. View the scoreboard of a class" << endl;
+        cout << "21. Log out" << endl;
         break;
     default:
         break;
     }
+    return isStudent;
 }
 Semester* getdatafromcache(Date &startreg, Date &endreg)
 {

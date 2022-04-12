@@ -19,7 +19,7 @@ void createSchoolYear() {
 	else {
 		setCurrentYear(year);
 		setCurrentSemester(year, 0, Date(0, 0, 0), Date(0, 0, 0));
-		cout << "Year has been created successfully";
+		cout << "Year has been created successfully!\n";
 		return;
 	}
 }
@@ -116,6 +116,8 @@ void addStudent(string className, Student*& student) {
 		
 		student = student->next;
 	}
+
+	cout << "Students have been added successfully!\n";
 }
 
 
@@ -278,22 +280,67 @@ void staffChoice(User* acc, Class*& classes, Student*& student) {
 		cin >> choice;
 		switch (choice)
 		{
-		case 1:
+		case 1: //View info
 			viewUserProfile(acc);
 			break;
-		case 2:
+		case 2: //Change password
 			changePass(acc);
 			break;
-		case 3:
+		case 3: //Create a school year
 			createSchoolYear();
 			break;
-		case 4:
+		case 4: //Create a class
 			createClass(classes);
 			break;
-		case 5:
+		case 5: //Add new student
 			cout << "Input class name: ";
 			cin >> className;
 			addStudent(className, student);
+			break;
+		case 6: //Create a semester
+
+			break;
+		case 7: //Create a course registration
+
+			break;
+		case 8: //Add a course to semester
+
+			break;
+		case 9: //View the list of courses in the semester
+
+			break;
+		case 10: //Update course information
+
+			break;
+		case 11: //Delete a course
+
+			break;
+		case 12: //View a list of classes
+
+			break;
+		case 13: //View a list of students in a class
+
+			break;
+		case 14: //View a list of courses in the system
+
+			break;
+		case 15: //View a list of students in a course
+
+			break;
+		case 16: //Export a list of students in a course to a csv file
+
+			break;
+		case 17: //Import the scoreboard of a course
+
+			break;
+		case 18: //View the scoreboard of a course
+
+			break;
+		case 19: //Update a student result
+
+			break;
+		case 20: //View the scoreboard of a class
+
 			break;
 		default:
 			break;
