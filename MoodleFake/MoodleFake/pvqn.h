@@ -9,3 +9,6 @@ string displaysession(string id);
 void displaylogin(string& user, string& password);
 void removedenrolledcourse(Semester* now, string id);
 bool displaymenu(bool isstudent);
+Semester* getdatafromcache(Date& startreg, Date& endreg);
+void enrolledcoure(Semester* now, string id);
+void viewenrolledcourse(Semester* now, string id);

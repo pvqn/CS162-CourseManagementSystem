@@ -158,6 +158,8 @@ void viewScoreboard()
 }
 
 void studentChoice(User* acc) {
+    Date startreg, endreg;
+    Semester* s = getdatafromcache(startreg, endreg);
     int choice = 0;
     do {
         cout << "\nInput your choice: ";
@@ -171,16 +173,18 @@ void studentChoice(User* acc) {
             changePass(acc);
             break;
         case 3: //Enroll in a course
-
+            if (compare(getcurrentdate(), startreg, endreg))
+                enrolledcoure(s, acc->username);
+            else std::cout << "out of time for course registration";
             break;
         case 4: //View a list of enrolled courses
-
+            viewenrolledcourse(s, acc->username);
             break;
         case 5: //remove a course
-
+            removedenrolledcourse(s, acc->username);
             break;
         case 6: //view a list of courses in this semester
-
+            viewcourse_student(s, acc->username);
             break;
         default:
             break;
