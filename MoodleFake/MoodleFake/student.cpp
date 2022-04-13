@@ -127,8 +127,8 @@ void viewScoreboard()
 
     cout << setw(20) << right << ' '; cout << '|';
     cout << setw(6) << left << "Total"; cout << '|';
-    cout << setw(6) << left << "Mid"; cout << '|';
     cout << setw(6) << left << "Final"; cout << '|';
+    cout << setw(6) << left << "Mid"; cout << '|';
     cout << setw(6) << left << "Other"; cout << '|';
     cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
     cout << setw(49) << "-" << endl;	// fill 49 ky tu '-'
@@ -145,13 +145,13 @@ void viewScoreboard()
         ifstream fin_mark;
         string path_mark = "data/cache/Semester/students/" + studentID + "/" + course_name + "_mark.txt";
         fin_mark.open(path_mark);
-        fin_mark >> Total >> Mid >> Final >> Other;
+        fin_mark >> Total >> Final >> Mid >> Other;
         fin_mark.close();
 
         cout << setw(20) << right << course_name; cout << '|';
         cout << setw(6) << left << Total; cout << '|';
-        cout << setw(6) << left << Mid; cout << '|';
         cout << setw(6) << left << Final; cout << '|';
+        cout << setw(6) << left << Mid; cout << '|';
         cout << setw(6) << left << Other; cout << '|';
 
     }
