@@ -337,10 +337,10 @@ void staffChoice(User* acc, Class*& classes, Student*& student) {
 		case 18: //View the scoreboard of a course
 
 			break;
-		case 19: //Update a student result
+		case 19: //View the scoreboard of a class
 
 			break;
-		case 20: //View the scoreboard of a class
+		case 20: //logout
 
 			break;
 		default:
