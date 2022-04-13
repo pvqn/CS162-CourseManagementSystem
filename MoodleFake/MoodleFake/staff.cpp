@@ -338,10 +338,10 @@ void staffChoice(int& choice, User*& account, string& username, string& password
 		case 18: //View the scoreboard of a course
 
 			break;
-		case 19: //Update a student result
+		case 19: //View the scoreboard of a class
 
 			break;
-		case 20: //View the scoreboard of a class
+		case 20: //logout
 
 			break;
 		case 21: //Log out

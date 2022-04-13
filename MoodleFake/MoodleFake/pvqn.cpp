@@ -358,10 +358,9 @@ bool displaymenu(bool isStudent)
         cout << "16. Export a list of students in a course to a csv file" << endl;
         cout << "17. Import the scoreboard of a course" << endl;
         cout << "18. View the scoreboard of a course" << endl;
-        cout << "19. Update a student result" << endl;
-        cout << "20. View the scoreboard of a class" << endl;
-        cout << "21. Log out" << endl;
-        cout << "22. Exit program " << endl;
+        cout << "19. View the scoreboard of a class" << endl;
+        cout << "20. Log out" << endl;
+        cout << "21. Exit program " << endl;
         break;
     default:
         break;
