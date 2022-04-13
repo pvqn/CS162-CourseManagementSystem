@@ -119,16 +119,23 @@ void viewcourse_student(Semester *head, string id)
     }
        
 }
-void viewclass(Class* head)
+void viewclass()
 {
+    string path = "classes/classList.txt";
+    ifstream fin;
+    fin.open(path);
+    string d;
     int i = 0;
-    cout << "Here is the list of classes" << endl;
-    while (head)
+    while (fin >> d)
     {
-        cout << i + 1 << ". " << head->ClassName << endl;
-        head = head->next;
-        ++i;
+   
+       if (!i) 
+           cout << "Here is the list of classes" << endl;
+           cout << i + 1 << ". " << d << endl;
+           ++i;
     }
+    
+fin.close();
 }
 /* pass string id
 * kiểm tra đã đăng kí bao nhiêu course
@@ -329,6 +336,7 @@ bool displaymenu(bool isStudent)
         cout << "A course resgistration session is closed" << endl;
         cout << "   6. View a list of courses in this semester" << endl;
         cout << "7. Log out " << endl;
+        cout << "8. Exit program " << endl;
         break;
     case 0:
         cout << "1. View info" << endl;
@@ -350,9 +358,9 @@ bool displaymenu(bool isStudent)
         cout << "16. Export a list of students in a course to a csv file" << endl;
         cout << "17. Import the scoreboard of a course" << endl;
         cout << "18. View the scoreboard of a course" << endl;
-        cout << "19. Update a student result" << endl;
-        cout << "20. View the scoreboard of a class" << endl;
-        cout << "21. Log out" << endl;
+        cout << "19. View the scoreboard of a class" << endl;
+        cout << "20. Log out" << endl;
+        cout << "21. Exit program " << endl;
         break;
     default:
         break;

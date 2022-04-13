@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void staffChoice(User* acc, Class*& classes, Student*& student);
+void staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student);
 void createSchoolYear();
 void importStudentFromCSV(string className, Student*& student);
 void addStudent(string className, Student*& student);

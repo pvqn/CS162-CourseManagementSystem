@@ -1,3 +1,4 @@
+#include "staff.h"
 #include "struct.h"
 #include "pvqn.h"
 #include "user.h"
@@ -157,37 +158,42 @@ void viewScoreboard()
     fin.close();
 }
 
-void studentChoice(User* acc) {
+void studentChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student) {
     Date startreg, endreg;
     Semester* s = getdatafromcache(startreg, endreg);
-    int choice = 0;
     do {
         cout << "\nInput your choice: ";
         cin >> choice;
         switch (choice)
         {
         case 1: //View info 
-            viewUserProfile(acc);
+            viewUserProfile(account);
             break;
         case 2: //Change password
-            changePass(acc);
+            changePass(account);
             break;
         case 3: //Enroll in a course
             if (compare(getcurrentdate(), startreg, endreg))
-                enrolledcoure(s, acc->username);
+                enrolledcoure(s, account->username);
             else std::cout << "out of time for course registration";
             break;
         case 4: //View a list of enrolled courses
-            viewenrolledcourse(s, acc->username);
+            viewenrolledcourse(s, account->username);
             break;
         case 5: //remove a course
-            removedenrolledcourse(s, acc->username);
+            removedenrolledcourse(s, account->username);
             break;
         case 6: //view a list of courses in this semester
-            viewcourse_student(s, acc->username);
+            viewcourse_student(s, account->username);
             break;
+        case 7: //Log out
+            displaylogin(username, password);
+            if (displaymenu(login(username, password, account)))
+                studentChoice(choice, account, username, password, classes, student); // student
+            else // staff
+                staffChoice(choice, account, username, password, classes, student);
         default:
             break;
         }
-    } while (choice != 7);
+    } while (choice != 8);
 }
