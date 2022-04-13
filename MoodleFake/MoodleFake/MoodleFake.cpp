@@ -1,7 +1,6 @@
 #include <iostream>
 #include "user.h"
 #include "pvqn.h"
-#include <iostream>
 #include "staff.h"
 #include "semester.h"
 #include "course.h"
@@ -20,14 +19,15 @@ int main()
 	Course* courseCur = NULL; // task 8
 	string username;
 	string password;
-	int choice = 0;
-
-	displaylogin(username, password);
-	if (displaymenu(login(username, password, account)))
-		studentChoice(choice, account, username, password, classes, student); // student
-	else // staff
-		staffChoice(choice, account, username, password, classes, student);
-
+	int choice;
+	bool logOut = -1;
+	do{
+		displaylogin(username, password);
+		if (displaymenu(login(username, password, account)))
+			logOut = studentChoice(choice, account, username, password, classes, student); // student
+		else // staff
+			logOut = staffChoice(choice, account, username, password, classes, student);
+	} while (logOut != 0);
 	//Create_newSemester(semCur);
 	//CourseRegister(startSem, endSem, semCur->term, semCur->year);
 	//addCourse(courseCur);

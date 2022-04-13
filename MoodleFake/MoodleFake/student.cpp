@@ -158,9 +158,10 @@ void viewScoreboard()
     fin.close();
 }
 
-void studentChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student) {
+bool studentChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student) {
     Date startreg, endreg;
     Semester* s = getdatafromcache(startreg, endreg);
+    
     do {
         cout << "\nInput your choice: ";
         cin >> choice;
@@ -187,13 +188,11 @@ void studentChoice(int& choice, User*& account, string& username, string& passwo
             viewcourse_student(s, account->username);
             break;
         case 7: //Log out
-            displaylogin(username, password);
-            if (displaymenu(login(username, password, account)))
-                studentChoice(choice, account, username, password, classes, student); // student
-            else // staff
-                staffChoice(choice, account, username, password, classes, student);
+            return 1;
         default:
             break;
         }
+        
     } while (choice != 8);
+    return 0;
 }

@@ -275,7 +275,7 @@ void ImportCourseScore() // Import + Update
 	// Not yet !!!!!!!!!!!!!!!!!
 }
 
-void staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student) {
+bool staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student) {
 	string className;
 	do {
 		cout << "\nInput your choice: ";
@@ -341,19 +341,13 @@ void staffChoice(int& choice, User*& account, string& username, string& password
 		case 19: //View the scoreboard of a class
 
 			break;
-		case 20: //logout
-
-			break;
-		case 21: //Log out
-			displaylogin(username, password);
-			if (displaymenu(login(username, password, account)))
-				studentChoice(choice, account, username, password, classes, student); // student
-			else // staff
-				staffChoice(choice, account, username, password, classes, student);
+		case 20: //Log out
+			return 1;
 		default:
 			break;
 		}
-	} while (choice != 22);
+	} while (choice != 21);
+	return 0;
 }
 
 void viewScoreboardOfCourse() // In bang diem mon hoc
