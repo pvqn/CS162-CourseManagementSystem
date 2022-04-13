@@ -243,7 +243,7 @@ void ImportCourseScore() // Import + Update
 	while (!fin.eof())
 	{
 		string ID, Total, Mid, Final, Other;
-		fin >> ID >> Total >> Fianl >> Mid >> Other;
+		fin >> ID >> Total >> Final >> Mid >> Other;
 		path_out = "data/cache/Semester/students/" + ID + "/" + Course_name + "/_mark.txt";
 		fout.open(path_out);
 		fout << Total << '\n' << Final << '\n' << Mid << '\n' << Other << '\n';
