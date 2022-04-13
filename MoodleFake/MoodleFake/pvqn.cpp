@@ -336,6 +336,7 @@ bool displaymenu(bool isStudent)
         cout << "A course resgistration session is closed" << endl;
         cout << "   6. View a list of courses in this semester" << endl;
         cout << "7. Log out " << endl;
+        cout << "8. Exit program " << endl;
         break;
     case 0:
         cout << "1. View info" << endl;
@@ -360,6 +361,7 @@ bool displaymenu(bool isStudent)
         cout << "19. Update a student result" << endl;
         cout << "20. View the scoreboard of a class" << endl;
         cout << "21. Log out" << endl;
+        cout << "22. Exit program " << endl;
         break;
     default:
         break;
