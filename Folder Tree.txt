@@ -22,11 +22,9 @@ data
 				    General Physic II
 			courseRegister.txt
 	cache
-		(currentAcc.txt
-		currentClass.txt
-		currentCourse.txt
+		
 		currentSemester.txt
-		currentYear.txt)
+		
 		// tạo thủ công folder, chỉ in lại dữ liệu
 
 		currentUser.txt // Ten dang nhap va password cua nguoi dang su dung

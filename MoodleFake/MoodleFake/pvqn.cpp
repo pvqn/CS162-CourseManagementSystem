@@ -370,8 +370,7 @@ bool displaymenu(bool isStudent)
 Semester* getdatafromcache(Date &startreg, Date &endreg)
 {
     Semester* s = new Semester;
-    Semester* temp = s;
-    string path = "cache/Semester/coureses/courseList";
+    string path = "cache/Semester/coureses/courseList.txt";
     ifstream fin;
     fin.open(path);
     string id;
@@ -382,14 +381,14 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
         {
             s->course_cur = new Course;
             s->course_cur->id = id;
-            fin >> s->course_cur->name; // do not read name of the course
+            getline(fin, s->course_cur->name) ;
         }
         else
         {
             s->course_cur->next = new Course;
             s->course_cur = s->course_cur->next;
             s->course_cur->id = id;
-            fin >> s->course_cur->name; // do not read name of the course
+            getline(fin, s->course_cur->name);
         }
     }
     fin.close();
@@ -413,19 +412,19 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
     while (cur)
     {
         // doc co thong tin trong khoa hoc
-            path = "cache/Semester/courses" + cur->id+"info_Of_Course.txt";
+            path = "cache/Semester/courses/" + cur->id + "/info_Of_Course.txt";
             fin.open(path);
                 fin >> cur->teacher >> cur->nCredits >> cur->maxCapacity >> cur->ses1 >> cur->ses2;
             fin.close();
         // doc student list trong khoa hoc
-            path = "cache/Semester/courses" + cur->id + "studentList.txt";
+            path = "cache/Semester/courses/" + cur->id + "/studentList.txt";
             fin.open(path);
                 string input;
                 student_list *in = cur->student;
                 if (fin >> input)
                 {
                     in = new student_list;
-                    in->id=input; 
+                    in->id = input; 
                     while (fin >> input)
                     {
                             in->next = new student_list;
@@ -435,7 +434,7 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
                 }
             fin.close();
         // doc mark cua student neu co
-            path = "cache/Semester/courses" + cur->id + "mark.txt";
+            path = "cache/Semester/courses/" + cur->id + "/mark.txt";
             fin.open(path);
             student_list* t = cur->student;
             while (t)
@@ -451,5 +450,5 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
             fin.close();
         cur = cur->next;
     }
-    return temp;
+    return s;
 }
