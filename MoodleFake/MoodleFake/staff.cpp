@@ -324,16 +324,16 @@ bool staffChoice(int& choice, User*& account, string& username, string& password
 
 			break;
 		case 16: //Export a list of students in a course to a csv file
-
+			exportCourseStudentListToCSV();
 			break;
 		case 17: //Import the scoreboard of a course
-
+			ImportCourseScore();
 			break;
 		case 18: //View the scoreboard of a course
-
+			viewScoreboardOfCourse();
 			break;
 		case 19: //View the scoreboard of a class
-
+			viewScoreinClass();
 			break;
 		case 20: //Log out
 			return 1;
