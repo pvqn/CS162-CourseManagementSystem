@@ -124,21 +124,15 @@ void addStudent(string className, Student*& student) {
 }
 
 
-void ExportCourseStudentList()
+void exportCourseStudentListToCSV()
 {
-	//  Enter the year and the semester
-	int Year = 0, Term = 0;
-	cout << "Please input the year: "; cin >> Year;
-	cout << "Please input the semester: "; cin >> Term;
 
-	// Print student in this course
 	string Course_name;
 	cout << "Please enter course name ( Example CS162 ): "; cin >> Course_name;
-	string path = "data/" + to_string(Year) + '/' + to_string(Term) + "/courseList.txt";
+	string path = "data/cache/Semester/courseList.txt";
 	bool Check = false;
 
-	ifstream fin;
-	ofstream fout;
+	ifstream fin; ofstream fout;
 
 	fin.open(path);
 	while (!fin.eof())
@@ -153,9 +147,9 @@ void ExportCourseStudentList()
 		return;
 	}
 
-	string path_in = "data/" + to_string(Year) + '/' + to_string(Term) + "/" + Course_name + "/studentList.txt";
-	string path_out = "data/" + to_string(Year) + '/' + to_string(Term) + "/" + Course_name + "/StudentList.csv";
-	string path_mark = "data/" + to_string(Year) + '/' + to_string(Term) + "/" + Course_name + "/mark.txt";
+	string path_in = "data/cache/Semester/courses/" + Course_name + "/studentList.txt";
+	string path_out = "data/cache/csvFile/" + Course_name + ".csv";
+	string path_mark = "data/cache/Semester/courses/" + Course_name + "/mark.txt";
 	ifstream Mark; Mark.open(path_mark);
 	fin.open(path_in);
 	fout.open(path_out);
