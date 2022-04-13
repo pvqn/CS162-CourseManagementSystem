@@ -8,7 +8,7 @@ void createSchoolYear();
 void importStudentFromCSV(string className, Student*& student);
 void addStudent(string className, Student*& student);
 void ImportCourseScore();
-void ExportCourseStudentList();
+void exportCourseStudentListToCSV();
 void viewScoreboardOfCourse();
 void viewScoreinClass();
 
