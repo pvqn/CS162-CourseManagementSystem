@@ -9,6 +9,7 @@
 #include <iostream>
 #include <iomanip>
 #include <stdlib.h>
+#include "course.h"
 
 
 void createSchoolYear() {
@@ -269,7 +270,7 @@ void ImportCourseScore() // Import + Update
 	// Not yet !!!!!!!!!!!!!!!!!
 }
 
-bool staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student) {
+bool staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student, Semester* semCur,Course* courseCur) {
 	string className;
 	do {
 		cout << "\nInput your choice: ";
@@ -294,22 +295,23 @@ bool staffChoice(int& choice, User*& account, string& username, string& password
 			addStudent(className, student);
 			break;
 		case 6: //Create a semester
-
+			Create_newSemester(semCur);
 			break;
 		case 7: //Create a course registration
-
+			CourseRegister(semCur->startDate, semCur->endDate, semCur->term, semCur->year);
 			break;
 		case 8: //Add a course to semester
-
+			addCourse(courseCur);
 			break;
 		case 9: //View the list of courses in the semester
-
+			cout << "The list of courses in the semester: ";
+			view_Course(courseCur, semCur);
 			break;
 		case 10: //Update course information
-
+			updateCourse(courseCur);
 			break;
 		case 11: //Delete a course
-
+			DeleteCourse(courseCur);
 			break;
 		case 12: //View a list of classes
 			viewclass();
