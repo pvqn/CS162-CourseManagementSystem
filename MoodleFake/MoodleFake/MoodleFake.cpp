@@ -20,12 +20,13 @@ int main()
 	Course* courseCur = NULL; // task 8
 	string username;
 	string password;
+	int choice = 0;
 
 	displaylogin(username, password);
 	if (displaymenu(login(username, password, account)))
-		studentChoice(account); // student
+		studentChoice(choice, account, username, password, classes, student); // student
 	else // staff
-		staffChoice(account, classes, student);
+		staffChoice(choice, account, username, password, classes, student);
 
 	//Create_newSemester(semCur);
 	//CourseRegister(startSem, endSem, s);

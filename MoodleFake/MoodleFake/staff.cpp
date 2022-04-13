@@ -4,6 +4,8 @@
 #include "struct.h"
 #include "classes.h"
 #include "pvqn.h"
+#include "student.h"
+#include "staff.h"
 #include <iostream>
 #include <iomanip>
 #include <stdlib.h>
@@ -273,8 +275,7 @@ void ImportCourseScore() // Import + Update
 	// Not yet !!!!!!!!!!!!!!!!!
 }
 
-void staffChoice(User* acc, Class*& classes, Student*& student) {
-	int choice = 0;
+void staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student) {
 	string className;
 	do {
 		cout << "\nInput your choice: ";
@@ -282,10 +283,10 @@ void staffChoice(User* acc, Class*& classes, Student*& student) {
 		switch (choice)
 		{
 		case 1: //View info
-			viewUserProfile(acc);
+			viewUserProfile(account);
 			break;
 		case 2: //Change password
-			changePass(acc);
+			changePass(account);
 			break;
 		case 3: //Create a school year
 			createSchoolYear();
@@ -343,10 +344,16 @@ void staffChoice(User* acc, Class*& classes, Student*& student) {
 		case 20: //View the scoreboard of a class
 
 			break;
+		case 21: //Log out
+			displaylogin(username, password);
+			if (displaymenu(login(username, password, account)))
+				studentChoice(choice, account, username, password, classes, student); // student
+			else // staff
+				staffChoice(choice, account, username, password, classes, student);
 		default:
 			break;
 		}
-	} while (choice != 21);
+	} while (choice != 22);
 }
 
 void viewScoreboardOfCourse() // In bang diem mon hoc
