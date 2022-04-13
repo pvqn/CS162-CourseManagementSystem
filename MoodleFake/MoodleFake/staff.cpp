@@ -159,7 +159,7 @@ void ExportCourseStudentList()
 	ifstream Mark; Mark.open(path_mark);
 	fin.open(path_in);
 	fout.open(path_out);
-	fout << "No,ID,Name,Midterm Mark,Final mark,Other mark,Total mark" << '\n';
+	fout << "No,ID,Name,Final,Midterm,Other,Total" << '\n';
 	int No = 0;
 	while (!fin.eof())
 	{
@@ -169,13 +169,13 @@ void ExportCourseStudentList()
 
 		fin >> ID;
 		fin.ignore(); getline(fin, Name);
-		Mark >> ID_mark >> Mid >> Final >> Other >> Total;
+		Mark >> ID_mark >> Total >> Final >> Mid >> Other;
 		if (ID != ID_mark)
 		{
 			system("pause");
 			cout << "Error!!!!!!!!!!!!!!!!!!!!!!!!";
 		}
-		fout << ++No << ',' << ID << ',' << Name << ',' << Mid << ',' << Final << ',' << Other << ',' << Total << '\n';
+		fout << ++No << ',' << ID << ',' << Name << ',' << Total << ',' << Final << ',' << Mid << ',' << Other << '\n';
 	}
 	fin.close();
 	fout.close();
@@ -243,10 +243,10 @@ void ImportCourseScore() // Import + Update
 	while (!fin.eof())
 	{
 		string ID, Total, Mid, Final, Other;
-		fin >> ID >> Total >> Mid >> Final >> Other;
+		fin >> ID >> Total >> Fianl >> Mid >> Other;
 		path_out = "data/cache/Semester/students/" + ID + "/" + Course_name + "/_mark.txt";
 		fout.open(path_out);
-		fout << Total << '\n' << Mid << '\n' << Final << '\n' << Other << '\n';
+		fout << Total << '\n' << Final << '\n' << Mid << '\n' << Other << '\n';
 		fout.close();
 	}
 	fin.close();
@@ -257,7 +257,7 @@ void ImportCourseScore() // Import + Update
 	while (!fin.eof())
 	{
 		string ID, Total, Mid, Final, Other, classID;
-		fin >> ID >> Total >> Mid >> Final >> Other;
+		fin >> ID >> Total >> Final >> Mid >> Other;
 		// Find class
 		ifstream FindClass;
 		string path_class = "data/cache/Semester/students/" + ID + "/class.txt";
@@ -267,7 +267,7 @@ void ImportCourseScore() // Import + Update
 		// Update mark
 		path_out = "data/classes/" + classID + "/" + ID + "_course/" + Course_name + "_mark.txt";
 		fout.open(path_out);
-		fout << Total << '\n' << Mid << '\n' << Final << '\n' << Other << '\n';
+		fout << Total << '\n' << Final << '\n' << Mid << '\n' << Other << '\n';
 		fout.close();
 	}
 	fin.close();
@@ -384,8 +384,8 @@ void viewScoreboardOfCourse() // In bang diem mon hoc
 	cout << setw(12) << left << "Student ID"; cout << '|';
 	cout << setw(30) << right << "Full name"; cout << '|';
 	cout << setw(6) << right << "Total"; cout << '|';
+	cout << setw(6) << right << "Fianl"; cout << '|';
 	cout << setw(6) << right << "Mid"; cout << '|';
-	cout << setw(6) << right << "Final"; cout << '|';
 	cout << setw(6) << right << "Other"; cout << '\n';
 	cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
 	cout << setw(75) << "-" << endl;	// fill 75 ky tu '-'
@@ -395,7 +395,7 @@ void viewScoreboardOfCourse() // In bang diem mon hoc
 		string current;
 		getline(fin, current);
 		if (current.size() == 0) break;
-		string List[7]; // No, ID, Full name, Total, Mid, Final, Other
+		string List[7]; // No, ID, Full name, Total, Final, Mid, Other
 		int cnt = 0;
 		for (int i = 0; i < current.size(); ++i)
 		{
