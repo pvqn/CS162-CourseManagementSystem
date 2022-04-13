@@ -164,10 +164,10 @@ void Create_newSemester(Semester* Scur)
 	fout.close();
 }
 
-void CourseRegister(Date& start, Date& end, int semester)
+void CourseRegister(Date& start, Date& end, int semester,int year)
 {
 
-	string path = "data/"+ to_string(semester) + "/courseRegister.txt";
+	string path = "data/" +to_string(year)+ "/" + to_string(semester) + "/courseRegister.txt";
 	ifstream fin(path);
 	
 	fin >> start.day >> start.month >> start.year;

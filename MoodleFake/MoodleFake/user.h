@@ -1,6 +1,7 @@
 #pragma once
 #include "struct.h"
 using namespace std;
+
 void addAcc(User*& acc);
 void getAcc(User*& acc);
 void resetAcc(User* acc);

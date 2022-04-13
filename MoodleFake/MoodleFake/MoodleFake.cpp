@@ -16,7 +16,7 @@ int main()
 	Class* classes = NULL;
 	Student* student = NULL;
 	Semester* semCur = NULL; //task 6
-	Date startSem, endSem; int s;// task 7
+	Date startSem, endSem;	// task 7
 	Course* courseCur = NULL; // task 8
 	string username;
 	string password;
@@ -28,7 +28,7 @@ int main()
 		staffChoice(account, classes, student);
 
 	//Create_newSemester(semCur);
-	//CourseRegister(startSem, endSem, s);
+	//CourseRegister(startSem, endSem, semCur->term, semCur->year);
 	//addCourse(courseCur);
 	//view_Course(courseCur, semCur);
 	//updateCourse(courseCur);
