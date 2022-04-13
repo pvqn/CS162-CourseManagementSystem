@@ -119,16 +119,23 @@ void viewcourse_student(Semester *head, string id)
     }
        
 }
-void viewclass(Class* head)
+void viewclass()
 {
+    string path = "classes/classList.txt";
+    ifstream fin;
+    fin.open(path);
+    string d;
     int i = 0;
-    cout << "Here is the list of classes" << endl;
-    while (head)
+    while (fin >> d)
     {
-        cout << i + 1 << ". " << head->ClassName << endl;
-        head = head->next;
-        ++i;
+   
+       if (!i) 
+           cout << "Here is the list of classes" << endl;
+           cout << i + 1 << ". " << d << endl;
+           ++i;
     }
+    
+fin.close();
 }
 /* pass string id
 * kiểm tra đã đăng kí bao nhiêu course

@@ -3,6 +3,7 @@
 #include "user.h"
 #include "struct.h"
 #include "classes.h"
+#include "pvqn.h"
 #include <iostream>
 #include <iomanip>
 #include <stdlib.h>
@@ -316,7 +317,7 @@ void staffChoice(User* acc, Class*& classes, Student*& student) {
 
 			break;
 		case 12: //View a list of classes
-
+			viewclass();
 			break;
 		case 13: //View a list of students in a class
 
