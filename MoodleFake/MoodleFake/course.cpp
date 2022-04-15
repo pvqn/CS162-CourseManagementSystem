@@ -2,25 +2,27 @@
 #include "pvqn.h"
 Course* add()
 {
-	Course* cCur = nullptr;
+	Course* cCur = new Course;
 	cin.ignore();
-	getline(cin, cCur->id);
-	getline(cin, cCur->name);
-	getline(cin, cCur->teacher);
-	cin >> cCur->nCredits;
-	cin >> cCur->maxCapacity;
+	cout << "Input id: ";  getline(cin, cCur->id);
+	cout << "Input Name: "; getline(cin, cCur->name);
+	cout << "Input Teacher: "; getline(cin, cCur->teacher);
+	cout << "Input Number of Credits: ";  cin >> cCur->nCredits;
+	cout << "Input max students: ";  cin >> cCur->maxCapacity;
 	cin.ignore();
-	getline(cin, cCur->day1);
-	getline(cin, cCur->ses1);
-	getline(cin, cCur->day2);
-	getline(cin, cCur->ses2);
+	cout << "Day1: "; getline(cin, cCur->day1);
+	cout << "Ses1: "; getline(cin, cCur->ses1);
+	cout << "Day2: "; getline(cin, cCur->day2);
+	cout << "Ses2: "; getline(cin, cCur->ses2);
+
+	cout << cCur->id << " " << cCur->name << " " << cCur->teacher << endl;
 	return cCur;
 }
-void addCourse(Course* pCourse)
+void addCourse(Course*& pCourse)
 {
 	Course* pCur = pCourse;
 	Course* newCourse = add();
-
+	//cout << newCourse->maxCapacity << endl;
 	while (pCur != nullptr)
 	{
 		if (pCur->id == newCourse->id)
@@ -28,7 +30,6 @@ void addCourse(Course* pCourse)
 			cout << "Failed to add a new course!!\n";
 			cout << "The course you want to add has already existed!!\n";
 			system("pause");
-			system("cls");
 			return;
 		}
 		pCur = pCur->next;
@@ -36,6 +37,7 @@ void addCourse(Course* pCourse)
 	if (pCourse == nullptr)
 	{
 		pCourse = newCourse;
+		//cout << pCourse->maxCapacity << endl;
 		return;
 	}
 	pCur->next = newCourse;

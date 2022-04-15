@@ -4,7 +4,7 @@
 using namespace std;
 
 
-void addCourse(Course* pCourse);
+void addCourse(Course*& pCourse);
 void view_Course(Course* pCur, Semester* Scur);
 void updateCourse(Course* pCur);
 

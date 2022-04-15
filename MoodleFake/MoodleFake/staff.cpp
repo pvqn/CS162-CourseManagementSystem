@@ -270,7 +270,7 @@ void ImportCourseScore() // Import + Update
 	// Not yet !!!!!!!!!!!!!!!!!
 }
 
-bool staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student, Semester* semCur,Course* courseCur) {
+bool staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student, Semester* semCur,Course*& courseCur) {
 	string className;
 	do {
 		cout << "\nInput your choice: ";
@@ -296,9 +296,10 @@ bool staffChoice(int& choice, User*& account, string& username, string& password
 			break;
 		case 6: //Create a semester
 			Create_newSemester(semCur);
+			//cout << semCur->year << " " << semCur->term << endl;
 			break;
 		case 7: //Create a course registration
-			CourseRegister(semCur->startDate, semCur->endDate, semCur->term, semCur->year);
+			CourseRegister( semCur->term, semCur->year);
 			break;
 		case 8: //Add a course to semester
 			addCourse(courseCur);

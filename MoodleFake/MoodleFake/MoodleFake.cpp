@@ -28,6 +28,7 @@ int main()
 		else // staff
 			logOut = staffChoice(choice, account, username, password, classes, student,semCur,courseCur);
 	} while (logOut != 0);
+
 	//Create_newSemester(semCur);
 	//CourseRegister(startSem, endSem, semCur->term, semCur->year);
 	//addCourse(courseCur);

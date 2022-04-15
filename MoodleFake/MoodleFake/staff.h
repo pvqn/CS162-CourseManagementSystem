@@ -3,7 +3,7 @@
 
 using namespace std;
 
-bool staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student, Semester* semCur, Course* courseCur);
+bool staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student, Semester* semCur, Course*& courseCur);
 void createSchoolYear();
 void importStudentFromCSV(string className, Student*& student);
 void addStudent(string className, Student*& student);

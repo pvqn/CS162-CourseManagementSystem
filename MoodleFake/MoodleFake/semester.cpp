@@ -122,14 +122,14 @@ Semester getCurrentSemester() { //Lấy thông tin của Semester hiện tại
 	return currentSemester;
 //>>>>>>> 4721181f85f83214196216fde0364355879f3ba6
 }
-void Create_newSemester(Semester* Scur)
+void Create_newSemester(Semester*& Scur)
 {
-	Semester* s = nullptr;
+	Semester* s = new Semester;
 
-	
-	cin >> s->year >> s->term;
-	cin >> s->startDate.day >> s->startDate.month >> s->startDate.year;
-	cin >> s->endDate.day >> s->endDate.month >> s->endDate.year;
+	cout << "Input Year: "; cin >> s->year ;
+	cout << "Input Term: ";cin >> s->term;
+	cout << "Start Day: "; cin >> s->startDate.day >> s->startDate.month >> s->startDate.year;
+	cout << "End Day: "; cin >> s->endDate.day >> s->endDate.month >> s->endDate.year;
 	//s->Course
 
 	Scur = s; /// Since we just need to create one semester
@@ -164,14 +164,17 @@ void Create_newSemester(Semester* Scur)
 	fout.close();
 }
 
-void CourseRegister(Date& start, Date& end, int semester,int year)
+void CourseRegister( int semester,int year)
 {
 
 	string path = "data/" +to_string(year)+ "/" + to_string(semester) + "/courseRegister.txt";
 	ifstream fin(path);
-	
+	Date start, end;
 	fin >> start.day >> start.month >> start.year;
 	fin >> end.day >> end.month >> end.year;
 
 	fin.close();
+	
+	cout << "courseRegister Start Day: " << start.day << " " << start.month << " " << start.year << endl;
+	cout << "courseRegister End Day: " << end.day << " " << end.month << " " << end.year << endl;
 }
