@@ -20,6 +20,7 @@ Course* add()
 }
 void addCourse(Course*& pCourse)
 {
+	Course* tmp = new Course;
 	Course* pCur = pCourse;
 	Course* newCourse = add();
 	//cout << newCourse->maxCapacity << endl;
@@ -32,6 +33,7 @@ void addCourse(Course*& pCourse)
 			system("pause");
 			return;
 		}
+		tmp = pCur;
 		pCur = pCur->next;
 	}
 	if (pCourse == nullptr)
@@ -40,8 +42,8 @@ void addCourse(Course*& pCourse)
 		//cout << pCourse->maxCapacity << endl;
 		return;
 	}
-	pCur->next = newCourse;
-	pCur = pCur->next;
+	pCur = newCourse;
+	tmp->next = pCur;
 }
 
 void view_Course(Course* pCur, Semester* Scur)
