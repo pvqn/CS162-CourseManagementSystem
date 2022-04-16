@@ -62,7 +62,7 @@ void view_Course(Course* pCur, Semester* Scur)
 		pCur = pCur->next;
 	}
 }
-void updateCourse(Course* pCourse)
+void updateCourse(Course*& pCourse)
 {
 	string id;
 	cin.ignore();
@@ -87,7 +87,7 @@ void updateCourse(Course* pCourse)
 
 		cout << "Your Input: "; 
 		cin >> option;
-		system("cls");
+		//system("cls");
 		if (option > 6 || option < 0)
 		{
 			cout << "Please input again" << endl << endl;
@@ -139,7 +139,6 @@ void updateCourse(Course* pCourse)
 	cout << "Update successfully !!" << endl;
 
 	system("pause");
-	system("cls");
 }
 
 void DeleteCourse(Course* pCourse)
