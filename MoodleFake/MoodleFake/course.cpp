@@ -141,7 +141,7 @@ void updateCourse(Course*& pCourse)
 	system("pause");
 }
 
-void DeleteCourse(Course* pCourse)
+void DeleteCourse(Course*& pCourse)
 {
 	string id;
 	cin.ignore();
@@ -163,7 +163,7 @@ void DeleteCourse(Course* pCourse)
 		cout << "1. Yes" << endl;
 		cout << "2. No" << endl;
 		cin >> option;
-		system("cls");
+		//system("cls");
 		if (option > 2 || option < 1)
 		{
 			cout << "Please input again" << endl << endl;
