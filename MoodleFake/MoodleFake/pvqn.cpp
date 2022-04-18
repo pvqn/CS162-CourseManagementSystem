@@ -121,7 +121,7 @@ void viewcourse_student(Semester *head, string id)
 }
 void viewclass()
 {
-    string path = "classes/classList.txt";
+    string path = "data/classes/classList.txt";
     ifstream fin;
     fin.open(path);
     string d;
