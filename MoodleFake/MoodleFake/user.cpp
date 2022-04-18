@@ -67,11 +67,19 @@ bool login(string username, string password, User*& account) {
 		if (username.find("@staff") != string::npos
 			&& username == acc->username && password == acc->password) {  //Account of staff
 			account = acc;
+			ofstream out("data/cache/currentUser.txt");
+			out << username << " ";
+			out << password;
+			out.close();
 			return false;
 			break;
 		}
 		else if (username == acc->username && password == acc->password) {
 			account = acc;
+			ofstream out("data/cache/currentUser.txt");
+			out << username << " ";
+			out << password;
+			out.close();
 			return true;
 			break;
 		}
