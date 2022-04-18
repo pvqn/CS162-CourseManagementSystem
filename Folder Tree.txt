@@ -39,7 +39,7 @@ data
 			students
 				student ID (Ex: 21125158) (Folder)
 					class.txt  // Class of the student
-					course.txt
+					course.txt // In this semester
 					course mark ( Ex: CS162_mark.txt )
 			info_Of_Semester.txt
 			courseList.txt

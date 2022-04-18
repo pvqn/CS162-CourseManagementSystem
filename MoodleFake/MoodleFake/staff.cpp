@@ -594,7 +594,7 @@ void displaycourse_list() // In ra danh sach cac khoa hoc
 	while (!fin.eof())
 	{
 		string cur;
-		fin >> cur;
+		getline(fin, cur);
 		cout << cur << '\n';
 	}
 	fin.close();
@@ -602,7 +602,7 @@ void displaycourse_list() // In ra danh sach cac khoa hoc
 
 void displaycourse_studentList()
 {
-
+	displaycourse_list();
 	// Print student in this course
 	string Course_name;
 	cout << "Please enter course name ( Example CS162 ): "; cin >> Course_name;
@@ -621,7 +621,7 @@ void displaycourse_studentList()
 		cout << "Your finding course is not exist !";
 		return;
 	}
-	path = "data/cache/Semester/coureses" + Course_name + "/studentList.txt";
+	path = "data/cache/Semester/coureses/" + Course_name + "/studentList.txt";
 	fin.open(path);
 	while (!fin.eof())
 	{
