@@ -326,7 +326,7 @@ void displaylogin(string &user, string &password)
     cout << "> user: "; cin >> user;
     cout << "> password: "; cin >> password;
 }
-bool displaymenu(bool isStudent)
+int displaymenu(int isStudent)
 {
     switch (isStudent)
     {

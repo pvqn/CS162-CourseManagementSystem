@@ -20,14 +20,20 @@ int main()
 	string username;
 	string password;
 	int choice;
+	int userRole;
 	bool logOut = -1;
 	do{
 		displaylogin(username, password);
-		if (displaymenu(login(username, password, account)))
-			logOut = studentChoice(choice, account, username, password, classes, student); // student
-		else // staff
-			logOut = staffChoice(choice, account, username, password, classes, student,semCur,courseCur);
-	} while (logOut != 0);
+		userRole = displaymenu(login(username, password, account));
+		if (userRole == 1) // student
+			logOut = studentChoice(choice, account, username, password, classes, student);
+		else if (userRole == 0)// staff
+			logOut = staffChoice(choice, account, username, password, classes, student, semCur, courseCur);
+		else {
+			cout << "WRONG USERNAME OR PASSWORD!" << endl;
+			cout << "Please login again!" << endl;
+		}
+	} while (logOut != 0 && (userRole != 0 || userRole != 1));
 
 	//Create_newSemester(semCur);
 	//CourseRegister(startSem, endSem, semCur->term, semCur->year);

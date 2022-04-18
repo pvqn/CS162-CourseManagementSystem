@@ -17,7 +17,7 @@ void resetAcc(User* acc) { // Ghi lại toàn bộ acc vào file account.txt
 			<< acc->role << ' ' << acc->Class << '\n';  //In thông tin user ra file account.txt
 		acc = acc->next;
 	}
-	out.close();
+	out.close();			
 }
 
 void getAcc(User*& acc) {
@@ -58,9 +58,10 @@ bool checkUserExist(string username, string password) {
 	return false;
 }
 
-bool login(string username, string password, User*& account) {
-	// Student: true
-	// Staff: false
+int login(string username, string password, User*& account) {
+	// Staff: 0
+	// Student: 1
+	// error: 2
 	User* acc = NULL;
 	getAcc(acc);
 	while (acc != NULL) {
@@ -71,7 +72,7 @@ bool login(string username, string password, User*& account) {
 			out << username << " ";
 			out << password;
 			out.close();
-			return false;
+			return 0;
 			break;
 		}
 		else if (username == acc->username && password == acc->password) {
@@ -80,11 +81,12 @@ bool login(string username, string password, User*& account) {
 			out << username << " ";
 			out << password;
 			out.close();
-			return true;
+			return 1;
 			break;
 		}
 		else acc = acc->next;
 	}
+	return 2;
 }
 
 void changePass(User* account) {
@@ -99,6 +101,10 @@ void changePass(User* account) {
 	while (acc != NULL) {
 		if (acc->username == account->username) {
 			acc->password = newPass;
+			ofstream out("data/cache/currentUser.txt");
+			out << acc->username << " ";
+			out << newPass;
+			out.close();
 			break;
 		}
 		else acc = acc->next;

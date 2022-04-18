@@ -92,10 +92,13 @@ void addStudent(string className, Student*& student) {
 	fout.close();
 	
 	while (student != NULL) {
-		path = "data/" + year + "/1/students/" + student->id;
+		//path = "data/Semester/students/";
+		//_mkdir(path.c_str());
+
+		path = "data/cache/Semester/students/" + student->id;
 		_mkdir(path.c_str());
 
-		path = "data/" + year + "/1/students/" + student->id + "/" + className + ".txt";
+		path = "data/cache/Semester/students/" + student->id + "/" + className + ".txt";
 		ofstream fout(path);
 		fout << className;
 		fout.close();
