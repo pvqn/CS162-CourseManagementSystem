@@ -347,7 +347,7 @@ void displaylogin(string &user, string &password)
                 hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
                 cls(hStdout);
                 cout << "> user: " << user << endl;
-                cout << "> pass: ";
+                cout << "> password: ";
                 for (int i = 0; i < password.size(); ++i)
                     cout << "*";
             }
