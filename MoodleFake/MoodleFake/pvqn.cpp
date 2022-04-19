@@ -328,18 +328,9 @@ void displaylogin(string &user, string &password)
     password = "";
     cout << "> user: "; cin >> user;
     cout << "> password: "; 
-<<<<<<< Updated upstream
-    //char ch;
-    //ch = _getch();
-    //while (ch != 13) 
-    //{//character 13 is enter
-    //    password.push_back(ch);
-    //    cout << '*';
-    //    ch = _getch();
-    //}
-    //cout << endl;
+
     cin >> password;
-=======
+
     char ch;
     ch = _getch();
     while (ch != 13) 
@@ -365,7 +356,7 @@ void displaylogin(string &user, string &password)
     }
     cout << endl;
     //cin >> password;
->>>>>>> Stashed changes
+
 }
 int displaymenu(int isStudent)
 {
