@@ -329,7 +329,7 @@ void displaylogin(string &user, string &password)
     cout << "> user: "; cin >> user;
     cout << "> password: "; 
 
-    cin >> password;
+   
 
     char ch;
     ch = _getch();
