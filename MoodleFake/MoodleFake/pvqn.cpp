@@ -323,6 +323,8 @@ void removedenrolledcourse(Semester* now, string id)
 }
 void displaylogin(string &user, string &password)
 {
+    user = "";
+    password = "";
     cout << "> user: "; cin >> user;
     cout << "> password: "; 
     char ch;

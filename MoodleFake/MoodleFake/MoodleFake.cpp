@@ -24,9 +24,12 @@ int main()
 	int userRole;
 	bool logOut = -1;
 	do{
-		displaylogin(username, password);
 		// clear screen
 		HANDLE hStdout;
+		hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+		cls(hStdout);
+		displaylogin(username, password);
+		//clear screen
 		hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 		cls(hStdout);
 		// start menu
