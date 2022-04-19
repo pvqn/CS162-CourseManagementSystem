@@ -339,8 +339,9 @@ int displaymenu(int isStudent)
         cout << "   5. Remove a course" << endl;
         cout << "A course resgistration session is closed" << endl;
         cout << "   6. View a list of courses in this semester" << endl;
-        cout << "7. Log out " << endl;
-        cout << "8. Exit program " << endl;
+        cout << "7. View student result " << endl;
+        cout << "8. Log out " << endl;
+        cout << "9. Exit program " << endl;
         break;
     case 0:
         cout << "1. View info" << endl;

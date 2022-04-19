@@ -130,7 +130,7 @@ void addStudent(string className, Student*& student) {
 
 void exportCourseStudentListToCSV()
 {
-
+	displaycourse_list();
 	string Course_name;
 	cout << "Please enter course name ( Example CS162 ): "; cin >> Course_name;
 	string path = "data/cache/Semester/courseList.txt";
@@ -141,7 +141,8 @@ void exportCourseStudentListToCSV()
 	fin.open(path);
 	while (!fin.eof())
 	{
-		string cur; fin >> cur;
+		string cur;
+		getline(fin, cur);
 		if (cur == Course_name) Check = true;
 	}
 	fin.close();
@@ -151,22 +152,24 @@ void exportCourseStudentListToCSV()
 		return;
 	}
 
-	string path_in = "data/cache/Semester/courses/" + Course_name + "/studentList.txt";
+
+	string path_in = "data/cache/Semester/coureses/" + Course_name + "/studentList.txt";
 	string path_out = "data/cache/csvFile/" + Course_name + ".csv";
-	string path_mark = "data/cache/Semester/courses/" + Course_name + "/mark.txt";
+	string path_mark = "data/cache/Semester/coureses/" + Course_name + "/mark.txt";
 	ifstream Mark; Mark.open(path_mark);
 	fin.open(path_in);
 	fout.open(path_out);
-	fout << "No,ID,Name,Final,Midterm,Other,Total" << '\n';
+	fout << "No,ID,Name,Total,Final,Midterm,Other" << '\n';
 	int No = 0;
 	while (!fin.eof())
 	{
 		string ID, Name;
 		float Mid, Final, Other, Total;
 		string ID_mark;
-
 		fin >> ID;
+		if (ID.size() == 0) break;
 		fin.ignore(); getline(fin, Name);
+		//cout << ID << ' ' << Name << endl;
 		Mark >> ID_mark >> Total >> Final >> Mid >> Other;
 		if (ID != ID_mark)
 		{
@@ -182,6 +185,7 @@ void exportCourseStudentListToCSV()
 
 void ImportCourseScore() // Import + Update
 {
+	displaycourse_list();
 	ifstream fin; ofstream fout;
 	string Course_name;
 	cout << "Please enter course name ( Example CS162 ): "; cin >> Course_name;
@@ -215,6 +219,8 @@ void ImportCourseScore() // Import + Update
 	path_in = "data/cache/csvFile/" + Course_name + ".csv";
 	path_out = "data/cache/Semester/coureses/" + Course_name + "/mark.txt";
 	fin.open(path_in); fout.open(path_out);
+	string Delete;
+	getline(fin, Delete);
 	while (!fin.eof())
 	{
 		string current;
@@ -232,7 +238,7 @@ void ImportCourseScore() // Import + Update
 		}
 		fout << '\n';
 	}
-	fin.open(path_in); fout.open(path_out);
+	fin.close(); fout.close();
 
 	// Update mark.txt in students folder
 	path_in = "data/cache/Semester/coureses/" + Course_name + "/mark.txt";
@@ -242,7 +248,9 @@ void ImportCourseScore() // Import + Update
 	{
 		string ID, Total, Mid, Final, Other;
 		fin >> ID >> Total >> Final >> Mid >> Other;
-		path_out = "data/cache/Semester/students/" + ID + "/" + Course_name + "/_mark.txt";
+		if (ID.size() == 0) break;
+		path_out = "data/cache/Semester/students/" + ID + "/" + Course_name + "_mark.txt";
+		//cout << path_out << endl;
 		fout.open(path_out);
 		fout << Total << '\n' << Final << '\n' << Mid << '\n' << Other << '\n';
 		fout.close();
@@ -269,8 +277,6 @@ void ImportCourseScore() // Import + Update
 		fout.close();
 	}
 	fin.close();
-
-	// Not yet !!!!!!!!!!!!!!!!!
 }
 
 bool staffChoice(int& choice, User*& account, string& username, string& password, Class*& classes, Student* student, Semester* semCur,Course*& courseCur) {
@@ -352,7 +358,7 @@ bool staffChoice(int& choice, User*& account, string& username, string& password
 
 void viewScoreboardOfCourse() // In bang diem mon hoc
 {
-	system("clrscr");
+	displaycourse_list();
 	ifstream fin; ofstream fout;
 	string Course_name;
 	cout << "Please enter course name ( Example CS162 ): "; cin >> Course_name;
@@ -414,6 +420,7 @@ void viewScoreboardOfCourse() // In bang diem mon hoc
 
 void viewScoreinClass()
 {
+	viewclass();
 	string classname;
 	cout << "Please enter the class: "; cin >> classname;
 	ifstream fin; ofstream out;
@@ -452,20 +459,20 @@ void viewScoreinClass()
 		getline(fin, course_name);
 	}
 	fin.close();
-	cout << setw(5) << right << "GPA"; cout << '|';
+	cout << setw(5) << right << "GPA"; cout << '|' << '\n';
 	cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
 	cout << setw(54 + (course_cnt * 11) ) << "-" << endl;	// fill ky tu '-'
 	cout << setfill(' ');
 
 	int No = 0; float total_GPA = 0;
-	string path_student = "data/classes/" + classname + "/classList.txt";
+	string path_student = "data/classes/" + classname + "/studentList.txt";
 	fin.open(path_student);
 	while (!fin.eof())
 	{
 		string studentID;
 		getline(fin, studentID);
 		if (studentID.size() == 0) break;
-
+		//cout << studentID << endl;
 		// Print student info
 		cout << setw(3) << left << ++No; cout << '|';
 		cout << setw(12) << left << studentID; cout << '|';
@@ -475,7 +482,7 @@ void viewScoreinClass()
 		string First, Last;
 		getline(fin_name, First); getline(fin_name, First);
 		getline(fin_name, Last);
-		First += " " + Last;
+		First = Last + ' ' + First;
 		cout << setw(30) << right << First; cout << '|';
 		fin_name.close();
 
@@ -488,23 +495,24 @@ void viewScoreinClass()
 			string course_name; float Total; int credit;
 			getline(fin_course, course_name);
 			if (course_name.size() == 0) break;
-
+			//cout << course_name << endl;
 			string path_mark = "data/classes/" + classname + "/" + studentID + "_course/" + course_name + "_mark.txt";
 			ifstream fin_mark;
 			fin_mark.open(path_mark);
 			if (fin_mark.fail())
 			{
 				cout << setw(10) << "N/A"; cout << '|';
+				getline(fin_course, course_name);
 				continue;
 			}
 			fin_mark >> Total;
 			fin_mark.close();
 			cout << setw(10) << Total; cout << '|';
 
-			string path_credit = "data/cache/Semester/courses/" + course_name + "/info_Of_Course.txt";
+			string path_credit = "data/cache/Semester/coureses/" + course_name + "/info_Of_Course.txt";
 			ifstream fin_credit;
 			fin_credit.open(path_credit);
-			string current; for (int i = 0; i < 3; ++i) getline(fin_credit, current);
+			string current; getline(fin_credit, current);
 			fin_credit >> credit;
 			fin_credit.close();
 			total_credit += credit;
@@ -513,12 +521,13 @@ void viewScoreinClass()
 			if (5.5 <= Total && Total <= 6.9) total_score += 2 * credit;
 			if (7.0 <= Total && Total <= 8.4) total_score += 3 * credit;
 			if (8.0 <= Total && Total <= 10 ) total_score += 4 * credit;
+			getline(fin_course, course_name);
 		}
 
 		fin_course.close();
-		cout << setw(5) << right << total_score / total_credit; cout << '|';
+		cout << setw(5) << right << total_score / total_credit; cout << '|' << '\n';
 		total_GPA += total_score / total_credit;
-		cout << '\n';
+		//cout << '\n';
 	}
 	fin.close();
 
@@ -532,8 +541,7 @@ void viewScoreinClass()
 
 void displayclass_student() // display class students
 {
-	system("clrscr");
-
+	viewclass();
 	string Classname;
 	cout << "Enter class name: "; cin >> Classname;
 	// Find class is exit or not
@@ -557,39 +565,49 @@ void displayclass_student() // display class students
 		cout << "This class is not exist !";
 		return;
 	}
+
 	// Create student list ID
-	path = "data/classes/" + Classname + "/studentID.txt";
+	path = "data/classes/" + Classname + "/studentList.txt";
 	fin.open(path);
-	int Number_of_student; cin >> Number_of_student;
-	int* studentList = new int[Number_of_student];
-	for (int i = 0; i < Number_of_student; ++i) cin >> studentList[i];
-	delete[] studentList;
+
+	int Number_of_student = 0;
+	int* studentList = new int[1000];
+	int studentID;
+	while (fin >> studentID)
+	{
+		studentList[Number_of_student++] = studentID;
+	}
+	
 	fin.close();
 	// Display student information
+	int No = 0;
 	for (int i = 0; i < Number_of_student; ++i)
 	{
 		path = "data/classes/" + Classname + '/' + to_string(studentList[i]) + ".txt";
 
-		int No;
+		
 		string ID, First_name, Last_name, socialID;
 		bool Gender;
 		Date DOB;
 
 		fin.open(path);
-		fin >> No >> ID >> First_name;
-		fin.ignore(); getline(fin, Last_name);
-		fin >> Gender;
-		fin >> DOB.day >> DOB.month >> DOB.year;
-		fin >> socialID;
+		fin >> ID;
+		fin.ignore(); getline(fin, First_name);
+		getline(fin, Last_name);
+		// fin >> Gender;
+		// fin >> DOB.day >> DOB.month >> DOB.year;
+		// fin >> socialID;
 
-		cout << No << ' ' << ID << ' ' << First_name << ' ' << Last_name << '\n';
+		cout << ++No << ' ' << ID << ' ' << Last_name << ' ' << First_name << '\n';
 
 		fin.close();
 	}
+	delete[] studentList;
 }
 
 void displaycourse_list() // In ra danh sach cac khoa hoc
 {
+	cout << "This is the course list: " << '\n';
 	// Print the course list of this semester
 	string path = "data/cache/Semester/coureses/courseList.txt";
 	ifstream fin;
@@ -624,14 +642,16 @@ void displaycourse_studentList()
 		cout << "Your finding course is not exist !";
 		return;
 	}
+
 	path = "data/cache/Semester/coureses/" + Course_name + "/studentList.txt";
 	fin.open(path);
+	int No = 0;
 	while (!fin.eof())
 	{
 		string ID, Name;
 		fin >> ID;
 		fin.ignore(); getline(fin, Name);
-		cout << ID << ' ' << Name << '\n';
+		cout << ++No << ' ' << ID << ' ' << Name << '\n';
 	}
 	fin.close();
 }

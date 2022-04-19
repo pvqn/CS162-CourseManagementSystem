@@ -13,7 +13,7 @@ void viewScoreboard()
     ifstream fin; ofstream fout;
     string path_in = "data/cache/currentUser.txt";
     fin.open(path_in);
-    getline(fin, studentID);
+    fin >> studentID;
     fin.close();
 
     // Print score board
@@ -24,7 +24,7 @@ void viewScoreboard()
     cout << setw(6) << left << "Total"; cout << '|';
     cout << setw(6) << left << "Final"; cout << '|';
     cout << setw(6) << left << "Mid"; cout << '|';
-    cout << setw(6) << left << "Other"; cout << '|';
+    cout << setw(6) << left << "Other"; cout << '|' << '\n';
     cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
     cout << setw(49) << "-" << endl;	// fill 49 ky tu '-'
     cout << setfill(' ');
@@ -82,12 +82,15 @@ bool studentChoice(int& choice, User*& account, string& username, string& passwo
         case 6: //view a list of courses in this semester
             viewcourse_student(s, account->username);
             break;
-        case 7: //Log out
+        case 7: // view student result
+            viewScoreboard();
+            break;
+        case 8: //Log out
             return 1;
         default:
             break;
         }
         
-    } while (choice != 8);
+    } while (choice != 9);
     return 0;
 }
