@@ -1,5 +1,6 @@
 ﻿
 #include "struct.h"
+#include "display.h"
 using namespace std;
 Date getcurrentdate () {
     time_t t = time(0);   // get time now
@@ -327,6 +328,7 @@ void displaylogin(string &user, string &password)
     password = "";
     cout << "> user: "; cin >> user;
     cout << "> password: "; 
+<<<<<<< Updated upstream
     //char ch;
     //ch = _getch();
     //while (ch != 13) 
@@ -337,6 +339,33 @@ void displaylogin(string &user, string &password)
     //}
     //cout << endl;
     cin >> password;
+=======
+    char ch;
+    ch = _getch();
+    while (ch != 13) 
+    {//character 13 is enter
+        if (ch != 8)
+        {
+            password.push_back(ch); cout << '*';
+        }
+        else
+            if (!password.empty())
+            {
+                password.pop_back();
+                HANDLE hStdout;
+                hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+                cls(hStdout);
+                cout << "> user: " << user << endl;
+                cout << "> pass: ";
+                for (int i = 0; i < password.size(); ++i)
+                    cout << "*";
+            }
+        
+        ch = _getch();
+    }
+    cout << endl;
+    //cin >> password;
+>>>>>>> Stashed changes
 }
 int displaymenu(int isStudent)
 {
