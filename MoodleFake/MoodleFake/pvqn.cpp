@@ -386,7 +386,7 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
         if (!s->course_cur)
         {
             s->course_cur = new Course;
-           head = s->course_cur;
+            head = s->course_cur;
             s->course_cur->id = id;
             fin.ignore();
             getline(fin, s->course_cur->name) ;
@@ -432,17 +432,23 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
             path = "data/cache/Semester/coureses/" + cur->id + "/studentList.txt";
             fin.open(path);
                 string input;
+                string name; // doc ten nhung khong luu vao 
                 student_list *in = cur->student;
                 if (fin >> input)
                 {
                     in = new student_list;
                     phead = in;
                     in->id = input; 
+                    getline(fin, name);
+                    fin.ignore();
                     while (fin >> input)
                     {
+                            getline(fin, name);
+                            fin.ignore();
                             in->next = new student_list;
                             in = in->next;
                             in->id = input;
+
                     }
                 }
             fin.close();
