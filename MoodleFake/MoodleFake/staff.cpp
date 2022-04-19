@@ -98,7 +98,7 @@ void addStudent(string className, Student*& student) {
 		path = "data/cache/Semester/students/" + student->id;
 		_mkdir(path.c_str());
 
-		path = "data/cache/Semester/students/" + student->id + "/" + className + ".txt";
+		path = "data/cache/Semester/students/" + student->id + "/class.txt";
 		ofstream fout(path);
 		fout << className;
 		fout.close();
