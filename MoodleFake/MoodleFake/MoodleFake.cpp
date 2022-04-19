@@ -1,4 +1,5 @@
 #include <iostream>
+#include "display.h"
 #include "user.h"
 #include "pvqn.h"
 #include "staff.h"
@@ -24,6 +25,11 @@ int main()
 	bool logOut = -1;
 	do{
 		displaylogin(username, password);
+		// clear screen
+		HANDLE hStdout;
+		hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+		cls(hStdout);
+		// start menu
 		userRole = displaymenu(login(username, password, account));
 		if (userRole == 1) // student
 			logOut = studentChoice(choice, account, username, password, classes, student);
@@ -32,6 +38,13 @@ int main()
 		else {
 			cout << "WRONG USERNAME OR PASSWORD!" << endl;
 			cout << "Please login again!" << endl;
+			cout << "Press enter to continue...";
+			_getch();
+			// clear screen
+			HANDLE hStdout;
+			hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+			cls(hStdout);
+			// start menu
 		}
 	} while (logOut != 0 && (userRole != 0 || userRole != 1));
 

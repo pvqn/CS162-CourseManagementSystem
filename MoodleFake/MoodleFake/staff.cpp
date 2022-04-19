@@ -10,7 +10,7 @@
 #include <iomanip>
 #include <stdlib.h>
 #include "course.h"
-
+#include "display.h"
 
 void createSchoolYear() {
 	int year;
@@ -352,6 +352,14 @@ bool staffChoice(int& choice, User*& account, string& username, string& password
 		default:
 			break;
 		}
+		cout << endl;
+		cout << "\npress enter to continue...";
+		_getch();
+		HANDLE hStdout;
+		hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+		cls(hStdout);
+
+		displaymenu(0);
 	} while (choice != 21);
 	return 0;
 }

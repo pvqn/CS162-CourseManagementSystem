@@ -4,6 +4,8 @@
 #include <iostream>
 //#include <string>
 #include <direct.h>
+#include <ctime>
+#include <conio.h>
 using namespace std;
 struct Date {
 	int day, month, year;

@@ -2,9 +2,10 @@
 #include "struct.h"
 #include "pvqn.h"
 #include "user.h"
+#include "display.h"
 #include <iomanip>
 #include <iostream>
-
+#include <Windows.h>
 
 void viewScoreboard()
 {
@@ -90,7 +91,14 @@ bool studentChoice(int& choice, User*& account, string& username, string& passwo
         default:
             break;
         }
-        
+        cout << endl;
+        cout << "\npress enter to continue...";
+        _getch();
+        HANDLE hStdout;
+        hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+        cls(hStdout);
+
+        displaymenu(1);
     } while (choice != 9);
     return 0;
 }

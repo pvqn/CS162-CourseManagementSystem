@@ -1,4 +1,4 @@
-﻿#include <ctime>
+﻿
 #include "struct.h"
 using namespace std;
 Date getcurrentdate () {
@@ -324,7 +324,17 @@ void removedenrolledcourse(Semester* now, string id)
 void displaylogin(string &user, string &password)
 {
     cout << "> user: "; cin >> user;
-    cout << "> password: "; cin >> password;
+    cout << "> password: "; 
+    char ch;
+    ch = _getch();
+    while (ch != 13) 
+    {//character 13 is enter
+        password.push_back(ch);
+        cout << '*';
+        ch = _getch();
+    }
+    cout << endl;
+    //cin >> password;
 }
 int displaymenu(int isStudent)
 {
@@ -468,9 +478,8 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
             }
             fin.close();
             cur->student = phead;
-        cur = cur->next;
+            cur = cur->next;
        
-    } 
-   
+    }  
     return s;
 }
