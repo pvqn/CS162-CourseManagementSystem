@@ -159,7 +159,7 @@ void exportCourseStudentListToCSV()
 	ifstream Mark; Mark.open(path_mark);
 	fin.open(path_in);
 	fout.open(path_out);
-	fout << "No,ID,Name,Total,Final,Midterm,Other" << '\n';
+	fout << "No;ID;Name;Total;Final;Midterm;Other" << '\n';
 	int No = 0;
 	while (!fin.eof())
 	{
@@ -176,7 +176,7 @@ void exportCourseStudentListToCSV()
 			system("pause");
 			cout << "Error!!!!!!!!!!!!!!!!!!!!!!!!";
 		}
-		fout << ++No << ',' << ID << ',' << Name << ',' << Total << ',' << Final << ',' << Mid << ',' << Other << '\n';
+		fout << ++No << ';' << ID << ';' << Name << ';' << Total << ';' << Final << ';' << Mid << ';' << Other << '\n';
 	}
 	fin.close();
 	fout.close();
@@ -228,7 +228,7 @@ void ImportCourseScore() // Import + Update
 		int count = 0;
 		for (int i = 0; i < current.size(); ++i)
 		{
-			if (current[i] == ',')
+			if (current[i] == ';')
 			{
 				++count;
 				if (count == 2 || count == 4 || count == 5 || count == 6 ) fout << '\n';
@@ -407,7 +407,7 @@ void viewScoreboardOfCourse() // In bang diem mon hoc
 		int cnt = 0;
 		for (int i = 0; i < current.size(); ++i)
 		{
-			if (current[i] == ',')
+			if (current[i] == ';')
 			{
 				++cnt;
 				continue;
