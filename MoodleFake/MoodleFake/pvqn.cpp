@@ -473,11 +473,9 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
                     in->id = input; 
                    
                     getline(fin, name);
-                    fin.ignore();
                     while (fin >> input)
                     {
                             getline(fin, name);
-                            fin.ignore();
                             in->next = new student_list;
                             in = in->next;
                             in->id = input;

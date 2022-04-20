@@ -398,6 +398,8 @@ void viewScoreboardOfCourse() // In bang diem mon hoc
 	cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '
 	cout << setw(75) << "-" << endl;	// fill 75 ky tu '-'
 	cout << setfill(' ');
+	string Delete;
+	getline(fin, Delete);
 	while (!fin.eof())
 	{
 		string current;
