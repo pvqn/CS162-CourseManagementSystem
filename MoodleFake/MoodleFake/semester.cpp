@@ -77,30 +77,30 @@ void Create_newSemester(Semester*& Scur)
 	string path = "data/" + to_string(s->year) +"/"+ to_string(s->term) + "/info_Of_Semester.txt";
 	ofstream fout(path);
 
-	if (s->term == 1) fout << s->term << "/" << s->year << endl;
-	if (s->term == 2) fout << s->term << "/" << s->year << endl;
-	if (s->term == 3) fout << s->term << "/" << s->year << endl;
+	if (s->term == 1) fout << s->term << " " << s->year << endl;
+	if (s->term == 2) fout << s->term << " " << s->year << endl;
+	if (s->term == 3) fout << s->term << " " << s->year << endl;
 
-	fout << s->startDate.day << "/" << s->startDate.month;
-	fout << "/" << s->startDate.year << endl;
+	fout << s->startDate.day << " " << s->startDate.month;
+	fout << " " << s->startDate.year << endl;
 
-	fout << s->endDate.day << "/" << s->endDate.month;
-	fout << "/" << s->endDate.year << endl;
+	fout << s->endDate.day << " " << s->endDate.month;
+	fout << " " << s->endDate.year << endl;
 
 	fout.close();
 
 	path = "data/cache/currentSemester.txt";
 	fout.open(path);
 
-	if (s->term == 1) fout << s->term << "/" << s->year << endl;
-	if (s->term == 2) fout << s->term << "/" << s->year << endl;
-	if (s->term == 3) fout << s->term << "/" << s->year << endl;
+	if (s->term == 1) fout << s->term << " " << s->year << endl;
+	if (s->term == 2) fout << s->term << " " << s->year << endl;
+	if (s->term == 3) fout << s->term << " " << s->year << endl;
 
-	fout << s->startDate.day << "/" << s->startDate.month;
-	fout << "/" << s->startDate.year << endl;
+	fout << s->startDate.day << " " << s->startDate.month;
+	fout << " " << s->startDate.year << endl;
 
-	fout << s->endDate.day << "/" << s->endDate.month;
-	fout << "/" << s->endDate.year << endl;
+	fout << s->endDate.day << " " << s->endDate.month;
+	fout << " " << s->endDate.year << endl;
 	fout.close();
 }
 
