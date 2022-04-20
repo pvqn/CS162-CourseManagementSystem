@@ -45,17 +45,6 @@
         SetConsoleCursorPosition(hConsole, coordScreen);
     }
 
-    /*int main(void)
-    {
-        HANDLE hStdout;
-
-        hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-
-        cls(hStdout);
-
-        return 0;
-    }*/
-
 void gotoxy(int x, int y)
 {
     static HANDLE h = NULL;

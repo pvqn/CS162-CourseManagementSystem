@@ -51,10 +51,4 @@ int main()
 		}
 	} while (logOut != 0 && (userRole != 0 || userRole != 1));
 
-	//Create_newSemester(semCur);
-	//CourseRegister(startSem, endSem, semCur->term, semCur->year);
-	//addCourse(courseCur);
-	//view_Course(courseCur, semCur);
-	//updateCourse(courseCur);
-	//DeleteCourse(courseCur);
 }
