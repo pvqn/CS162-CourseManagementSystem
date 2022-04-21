@@ -65,30 +65,30 @@ void addCourse(Course*& pCourse, Semester* s)
 	//cout << "CHECK" << endl;
 
 	path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/courseList.txt";
-	fout.open(path);
+	fout.open(path, ios::app);
 	fout << newCourse->id << endl;
 	fout.close();
 
-	//while (pCur != nullptr)
-	//{
-	//	if (pCur->id == newCourse->id)
-	//	{
-	//		cout << "Failed to add a new course!!\n";
-	//		cout << "The course you want to add has already existed!!\n";
-	//		system("pause");
-	//		return;
-	//	}
-	//	tmp = pCur;
-	//	pCur = pCur->next;
-	//}
-	//if (pCourse == nullptr)
-	//{
-	//	pCourse = newCourse;
-	//	//cout << pCourse->maxCapacity << endl;
-	//	return;
-	//}
-	//pCur = newCourse;
-	//tmp->next = pCur;
+	while (pCur != nullptr)
+	{
+		if (pCur->id == newCourse->id)
+		{
+			cout << "Failed to add a new course!!\n";
+			cout << "The course you want to add has already existed!!\n";
+			system("pause");
+			return;
+		}
+		tmp = pCur;
+		pCur = pCur->next;
+	}
+	if (pCourse == nullptr)
+	{
+		pCourse = newCourse;
+		//cout << pCourse->maxCapacity << endl;
+		return;
+	}
+	pCur = newCourse;
+	tmp->next = pCur;
 }
 
 void view_Course(Course* pCur, Semester* Scur)
@@ -107,7 +107,7 @@ void view_Course(Course* pCur, Semester* Scur)
 		pCur = pCur->next;
 	}
 }
-void updateCourse(Course*& pCourse)
+void updateCourse(Course*& pCourse, Semester* s)
 {
 	string id;
 	cin.ignore();
@@ -180,7 +180,18 @@ void updateCourse(Course*& pCourse)
 		getline(cin, pCur->day2);
 		getline(cin, pCur->ses2);
 	}
-
+	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + pCur->id + "/info_Of_Course.txt";
+	ofstream fout(path);
+	fout << pCur->name << endl;
+	fout << pCur->teacher << endl;
+	fout << pCur->nCredits << endl;
+	fout << pCur->maxCapacity << endl;
+	string str1 = displaysession(pCur->day1 + pCur->ses1);
+	string str2 = displaysession(pCur->day2 + pCur->ses2);
+	//cout << "CHECK" << endl;
+	fout << str1 << endl;
+	fout << str2 << endl;
+	fout.close();
 	cout << "Update successfully !!" << endl;
 
 	system("pause");
