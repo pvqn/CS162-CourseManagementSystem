@@ -73,8 +73,16 @@ void Create_newSemester(Semester*& Scur)
 	//s->Course
 
 	Scur = s; /// Since we just need to create one semester
+	string PATH = "data/" + to_string(s->year);
+	_mkdir(PATH.c_str());
 
 	string path = "data/" + to_string(s->year) +"/"+ to_string(s->term) + "/info_Of_Semester.txt";
+
+	PATH = "data/" + to_string(s->year) + "/" + to_string(s->term);
+	_mkdir(PATH.c_str());
+
+	PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses";
+	_mkdir(PATH.c_str());
 	ofstream fout(path);
 
 	if (s->term == 1) fout << s->term << " " << s->year << endl;
@@ -108,13 +116,15 @@ void CourseRegister( int semester,int year)
 {
 
 	string path = "data/" +to_string(year)+ "/" + to_string(semester) + "/courseRegister.txt";
-	ifstream fin(path);
+	ofstream fout(path);
 	Date start, end;
-	fin >> start.day >> start.month >> start.year;
-	fin >> end.day >> end.month >> end.year;
+	cin >> start.day >> start.month >> start.year;
+	cin >> end.day >> end.month >> end.year;
 
-	fin.close();
 	
-	cout << "courseRegister Start Day: " << start.day << " " << start.month << " " << start.year << endl;
-	cout << "courseRegister End Day: " << end.day << " " << end.month << " " << end.year << endl;
+	
+	fout << start.day << " " << start.month << " " << start.year << endl;
+	fout << end.day << " " << end.month << " " << end.year << endl;
+
+	fout.close();
 }

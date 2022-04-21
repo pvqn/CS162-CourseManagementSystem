@@ -15,35 +15,80 @@ Course* add()
 	cout << "Day2: "; getline(cin, cCur->day2);
 	cout << "Ses2: "; getline(cin, cCur->ses2);
 
-	cout << cCur->id << " " << cCur->name << " " << cCur->teacher << endl;
+	//cout << cCur->id << " " << cCur->name << " " << cCur->teacher << endl;
 	return cCur;
 }
-void addCourse(Course*& pCourse)
+void addCourse(Course*& pCourse, Semester* s)
 {
+
 	Course* tmp = new Course;
 	Course* pCur = pCourse;
 	Course* newCourse = add();
-	//cout << newCourse->maxCapacity << endl;
-	while (pCur != nullptr)
+	//cout << "CHECK" << endl;
+	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/courseList.txt";
+	//cout << "CHECK" << endl;
+
+	ifstream fin(path);
+	while (!fin.eof())
 	{
-		if (pCur->id == newCourse->id)
+		string STR;
+		getline(fin, STR);
+		if (STR.size() == 0) break;
+		if (STR == newCourse->id) 
 		{
 			cout << "Failed to add a new course!!\n";
 			cout << "The course you want to add has already existed!!\n";
 			system("pause");
 			return;
 		}
-		tmp = pCur;
-		pCur = pCur->next;
+		cout << "CHECK" << endl;		
 	}
-	if (pCourse == nullptr)
-	{
-		pCourse = newCourse;
-		//cout << pCourse->maxCapacity << endl;
-		return;
-	}
-	pCur = newCourse;
-	tmp->next = pCur;
+	fin.close();
+	//cout << "CHECK" << endl;
+
+	string PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + newCourse->id;
+	_mkdir(PATH.c_str()); // tao file course ID
+	
+	 path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + newCourse->id + "/info_Of_Course.txt";
+	ofstream fout(path);
+	fout << newCourse->name << endl;
+	fout << newCourse->teacher << endl;
+	fout << newCourse->nCredits << endl;
+	fout << newCourse->maxCapacity << endl;
+	string str1 = displaysession(newCourse->day1 + newCourse->ses1);
+	string str2 = displaysession(newCourse->day2 + newCourse->ses2);
+	//cout << "CHECK" << endl;
+	fout << str1 << endl;
+	fout << str2 << endl;
+	fout.close();
+	//cout << newCourse->maxCapacity << endl;
+	//cout << "CHECK" << endl;
+
+	path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/courseList.txt";
+	fout.open(path);
+	fout << newCourse->id << endl;
+	fout.close();
+
+	//while (pCur != nullptr)
+	//{
+	//	if (pCur->id == newCourse->id)
+	//	{
+	//		cout << "Failed to add a new course!!\n";
+	//		cout << "The course you want to add has already existed!!\n";
+	//		system("pause");
+	//		return;
+	//	}
+	//	tmp = pCur;
+	//	pCur = pCur->next;
+	//}
+	//if (pCourse == nullptr)
+	//{
+	//	pCourse = newCourse;
+	//	//cout << pCourse->maxCapacity << endl;
+	//	return;
+	//}
+	//pCur = newCourse;
+	//tmp->next = pCur;
 }
 
 void view_Course(Course* pCur, Semester* Scur)

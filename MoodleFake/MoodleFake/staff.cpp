@@ -311,7 +311,7 @@ bool staffChoice(int& choice, User*& account, string& username, string& password
 			CourseRegister( semCur->term, semCur->year);
 			break;
 		case 8: //Add a course to semester
-			addCourse(courseCur);
+			addCourse(courseCur,semCur);
 			break;
 		case 9: //View the list of courses in the semester
 			cout << "The list of courses in the semester: ";
