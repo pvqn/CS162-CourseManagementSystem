@@ -48,6 +48,7 @@ struct Class
 struct student_list
 {
 	string id;
+	string name;
 	Mark mark;
 	student_list* next = nullptr;
 };

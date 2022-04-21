@@ -2,6 +2,7 @@
 #include "struct.h"
 #include "display.h"
 using namespace std;
+
 Date getcurrentdate () {
     time_t t = time(0);   // get time now
     tm* now = localtime(&t);
@@ -232,6 +233,121 @@ Course* findcourse(Semester* now, int i)
     return pcur;
 }
 // xu li chinh phan dang ki hoc phan
+string getnameofstudent(string id)
+{
+    ifstream fin;
+    //C:\Users\DELL\Desktop\New folder\MoodleFake\MoodleFake\data\cache\Semester\students\21125089
+   //1.get class
+    string path = "data/cache/Semester/students/" + id + "/class.txt";
+    fin.open(path);
+    string classname;
+    fin >> classname;
+    fin.close();
+    //2. get full name
+    //C:\Users\DELL\Desktop\New folder\MoodleFake\MoodleFake\data\classes\21APCS2
+    path = "data/classes/" + classname + "/" + id + ".txt";
+    string first, last;
+    fin.open(path);
+    getline(fin, first);
+    first = "";
+    getline(fin, first);
+    getline(fin, last);
+    string name = last + " " + first;
+    fin.close();
+    return name;
+}
+void printdateafterenrolling(string course, string id)
+{
+    ifstream fin; ofstream fout;
+    //get the name of student
+    string name = getnameofstudent(id);
+    // ghi them id va ten vao studentList.txt
+    //C:\Users\DELL\Desktop\New folder\MoodleFake\MoodleFake\data\cache\Semester\coureses\CS162
+    string path = "data/cache/Semester/coureses/" + course + "/studentList.txt";
+    fout.open(path, ios::app);
+    fout << id << endl;
+    fout << name << endl;
+    fout.close();
+    // ghi them id + 4 so 0 vao mark.txt
+    path = "data/cache/Semester/coureses/" + course + "/mark.txt";
+    fout.open(path, ios::app);
+    fout << id << endl;
+    for (int i = 0; i < 4; ++i)
+        fout << "0" << endl;
+    fout.close();
+    //ghi them course id vao trong folder student_id
+    //C:\Users\DELL\Desktop\New folder\MoodleFake\MoodleFake\data\cache\Semester\students\21125089
+    path = "data/cache/Semester/students/" + id + "/course.txt";
+    fout.open(path, ios::app);
+    fout << course << endl;
+    fout.close();
+    // ghi them diem vao trong mark.txt trong students
+    path = "data/cache/Semester/students/" + id + "/" + course +"_mark.txt";
+    fout.open(path);
+    for (int i = 0; i < 4; ++i)
+        fout << "0" << endl;
+    fout.close();
+}
+void printoutdataafterremoving(Course *cur, string id){
+    ifstream fin;
+    ofstream fout;
+    string path = "data/cache/Semester/coureses/" + cur->id + "/studentList.txt";
+    fout.open(path);
+    student_list* head = cur->student;
+    while (head)
+    {
+        fout << head->id << endl;
+        fout << head->name << endl;
+        head = head->next;
+    }
+    fout.close();
+    path = "data/cache/Semester/coureses/" + cur->id + "/mark.txt";
+    fout.open(path);
+    head = cur->student;
+    while (head)
+    {
+        fout << head->id << endl;
+        fout << head->mark.totalMark << endl << head->mark.finalMark << endl << head->mark.midtermMark << endl << head->mark.otherMark << endl;
+        head = head->next;
+    }
+    fout.close();
+    struct node
+    {
+        string course_id;
+        node* ptr = nullptr;
+    };
+    node* ptrhead = nullptr, *phead=ptrhead;
+    path = "data/cache/Semester/students/" + id + "/course.txt";
+    fin.open(path);
+    string input;
+    while (fin >> input)
+    {
+        if (input != cur->id)
+        {
+            if (!head)
+            {
+                ptrhead = new node;
+                ptrhead->course_id = input;
+                phead = ptrhead;
+            }
+            else
+            {
+                ptrhead->ptr = new node;
+                ptrhead = ptrhead->ptr;
+                ptrhead->course_id = input;
+            }
+        }
+
+    }
+    fin.close();
+    fout.open(path);
+    while (phead)
+    {
+        fout << phead->course_id << endl;
+        phead = phead->ptr;
+    }
+    fout.close();
+}
 void enrolledcoure(Semester* now, string id)
 {
     displaymenuforcourseregistration(now);
@@ -251,6 +367,7 @@ void enrolledcoure(Semester* now, string id)
             {
                 pcur = new student_list;
                 pcur->id = id;
+                pcur->name = getnameofstudent(id);
             }
             else
             {
@@ -261,7 +378,9 @@ void enrolledcoure(Semester* now, string id)
                 pcur->next = new student_list;
                 pcur = pcur->next;
                 pcur->id = id;
+                pcur->name = getnameofstudent(id);
             }
+            printdateafterenrolling(find->id, id);
         }
         else cout << "could not enroll this course" << endl;
     }
@@ -316,10 +435,12 @@ void removedenrolledcourse(Semester* now, string id)
                 delete temp;
                 pcur = dummy->next;
                 find->student = pcur;
-                return;
+                printoutdataafterremoving(find, id);
+             
             }
             else pcur = pcur->next;
         }
+       
     }
 }
 void displaylogin(string &user, string &password)
@@ -471,21 +592,25 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
                     in = new student_list;
                     phead = in;
                     in->id = input; 
-                   
+                    fin.ignore();
                     getline(fin, name);
+                    in->name = name;
                     while (fin >> input)
                     {
-                            getline(fin, name);
+                        fin.ignore();
+                        getline(fin, name);
+                       
                             in->next = new student_list;
                             in = in->next;
                             in->id = input;
-
+                            in->name = name;
                     }
                 }
             fin.close();
         // doc mark cua student neu co
             path = "data/cache/Semester/coureses/" + cur->id + "/mark.txt";
             fin.open(path);
+            cur->student = phead;
             student_list* t = cur->student;
             while (t)
             {
@@ -498,7 +623,7 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
                 t = t->next;
             }
             fin.close();
-            cur->student = phead;
+            
             cur = cur->next;
        
     }  
