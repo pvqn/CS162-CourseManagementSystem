@@ -321,7 +321,7 @@ bool staffChoice(int& choice, User*& account, string& username, string& password
 			updateCourse(courseCur, semCur);
 			break;
 		case 11: //Delete a course
-			DeleteCourse(courseCur);
+			DeleteCourse(courseCur,semCur);
 			break;
 		case 12: //View a list of classes
 			viewclass();

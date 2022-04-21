@@ -197,7 +197,7 @@ void updateCourse(Course*& pCourse, Semester* s)
 	system("pause");
 }
 
-void DeleteCourse(Course*& pCourse)
+void DeleteCourse(Course*& pCourse, Semester* s)
 {
 	string id;
 	cin.ignore();
@@ -210,7 +210,6 @@ void DeleteCourse(Course*& pCourse)
 		pCur = pCur->next;
 	}
 	if (pCur == nullptr) return;
-
 	int option;
 	while (true)
 	{
@@ -228,6 +227,10 @@ void DeleteCourse(Course*& pCourse)
 		else break;
 	}
 	if (option == 2) return;
+	/*cout << "CHECK" << endl;
+	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + id;
+	cout << _rmdir(path.c_str()) << endl;
+	_rmdir(path.c_str());*/
 	
 	if (pBefore_Cur == nullptr)
 	{
