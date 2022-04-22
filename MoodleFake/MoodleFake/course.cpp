@@ -62,11 +62,15 @@ void addCourse(Course*& pCourse)
 	fout << newCourse->teacher << endl;
 	fout << newCourse->nCredits << endl;
 	fout << newCourse->maxCapacity << endl;
-	string str1 = displaysession(newCourse->day1 + newCourse->ses1);
-	string str2 = displaysession(newCourse->day2 + newCourse->ses2);
-	//cout << "CHECK" << endl;
-	fout << str1 << endl;
-	fout << str2 << endl;
+	fout << newCourse->day1 << endl;
+	fout << newCourse->ses1 << endl;
+	fout << newCourse->day2 << endl;
+	fout << newCourse->ses2 << endl;
+	//string str1 = displaysession(newCourse->day1 + newCourse->ses1);
+	//string str2 = displaysession(newCourse->day2 + newCourse->ses2);
+	////cout << "CHECK" << endl;
+	//fout << str1 << endl;
+	//fout << str2 << endl;
 	fout.close();
 	//cout << newCourse->maxCapacity << endl;
 	//cout << "CHECK" << endl;
@@ -135,8 +139,14 @@ void view_Course(Course* pCur)
 		FIN.ignore();
 		getline(FIN, cCur->day1); getline(FIN, cCur->ses1);
 		getline(FIN, cCur->day2); getline(FIN, cCur->ses2);
-		cout << cCur->day1 << " " << cCur->ses1 << endl;
-		cout << cCur->day2 << " " << cCur->ses2 << endl;
+		/*cout << cCur->day1 << " " << cCur->ses1 << endl;
+		cout << cCur->day2 << " " << cCur->ses2 << endl;*/
+
+		string str1 = displaysession(cCur->day1 + cCur->ses1);
+		string str2 = displaysession(cCur->day2 + cCur->ses2);
+		//cout << "CHECK" << endl;
+		cout << str1 << endl;
+		cout << str2 << endl;
 
 		FIN.close();
 	}
@@ -167,22 +177,52 @@ void updateCourse(Course*& pCourse)
 	string id;
 	cin.ignore();
 	getline(cin, id);
-	Course* pCur = pCourse;
-	while (pCur != nullptr && pCur->id != id)
+
+	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/courseList.txt";
+	ifstream fin;
+	fin.open(path, ios::in);
+	bool check = false;
+	while (!fin.eof())
+	{
+		string STR;
+		getline(fin, STR);
+
+		if (STR.size() == 0) break;
+
+		if (STR == id) check = true;
+	}
+	if (check == false) cout << "This ID doesn't exist!" << endl;
+	fin.close();
+
+	Course* pCur = new Course;
+
+	string PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + id + "/info_Of_Course.txt";
+	FIN.open(PATH, ios::in);
+
+	
+	getline(FIN, pCur->name); 
+	getline(FIN, pCur->teacher); 
+	FIN >> pCur->nCredits; 
+	FIN >> pCur->maxCapacity; 
+	FIN.ignore();
+	getline(FIN, pCur->day1); getline(FIN, pCur->ses1);
+	getline(FIN, pCur->day2); getline(FIN, pCur->ses2);
+	
+	FIN.close();
+	/*while (pCur != nullptr && pCur->id != id)
 	{
 		pCur = pCur->next;
-	}
+	}*/
 	int option;
 	while (true)
 	{
 		cout << "0: Back " << endl;
 		cout << "Input your option you want:  " << endl;
-		cout << "1. Course's ID" << endl;
-		cout << "2. Course's Name" << endl;
-		cout << "3. Teacher's Name" << endl;
-		cout << "4. Number of Credits" << endl;
-		cout << "5. Max of Students " << endl;
-		cout << "6. New days and new sessions" << endl;
+		cout << "1. Course's Name" << endl;
+		cout << "2. Teacher's Name" << endl;
+		cout << "3. Number of Credits" << endl;
+		cout << "4. Max of Students " << endl;
+		cout << "5. New days and new sessions" << endl;
 		cout << "Which infomation do you want to update: " << endl << endl;
 
 		cout << "Your Input: ";
@@ -195,37 +235,36 @@ void updateCourse(Course*& pCourse)
 		}
 		else break;
 	}
+	//cout << id << " " << "CHECK" << endl;
+	//cout << pCur->name << endl;
 	if (option == 0) return;
 
 	if (option == 1)
 	{
-		cout << "New course's ID: ";
-		cin.ignore();
-		getline(cin, pCur->id);
-	}
-	if (option == 2)
-	{
-		cout << "New course's Name: ";
+		/*cout << "New course's Name: ";
+		cout << id << " " << "CHECK" << endl;
+		cout << id << " " << "CHECK" << endl;*/
+
 		cin.ignore();
 		getline(cin, pCur->name);
 	}
-	if (option == 3)
+	if (option == 2)
 	{
 		cout << "New teacher's Name: ";
 		cin.ignore();
 		getline(cin, pCur->teacher);
 	}
-	if (option == 4)
+	if (option == 3)
 	{
 		cout << "New number of credits: ";
 		cin >> pCur->nCredits;
 	}
-	if (option == 5)
+	if (option == 4)
 	{
 		cout << "Max of students ";
 		cin >> pCur->maxCapacity;
 	}
-	if (option == 6)
+	if (option == 5)
 	{
 		cout << "New day 1 and new session 1: ";
 		cin.ignore();
@@ -235,17 +274,21 @@ void updateCourse(Course*& pCourse)
 		getline(cin, pCur->day2);
 		getline(cin, pCur->ses2);
 	}
-	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + pCur->id + "/info_Of_Course.txt";
+	/*cout << pCur->name << endl;
+	cout << pCur->teacher << endl;
+	cout << pCur->nCredits << endl;
+	cout << pCur->maxCapacity << endl;
+	cout << pCur->day1 << " " << pCur->ses1 << endl;
+	cout << pCur->day2 << " " << pCur->ses2 << endl;*/
+
+	path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + id + "/info_Of_Course.txt";
 	ofstream fout(path);
 	fout << pCur->name << endl;
 	fout << pCur->teacher << endl;
 	fout << pCur->nCredits << endl;
 	fout << pCur->maxCapacity << endl;
-	string str1 = displaysession(pCur->day1 + pCur->ses1);
-	string str2 = displaysession(pCur->day2 + pCur->ses2);
-	//cout << "CHECK" << endl;
-	fout << str1 << endl;
-	fout << str2 << endl;
+	fout << pCur->day1 << endl << pCur->ses1 << endl;
+	fout << pCur->day2 << endl << pCur->ses2 << endl;
 	fout.close();
 	cout << "Update successfully !!" << endl;
 
