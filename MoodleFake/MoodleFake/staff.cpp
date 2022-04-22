@@ -311,14 +311,14 @@ bool staffChoice(int& choice, User*& account, string& username, string& password
 			CourseRegister( semCur->term, semCur->year);
 			break;
 		case 8: //Add a course to semester
-			addCourse(courseCur,semCur);
+			addCourse(courseCur);
 			break;
 		case 9: //View the list of courses in the semester
 			cout << "The list of courses in the semester: ";
-			view_Course(courseCur, semCur);
+			view_Course(courseCur);
 			break;
 		case 10: //Update course information
-			updateCourse(courseCur, semCur);
+			updateCourse(courseCur);
 			break;
 		case 11: //Delete a course
 			DeleteCourse(courseCur,semCur);

@@ -18,9 +18,16 @@ Course* add()
 	//cout << cCur->id << " " << cCur->name << " " << cCur->teacher << endl;
 	return cCur;
 }
-void addCourse(Course*& pCourse, Semester* s)
+void addCourse(Course*& pCourse)
 {
-
+	Semester* s = new Semester;
+	string PATHPATH = "data/cache/currentSemester.txt";
+	ifstream FIN(PATHPATH);
+	FIN >> s->term >> s->year;
+	FIN >> s->startDate.day >> s->startDate.month >> s->startDate.year;
+	FIN >> s->endDate.day >> s->endDate.month >> s->endDate.year;
+	FIN.close();
+	cout << s->term << "CHECK" << endl;
 	Course* tmp = new Course;
 	Course* pCur = pCourse;
 	Course* newCourse = add();
@@ -34,22 +41,22 @@ void addCourse(Course*& pCourse, Semester* s)
 		string STR;
 		getline(fin, STR);
 		if (STR.size() == 0) break;
-		if (STR == newCourse->id) 
+		if (STR == newCourse->id)
 		{
 			cout << "Failed to add a new course!!\n";
 			cout << "The course you want to add has already existed!!\n";
 			system("pause");
 			return;
 		}
-		cout << "CHECK" << endl;		
+		cout << "CHECK" << endl;
 	}
 	fin.close();
 	//cout << "CHECK" << endl;
 
 	string PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + newCourse->id;
 	_mkdir(PATH.c_str()); // tao file course ID
-	
-	 path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + newCourse->id + "/info_Of_Course.txt";
+
+	path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + newCourse->id + "/info_Of_Course.txt";
 	ofstream fout(path);
 	fout << newCourse->name << endl;
 	fout << newCourse->teacher << endl;
@@ -89,26 +96,74 @@ void addCourse(Course*& pCourse, Semester* s)
 	}
 	pCur = newCourse;
 	tmp->next = pCur;
+
+	delete s;
 }
 
-void view_Course(Course* pCur, Semester* Scur)
+void view_Course(Course* pCur)
 {
-	while (pCur != nullptr)
+	Semester* s = new Semester;
+	string PATHPATH = "data/cache/currentSemester.txt";
+	ifstream FIN(PATHPATH);
+	FIN >> s->term >> s->year;
+	FIN >> s->startDate.day >> s->startDate.month >> s->startDate.year;
+	FIN >> s->endDate.day >> s->endDate.month >> s->endDate.year;
+	FIN.close();
+
+	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/courseList.txt";
+	ifstream fin;
+	fin.open(path, ios::in);
+	while (!fin.eof())
 	{
-		cout << pCur->id << endl;
-		cout << pCur->name << endl;
-		cout << pCur->teacher << endl;
-		cout << pCur->nCredits << endl;
-		cout << pCur->maxCapacity << endl;
-		string str1 = displaysession(pCur->day1 + pCur->ses1);
-		string str2 = displaysession(pCur->day2 + pCur->ses2);
-		cout << str1 << endl;
-		cout << str2 << endl;
-		pCur = pCur->next;
+		string STR;
+		getline(fin, STR);
+
+		if (STR.size() == 0) break;
+
+		cout << "CHECK CHECK" << endl;
+		cout << STR << endl;
+		string PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + STR + "/info_Of_Course.txt";
+		ifstream FIN;
+		FIN.open(PATH, ios::in);
+		Course* cCur = new Course;
+
+		cout << STR << endl;
+		getline(FIN, cCur->name); cout << cCur->name << endl;
+		getline(FIN, cCur->teacher); cout << cCur->teacher << endl;
+		FIN >> cCur->nCredits; cout << cCur->nCredits << endl;
+		FIN >> cCur->maxCapacity; cout << cCur->maxCapacity << endl;
+		FIN.ignore();
+		getline(FIN, cCur->day1); getline(FIN, cCur->ses1);
+		getline(FIN, cCur->day2); getline(FIN, cCur->ses2);
+		cout << cCur->day1 << " " << cCur->ses1 << endl;
+		cout << cCur->day2 << " " << cCur->ses2 << endl;
+
+		FIN.close();
 	}
+
+	fin.close();
+	delete s;
+	/*cin.ignore();
+		cout << "Input id: ";  getline(cin, cCur->id);
+		cout << "Input Name: "; getline(cin, cCur->name);
+		cout << "Input Teacher: "; getline(cin, cCur->teacher);
+		cout << "Input Number of Credits: ";  cin >> cCur->nCredits;
+		cout << "Input max students: ";  cin >> cCur->maxCapacity;
+		cin.ignore();
+		cout << "Day1: "; getline(cin, cCur->day1);
+		cout << "Ses1: "; getline(cin, cCur->ses1);
+		cout << "Day2: "; getline(cin, cCur->day2);
+		cout << "Ses2: "; getline(cin, cCur->ses2);*/
 }
-void updateCourse(Course*& pCourse, Semester* s)
+void updateCourse(Course*& pCourse)
 {
+	Semester* s = new Semester;
+	string PATHPATH = "data/cache/currentSemester.txt";
+	ifstream FIN(PATHPATH);
+	FIN >> s->term >> s->year;
+	FIN >> s->startDate.day >> s->startDate.month >> s->startDate.year;
+	FIN >> s->endDate.day >> s->endDate.month >> s->endDate.year;
+	FIN.close();
 	string id;
 	cin.ignore();
 	getline(cin, id);
@@ -130,7 +185,7 @@ void updateCourse(Course*& pCourse, Semester* s)
 		cout << "6. New days and new sessions" << endl;
 		cout << "Which infomation do you want to update: " << endl << endl;
 
-		cout << "Your Input: "; 
+		cout << "Your Input: ";
 		cin >> option;
 		//system("cls");
 		if (option > 6 || option < 0)
@@ -194,7 +249,7 @@ void updateCourse(Course*& pCourse, Semester* s)
 	fout.close();
 	cout << "Update successfully !!" << endl;
 
-	system("pause");
+	delete s;
 }
 
 void DeleteCourse(Course*& pCourse, Semester* s)
@@ -231,7 +286,7 @@ void DeleteCourse(Course*& pCourse, Semester* s)
 	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + id;
 	cout << _rmdir(path.c_str()) << endl;
 	_rmdir(path.c_str());*/
-	
+
 	if (pBefore_Cur == nullptr)
 	{
 		pBefore_Cur = pCur->next;
