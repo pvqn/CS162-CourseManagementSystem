@@ -1,23 +1,14 @@
 #include <iostream>
 #include <fstream>
-//#include <dirent.h>
-
+#include "dirent.h"
 #include <string.h>
 #include <sys/stat.h>
 #include <windows.h>
 #include <direct.h>
 #include <conio.h>;
 #include <string>
+
 using namespace std;
-void reset_cache()
-{
-    remove_dir("data/cache");
-    mkdir("data/cache");
-    mkdir("data/cache/Semester");
-    mkdir("data/cache/Semester/coureses");
-    mkdir("data/cache/Semester/students");
-    mkdir("data/cache/csvFile");
-}
 
 void remove_dir(char* path)
 {
@@ -48,43 +39,35 @@ void remove_dir(char* path)
         }
     }
     remove(path);
-    rmdir(path);
-}
-void Pull()
-{
-    string YY, TERM;
-    string path_in = "data/cache/currentSemester.txt";
-    ifstream fin;
-    fin.open(path_in);
-    fin >> YY >> TERM;
-    fin.close();
-
-    string srcDir = "data/" + YY + '/' + TERM; // Folder truyen di
-    string destDir = "data/cache/Semester";   // Folder den
-    copyDir_(srcDir.c_str(), destDir);
-
-    srcDir = "csvFile/" + YY + '/' + TERM; // Folder truyen di
-    destDir = "data/cache/csvFile";   // Folder den
-    copyDir_(srcDir.c_str(), destDir);
+    _rmdir(path);
 }
 
-void Push()
+void reset_cache()
 {
-    string YY, TERM;
-    string path_in = "data/cache/currentSemester.txt";
-    ifstream fin;
-    fin.open(path_in);
-    fin >> YY >> TERM;
-    fin.close();
+    char* path = new char[11];
+    path[0] = 'd'; path[1] = 'a'; path[2] = 't'; path[3] = 'a';
+    path[4] = '/'; path[5] = 'c'; path[6] = 'a'; path[7] = 'c';
+    path[8] = 'h'; path[9] = 'e'; path[10] = '\0';
+    remove_dir(path);
+    _mkdir("data/cache");
+    _mkdir("data/cache/Semester");
+    _mkdir("data/cache/Semester/coureses");
+    _mkdir("data/cache/Semester/students");
+    _mkdir("data/cache/csvFile");
+    delete[] path;
+}
 
-    string srcDir = "data/cache/Semester";
-    string destDir = "data/" + YY + '/' + TERM; // Folder truyen di
-    // Folder den
-    copyDir_(srcDir.c_str(), destDir);
+bool is_dir(const char* path)
+{
+    struct stat buf;
+    stat(path, &buf);
+    return S_ISDIR(buf.st_mode);
+}
 
-    destDir = "csvFile/" + YY + '/' + TERM; // Folder truyen di
-    srcDir = "data/cache/csvFile";   // Folder den
-    copyDir_(srcDir.c_str(), destDir);
+void copyFile_(string inDir, string outDir)
+{
+    CopyFile(inDir.c_str(), outDir.c_str(), 0);
+    DWORD Error = GetLastError();
 }
 
 void copyDir_(const char* inputDir, string outDir)
@@ -122,7 +105,7 @@ void copyDir_(const char* inputDir, string outDir)
                     outStrPath = outDir;
                     outStrPath.append("\\");
                     outStrPath.append(tmpStr);
-                    mkdir(outStrPath.c_str());
+                    _mkdir(outStrPath.c_str());
 
                     copyDir_(tmpStrPath.c_str(), outStrPath);
                 }
@@ -141,15 +124,39 @@ void copyDir_(const char* inputDir, string outDir)
     }
 }
 
-bool is_dir(const char* path)
+void Pull()
 {
-    struct stat buf;
-    stat(path, &buf);
-    return S_ISDIR(buf.st_mode);
+    string YY, TERM;
+    string path_in = "data/cache/currentSemester.txt";
+    ifstream fin;
+    fin.open(path_in);
+    fin >> TERM >> YY;
+    fin.close();
+
+    string srcDir = "data/" + YY + '/' + TERM; // Folder truyen di
+    string destDir = "data/cache/Semester";   // Folder den
+    copyDir_(srcDir.c_str(), destDir);
+
+    srcDir = "csvFile/" + YY + '/' + TERM; // Folder truyen di
+    destDir = "data/cache/csvFile";   // Folder den
+    copyDir_(srcDir.c_str(), destDir);
 }
 
-void copyFile_(string inDir, string outDir)
+void Push()
 {
-    CopyFile(inDir.c_str(), outDir.c_str(), 0);
-    DWORD Error = GetLastError();
+    string YY, TERM;
+    string path_in = "data/cache/currentSemester.txt";
+    ifstream fin;
+    fin.open(path_in);
+    fin >> TERM >> YY;
+    fin.close();
+
+    string srcDir = "data/cache/Semester";
+    string destDir = "data/" + YY + '/' + TERM; // Folder truyen di
+    // Folder den
+    copyDir_(srcDir.c_str(), destDir);
+
+    destDir = "csvFile/" + YY + '/' + TERM; // Folder truyen di
+    srcDir = "data/cache/csvFile";   // Folder den
+    copyDir_(srcDir.c_str(), destDir);
 }
