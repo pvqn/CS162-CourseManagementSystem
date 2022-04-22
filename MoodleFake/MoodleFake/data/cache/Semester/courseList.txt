@@ -1,4 +1,0 @@
-CS162
-Introduction to Computer Science II
-PH212
-General Physic II

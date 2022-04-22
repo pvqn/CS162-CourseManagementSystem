@@ -1,4 +1,5 @@
 #include "struct.h"
+#include "support.h"
 
 void setCurrentSemester(int year, int term, Date start, Date end) {
 	string path = "data/" + to_string(year) + '/' + to_string(term) + "/info_Of_Semester.txt";
@@ -64,6 +65,8 @@ Semester getCurrentSemester() { //Lấy thông tin của Semester hiện tại
 }
 void Create_newSemester(Semester*& Scur)
 {
+	Push();
+	reset_cache();
 	Semester* s = new Semester;
 
 	cout << "Input Year: "; cin >> s->year ;
@@ -110,6 +113,8 @@ void Create_newSemester(Semester*& Scur)
 	fout << s->endDate.day << " " << s->endDate.month;
 	fout << " " << s->endDate.year << endl;
 	fout.close();
+	cout << "\n\n\n\n";
+	Pull();
 }
 
 void CourseRegister( int semester,int year)

@@ -165,6 +165,7 @@
     <ClInclude Include="staff.h" />
     <ClInclude Include="struct.h" />
     <ClInclude Include="student.h" />
+    <ClInclude Include="support.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
