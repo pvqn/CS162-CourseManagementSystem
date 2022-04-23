@@ -295,42 +295,87 @@ void updateCourse(Course*& pCourse)
 	delete s;
 }
 
-void DeleteCourse(Course*& pCourse, Semester* s)
+void DeleteCourse(Course*& pCourse)
 {
+	Semester* s = new Semester;
+	string PATHPATH = "data/cache/currentSemester.txt";
+	ifstream FIN(PATHPATH);
+	FIN >> s->term >> s->year;
+	FIN >> s->startDate.day >> s->startDate.month >> s->startDate.year;
+	FIN >> s->endDate.day >> s->endDate.month >> s->endDate.year;
+	FIN.close();
+
 	string id;
 	cin.ignore();
 	getline(cin, id);
-	Course* pCur = pCourse;
-	Course* pBefore_Cur = nullptr;
-	while (pCur->id != id && pCur != nullptr)
+	string* str = new string [10];
+	int dem = -1;
+	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/courseList.txt";
+	ifstream fin;
+	fin.open(path, ios::in);
+	bool check = false;
+	while (!fin.eof())
 	{
-		pBefore_Cur = pCur;
-		pCur = pCur->next;
-	}
-	if (pCur == nullptr) return;
-	int option;
-	while (true)
-	{
-		cout << "Are you sure to delete this course: " << endl;
-		cout << "Input your option: " << endl;
-		cout << "1. Yes" << endl;
-		cout << "2. No" << endl;
-		cin >> option;
-		//system("cls");
-		if (option > 2 || option < 1)
+		string ss;
+		getline(fin, ss);
+		if (ss.size() == 0) break;
+		if (ss == id)
 		{
-			cout << "Please input again" << endl << endl;
+			check = true;
 			continue;
 		}
-		else break;
+		else str[++dem] = ss;
+
 	}
-	if (option == 2) return;
+	fin.close();
+	if (check == false)
+	{
+		cout << "Please id input again!";
+		return;
+	}
+
+	ofstream fout;
+	fout.open(path);
+	for (int i = 0; i <= dem; i++) fout << str[i] << endl;
+	fout.close();
+
+	path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + id;
+	//cout << _rmdir(path.c_str()) << endl;
+	_rmdir(path.c_str()); 
+	//string id;
+	//cin.ignore();
+	//getline(cin, id);
+	//Course* pCur = pCourse;
+	//Course* pBefore_Cur = nullptr;
+	//while (pCur->id != id && pCur != nullptr)
+	//{
+	//	pBefore_Cur = pCur;
+	//	pCur = pCur->next;
+	//}
+	//if (pCur == nullptr) return;
+	//int option;
+	//while (true)
+	//{
+	//	cout << "Are you sure to delete this course: " << endl;
+	//	cout << "Input your option: " << endl;
+	//	cout << "1. Yes" << endl;
+	//	cout << "2. No" << endl;
+	//	cin >> option;
+	//	//system("cls");
+	//	if (option > 2 || option < 1)
+	//	{
+	//		cout << "Please input again" << endl << endl;
+	//		continue;
+	//	}
+	//	else break;
+	//}
+	//if (option == 2) return;
 	/*cout << "CHECK" << endl;
 	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + id;
 	cout << _rmdir(path.c_str()) << endl;
 	_rmdir(path.c_str());*/
 
-	if (pBefore_Cur == nullptr)
+	/*if (pBefore_Cur == nullptr)
 	{
 		pBefore_Cur = pCur->next;
 		delete pCur;
@@ -339,7 +384,7 @@ void DeleteCourse(Course*& pCourse, Semester* s)
 	{
 		pBefore_Cur->next = pCur->next;
 		delete pCur;
-	}
+	}*/
 
 }
 
