@@ -44,17 +44,16 @@ void remove_dir(char* path)
 
 void reset_cache()
 {
-    char* path = new char[11];
-    path[0] = 'd'; path[1] = 'a'; path[2] = 't'; path[3] = 'a';
-    path[4] = '/'; path[5] = 'c'; path[6] = 'a'; path[7] = 'c';
-    path[8] = 'h'; path[9] = 'e'; path[10] = '\0';
-    remove_dir(path);
-    _mkdir("data/cache");
+    char* path_Semester = new char[20]{ 'd', 'a', 't', 'a' , '/', 'c', 'a', 'c', 'h', 'e', '/', 'S', 'e', 'm', 'e', 's', 't', 'e', 'r', '\0' };
+    char* path_csv = new char[19]{ 'd', 'a', 't', 'a' , '/', 'c', 'a', 'c', 'h', 'e', '/', 'c', 's', 'v', 'F', 'i', 'l', 'e', '\0' };
+    remove_dir(path_Semester);;
+    remove_dir(path_csv);
     _mkdir("data/cache/Semester");
     _mkdir("data/cache/Semester/coureses");
     _mkdir("data/cache/Semester/students");
     _mkdir("data/cache/csvFile");
-    delete[] path;
+    delete[] path_Semester;
+    delete[] path_csv;
 }
 
 bool is_dir(const char* path)
