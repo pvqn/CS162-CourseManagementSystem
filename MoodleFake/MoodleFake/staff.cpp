@@ -22,7 +22,6 @@ void createSchoolYear() {
 	}
 	else {
 		setCurrentYear(year);
-		setCurrentSemester(year, 0, Date(0, 0, 0), Date(0, 0, 0));
 		cout << "Year has been created successfully!\n";
 		return;
 	}
@@ -83,6 +82,22 @@ void addStudent(string className, Student*& student) {
 	Student* std = student;
 	importStudentFromCSV(className, student);
 
+	Student* newStudent = new Student;
+	cout << "Student ID: "; cin >> newStudent->id;
+	cout << "First name: "; cin >> newStudent->firstName;
+	cout << "Last name: "; cin >> newStudent->lastName;
+	cout << "Gender: "; cin >> newStudent->gender;
+	cout << "Date of birth (day month year): "; cin >> newStudent->dob.day >> newStudent->dob.month >> newStudent->dob.year;
+	cout << "Social ID: "; cin >> newStudent->socialId;
+	newStudent->next = NULL;
+	if (student == NULL) student = newStudent;
+	else {
+		Student* lastStudent = student;
+		while (lastStudent->next != NULL)
+			lastStudent = lastStudent->next;
+		lastStudent->next = newStudent;
+	}
+
 	string path = "data/classes/" + className + "/studentList.txt";
 	ofstream fout(path.c_str());
 	while (std != NULL) {
@@ -92,9 +107,6 @@ void addStudent(string className, Student*& student) {
 	fout.close();
 	
 	while (student != NULL) {
-		//path = "data/Semester/students/";
-		//_mkdir(path.c_str());
-
 		path = "data/cache/Semester/students/" + student->id;
 		_mkdir(path.c_str());
 
