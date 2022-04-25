@@ -674,6 +674,7 @@ void displaycourse_studentList()
 	{
 		string ID, Name;
 		fin >> ID;
+		if (ID.size() == 0) break;
 		fin.ignore(); getline(fin, Name);
 		cout << ++No << ' ' << ID << ' ' << Name << '\n';
 	}
