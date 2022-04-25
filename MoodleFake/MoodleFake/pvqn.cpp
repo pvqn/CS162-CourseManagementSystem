@@ -92,8 +92,8 @@ void displaycourse_student(Course *display, int i)
     cout << "Course name: " << display->name << endl;
     cout << "Course's instructor: " << display->teacher << endl;
     cout << "Number of credits: " << display->nCredits << endl;
-    cout << "First session: " << displaysession(display->ses1) <<endl;
-    cout << "Second session: " << displaysession(display->ses2) <<endl;
+    cout << "First session: " << displaysession(display->day1+display->ses1) <<endl;
+    cout << "Second session: " << displaysession(display->day2+display->ses2) <<endl;
 }
 void viewcourse_student(Semester *head, string id)
 {
@@ -173,7 +173,7 @@ bool checkhowmanycourse(Semester* now, string id)
     return true;
 }
 //kiểm tra có giờ nào chung không
-bool issamesession(Semester* now, string id, string s1, string s2, Course*cur)
+bool issamesession(Semester* now, string id, string s1, string s2, Course*cur, string s3, string s4)
 {
     Course* current = now->course_cur;
     while (current)
@@ -182,7 +182,7 @@ bool issamesession(Semester* now, string id, string s1, string s2, Course*cur)
         while (pcur)
         {
             if (pcur->id == id && current->ses1 == s1 &&
-                current->ses2 == s2 && current != cur)
+                current->ses2 == s2 && current != cur && current->day1!=s3 && current->day2!=s4)
             {
                 return true;
             }
@@ -359,7 +359,7 @@ void enrolledcoure(Semester* now, string id)
         if (!i) break;
         Course* find = findcourse(now, i);
         if (!isstudentexisted(find, id)
-            && !issamesession(now, id, find->ses1, find->ses2, find)
+            && !issamesession(now, id, find->ses1, find->ses2, find, find->day1, find->day2)
             && checkhowmanycourse(now, id))
         {
             student_list* pcur = find->student;
@@ -579,7 +579,7 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
             path = "data/cache/Semester/coureses/" + cur->id + "/info_Of_Course.txt";
             fin.open(path);
             getline(fin, cur->teacher);
-            fin >> cur->nCredits >> cur->maxCapacity >> cur->ses1 >> cur->ses2;
+            fin >> cur->nCredits >> cur->maxCapacity >> cur->day1>>cur->ses1 >> cur->day2>> cur->ses2;
             fin.close();
         // doc student list trong khoa hoc
             path = "data/cache/Semester/coureses/" + cur->id + "/studentList.txt";
