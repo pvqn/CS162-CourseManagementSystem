@@ -83,12 +83,14 @@ void addStudent(string className, Student*& student) {
 	importStudentFromCSV(className, student);
 
 	Student* newStudent = new Student;
-	cout << "Student ID: "; cin >> newStudent->id;
-	cout << "First name: "; cin >> newStudent->firstName;
-	cout << "Last name: "; cin >> newStudent->lastName;
-	cout << "Gender: "; cin >> newStudent->gender;
+	cin.ignore();
+	cout << "Student ID: "; getline(cin, newStudent->id);
+	cout << "First name: "; getline(cin, newStudent->firstName);
+	cout << "Last name: "; getline(cin, newStudent->lastName);
+	cout << "Gender: "; getline(cin, newStudent->gender);
 	cout << "Date of birth (day month year): "; cin >> newStudent->dob.day >> newStudent->dob.month >> newStudent->dob.year;
-	cout << "Social ID: "; cin >> newStudent->socialId;
+	cin.ignore();
+	cout << "Social ID: "; getline(cin, newStudent->socialId);
 	newStudent->next = NULL;
 	if (student == NULL) student = newStudent;
 	else {
