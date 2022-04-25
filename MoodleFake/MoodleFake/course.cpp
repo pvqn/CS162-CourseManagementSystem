@@ -73,10 +73,39 @@ void addCourse(Course*& pCourse)
 	//fout << str1 << endl;
 	//fout << str2 << endl;
 	fout.close();
+
+	path = "data/cache/Semester/coureses/" + newCourse->id;
+	_mkdir(path.c_str()); // tao file course ID
+	path = "data/cache/Semester/coureses/" + newCourse->id + "/info_Of_Course.txt";
+	fout.open(path);
+	fout << newCourse->name << endl;
+	fout << newCourse->teacher << endl;
+	fout << newCourse->nCredits << endl;
+	fout << newCourse->maxCapacity << endl;
+	fout << newCourse->day1 << endl;
+	fout << newCourse->ses1 << endl;
+	fout << newCourse->day2 << endl;
+	fout << newCourse->ses2 << endl;
+	fout.close();
 	//cout << newCourse->maxCapacity << endl;
 	//cout << "CHECK" << endl;
+	path = "data/cache/Semester/courseList.txt";
+	fout.open(path, ios::app);
+	fout << newCourse->id << endl;
+	fout.close();
+
+	path = "data/cache/Semester/coureses/courseList.txt";
+	fout.open(path, ios::app);
+	fout << newCourse->id << endl;
+	fout.close();
 
 	path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/courseList.txt";
+	fout.open(path, ios::app);
+	fout << newCourse->id << endl;
+	fout.close();
+
+
+	path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/courseList.txt";
 	fout.open(path, ios::app);
 	fout << newCourse->id << endl;
 	fout.close();
@@ -200,15 +229,15 @@ void updateCourse(Course*& pCourse)
 	string PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + id + "/info_Of_Course.txt";
 	FIN.open(PATH, ios::in);
 
-	
-	getline(FIN, pCur->name); 
-	getline(FIN, pCur->teacher); 
-	FIN >> pCur->nCredits; 
-	FIN >> pCur->maxCapacity; 
+
+	getline(FIN, pCur->name);
+	getline(FIN, pCur->teacher);
+	FIN >> pCur->nCredits;
+	FIN >> pCur->maxCapacity;
 	FIN.ignore();
 	getline(FIN, pCur->day1); getline(FIN, pCur->ses1);
 	getline(FIN, pCur->day2); getline(FIN, pCur->ses2);
-	
+
 	FIN.close();
 	/*while (pCur != nullptr && pCur->id != id)
 	{
@@ -293,6 +322,15 @@ void updateCourse(Course*& pCourse)
 	fout.close();
 	cout << "Update successfully !!" << endl;
 
+	path = "data/cache/Semester/coureses/" + id + "/info_Of_Course.txt";
+	fout.open(path);
+	fout << pCur->name << endl;
+	fout << pCur->teacher << endl;
+	fout << pCur->nCredits << endl;
+	fout << pCur->maxCapacity << endl;
+	fout << pCur->day1 << endl << pCur->ses1 << endl;
+	fout << pCur->day2 << endl << pCur->ses2 << endl;
+	fout.close();
 	delete s;
 }
 
@@ -309,7 +347,7 @@ void DeleteCourse(Course*& pCourse)
 	string id;
 	cin.ignore();
 	getline(cin, id);
-	string* str = new string [10];
+	string* str = new string[10];
 	int dem = -1;
 	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/courseList.txt";
 	ifstream fin;
@@ -340,11 +378,26 @@ void DeleteCourse(Course*& pCourse)
 	for (int i = 0; i <= dem; i++) fout << str[i] << endl;
 	fout.close();
 
+	path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/courseList.txt";
+	fout.open(path);
+	for (int i = 0; i <= dem; i++) fout << str[i] << endl;
+	fout.close();
+
+	path = "data/cache/Semester/coureses/courseList.txt";
+	fout.open(path);
+	for (int i = 0; i <= dem; i++) fout << str[i] << endl;
+	fout.close();
+
+	path = "data/cache/Semester/courseList.txt";
+	fout.open(path);
+	for (int i = 0; i <= dem; i++) fout << str[i] << endl;
+	fout.close();
+
 	path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + id;
 	string s_year = to_string(s->year);
 	string s_term = to_string(s->term);
-	char* path_path = new char[100]{'d','a','t','a','/',s_year[0],
-		s_year[1],s_year[2],s_year[3],'/',s_term[0],'/','c','o','u','r','e','s','e','s','/'};
+	char* path_path = new char[100]{ 'd','a','t','a','/',s_year[0],
+		s_year[1],s_year[2],s_year[3],'/',s_term[0],'/','c','o','u','r','e','s','e','s','/' };
 	dem = 20;
 	for (int i = 0; i < id.size(); i++)
 	{
@@ -353,6 +406,18 @@ void DeleteCourse(Course*& pCourse)
 	path_path[++dem] = '\0';
 	cout << path_path << endl;
 	remove_dir(path_path);
+
+	path = "data/cache/Semester/coureses/" + id;
+	char* pp = new char[100]{ 'd','a','t','a','/','c','a','c','h','e','/','S','e','m','e','s','t','e','r',
+		'/','c','o','u','r','e','s','e','s','/' };
+	dem = 28;
+	for (int i = 0; i < id.size(); i++)
+	{
+		pp[++dem] = id[i];
+	}
+	pp[++dem] = '\0';
+	cout << pp << endl;
+	remove_dir(pp);
 	//string id;
 	//cin.ignore();
 	//getline(cin, id);

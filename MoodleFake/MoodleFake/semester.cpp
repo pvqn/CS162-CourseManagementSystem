@@ -61,7 +61,7 @@ Semester getCurrentSemester() { //Lấy thông tin của Semester hiện tại
 	currentSemester.endDate = Date(endday, endmonth, endyear);
 
 	return currentSemester;
-//>>>>>>> 4721181f85f83214196216fde0364355879f3ba6
+	//>>>>>>> 4721181f85f83214196216fde0364355879f3ba6
 }
 void Create_newSemester(Semester*& Scur)
 {
@@ -69,8 +69,8 @@ void Create_newSemester(Semester*& Scur)
 	reset_cache();
 	Semester* s = new Semester;
 
-	cout << "Input Year: "; cin >> s->year ;
-	cout << "Input Term: ";cin >> s->term;
+	cout << "Input Year: "; cin >> s->year;
+	cout << "Input Term: "; cin >> s->term;
 	cout << "Start Day: "; cin >> s->startDate.day >> s->startDate.month >> s->startDate.year;
 	cout << "End Day: "; cin >> s->endDate.day >> s->endDate.month >> s->endDate.year;
 	//s->Course
@@ -96,9 +96,9 @@ void Create_newSemester(Semester*& Scur)
 	_mkdir(PATH.c_str());
 
 	//TO
-	
+
 	//FROM
-	PATH = "data/" + to_string(s->year) + "/" + to_string(s->term)+"/students";
+	PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/students";
 	_mkdir(PATH.c_str());
 	PATH = "data/classes/classList.txt";
 	ifstream fin; fin.open(PATH, ios::in);
@@ -174,17 +174,25 @@ void Create_newSemester(Semester*& Scur)
 	Pull();
 }
 
-void CourseRegister( int semester,int year)
+void CourseRegister(int semester, int year)
 {
 
-	string path = "data/" +to_string(year)+ "/" + to_string(semester) + "/courseRegister.txt";
+	string path = "data/" + to_string(year) + "/" + to_string(semester) + "/courseRegister.txt";
 	ofstream fout(path);
 	Date start, end;
 	cin >> start.day >> start.month >> start.year;
 	cin >> end.day >> end.month >> end.year;
 
-	
-	
+
+
+	fout << start.day << " " << start.month << " " << start.year << endl;
+	fout << end.day << " " << end.month << " " << end.year << endl;
+
+	fout.close();
+
+	path = "data/cache/courseRegister.txt";
+	fout.open(path);
+
 	fout << start.day << " " << start.month << " " << start.year << endl;
 	fout << end.day << " " << end.month << " " << end.year << endl;
 
