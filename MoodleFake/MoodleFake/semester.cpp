@@ -95,8 +95,6 @@ void Create_newSemester(Semester*& Scur)
 	PATH = "csvFile/" + to_string(s->year) + "/" + to_string(s->term);
 	_mkdir(PATH.c_str());
 
-	PATH = "csvFile/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses";
-	_mkdir(PATH.c_str());
 	//TO
 	
 	//FROM
