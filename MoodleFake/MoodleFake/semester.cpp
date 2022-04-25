@@ -76,16 +76,61 @@ void Create_newSemester(Semester*& Scur)
 	//s->Course
 
 	Scur = s; /// Since we just need to create one semester
+	// FROM
 	string PATH = "data/" + to_string(s->year);
 	_mkdir(PATH.c_str());
-
-	string path = "data/" + to_string(s->year) +"/"+ to_string(s->term) + "/info_Of_Semester.txt";
 
 	PATH = "data/" + to_string(s->year) + "/" + to_string(s->term);
 	_mkdir(PATH.c_str());
 
 	PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses";
 	_mkdir(PATH.c_str());
+
+	//TO
+	//FROM
+
+	PATH = "csvFile/" + to_string(s->year);
+	_mkdir(PATH.c_str());
+
+	PATH = "csvFile/" + to_string(s->year) + "/" + to_string(s->term);
+	_mkdir(PATH.c_str());
+
+	PATH = "csvFile/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses";
+	_mkdir(PATH.c_str());
+	//TO
+	
+	//FROM
+	PATH = "data/" + to_string(s->year) + "/" + to_string(s->term)+"/students";
+	_mkdir(PATH.c_str());
+	PATH = "data/classes/classList.txt";
+	ifstream fin; fin.open(PATH, ios::in);
+	while (!fin.eof())
+	{
+		string sss;
+		getline(fin, sss);
+		if (sss.size() == 0) break;
+		string PATH_PATH = "data/classes/" + sss + "/studentList.txt";
+		ifstream FIN; FIN.open(PATH_PATH, ios::in);
+		while (!FIN.eof())
+		{
+			string ssss;
+			getline(FIN, ssss);
+			if (ssss.size() == 0) break;
+			string PATH_PATH_PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/students/" + ssss;
+			_mkdir(PATH_PATH_PATH.c_str());
+			PATH_PATH_PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/students/" + ssss + "/class.txt";
+			ofstream FOUT(PATH_PATH_PATH);
+			FOUT << sss;
+			FOUT.close();
+		}
+		FIN.close();
+	}
+
+	fin.close();
+	//TO
+
+
+	string path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/info_Of_Semester.txt";
 	ofstream fout(path);
 
 	if (s->term == 1) fout << s->term << " " << s->year << endl;
@@ -101,6 +146,20 @@ void Create_newSemester(Semester*& Scur)
 	fout.close();
 
 	path = "data/cache/currentSemester.txt";
+	fout.open(path);
+
+	if (s->term == 1) fout << s->term << " " << s->year << endl;
+	if (s->term == 2) fout << s->term << " " << s->year << endl;
+	if (s->term == 3) fout << s->term << " " << s->year << endl;
+
+	fout << s->startDate.day << " " << s->startDate.month;
+	fout << " " << s->startDate.year << endl;
+
+	fout << s->endDate.day << " " << s->endDate.month;
+	fout << " " << s->endDate.year << endl;
+	fout.close();
+
+	path = "csvFile/" + to_string(s->year) + "/" + to_string(s->term) + "/info_Of_Semester.txt";
 	fout.open(path);
 
 	if (s->term == 1) fout << s->term << " " << s->year << endl;

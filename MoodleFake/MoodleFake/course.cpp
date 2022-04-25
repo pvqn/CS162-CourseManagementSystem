@@ -1,5 +1,6 @@
 #include "struct.h"
 #include "pvqn.h"
+#include "support.h"
 Course* add()
 {
 	Course* cCur = new Course;
@@ -340,8 +341,18 @@ void DeleteCourse(Course*& pCourse)
 	fout.close();
 
 	path = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + id;
-	//cout << _rmdir(path.c_str()) << endl;
-	_rmdir(path.c_str()); 
+	string s_year = to_string(s->year);
+	string s_term = to_string(s->term);
+	char* path_path = new char[100]{'d','a','t','a','/',s_year[0],
+		s_year[1],s_year[2],s_year[3],'/',s_term[0],'/','c','o','u','r','e','s','e','s','/'};
+	dem = 20;
+	for (int i = 0; i < id.size(); i++)
+	{
+		path_path[++dem] = id[i];
+	}
+	path_path[++dem] = '\0';
+	cout << path_path << endl;
+	remove_dir(path_path);
 	//string id;
 	//cin.ignore();
 	//getline(cin, id);
