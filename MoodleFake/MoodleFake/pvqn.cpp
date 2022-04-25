@@ -3,7 +3,7 @@
 #include "display.h"
 using namespace std;
 
-Date getcurrentdate () {
+Date getcurrentdate() {
     time_t t = time(0);   // get time now
     tm* now = localtime(&t);
     Date cur;
@@ -15,6 +15,7 @@ Date getcurrentdate () {
 // neu ngay hien tai dang trong ki hoc, return true, else return true
 bool compare(Date cur, Date start, Date end)
 {
+
     if (start.year <= cur.year && cur.year <= end.year)
     {
         // cung nam thi compare tiep
@@ -26,13 +27,16 @@ bool compare(Date cur, Date start, Date end)
             {
                 return true;
             }
-            else return false;
+            else
+                if (start.month == cur.month && start.day > cur.day)
+                    return false;
             // cung thang ket thuc, so sanh ngay
             if (end.month == cur.month && cur.day <= end.day)
             {
                 return true;
             }
-            else return false;
+            else
+                if (end.month == cur.month && cur.day > end.day)return false;
             return true;
         }
         return false;
@@ -50,7 +54,7 @@ string displaysession(string id)
         break;
     case '2':
         d = "TUE ";
-        break; 
+        break;
     case '3':
         d = "WED ";
         break;
@@ -85,19 +89,19 @@ string displaysession(string id)
     }
     return d;
 }
-void displaycourse_student(Course *display, int i)
+void displaycourse_student(Course* display, int i)
 {
     cout << i + 1 << "." << endl;
     cout << "Course id: " << display->id << endl;
     cout << "Course name: " << display->name << endl;
     cout << "Course's instructor: " << display->teacher << endl;
     cout << "Number of credits: " << display->nCredits << endl;
-    cout << "First session: " << displaysession(display->day1+display->ses1) <<endl;
-    cout << "Second session: " << displaysession(display->day2+display->ses2) <<endl;
+    cout << "First session: " << displaysession(display->day1 + display->ses1) << endl;
+    cout << "Second session: " << displaysession(display->day2 + display->ses2) << endl;
 }
-void viewcourse_student(Semester *head, string id)
+void viewcourse_student(Semester* head, string id)
 {
-    int i = 0;         
+    int i = 0;
     Course* cur = head->course_cur; // khoa hoc hien tai trong ki nay
     while (cur)
     {
@@ -119,7 +123,7 @@ void viewcourse_student(Semester *head, string id)
         }
         cur = cur->next;
     }
-       
+
 }
 void viewclass()
 {
@@ -130,14 +134,14 @@ void viewclass()
     int i = 0;
     while (fin >> d)
     {
-   
-       if (!i) 
-           cout << "Here is the list of classes" << endl;
-           cout << i + 1 << ". " << d << endl;
-           ++i;
+
+        if (!i)
+            cout << "Here is the list of classes" << endl;
+        cout << i + 1 << ". " << d << endl;
+        ++i;
     }
-    
-fin.close();
+
+    fin.close();
 }
 /* pass string id
 * kiểm tra đã đăng kí bao nhiêu course
@@ -173,7 +177,7 @@ bool checkhowmanycourse(Semester* now, string id)
     return true;
 }
 //kiểm tra có giờ nào chung không
-bool issamesession(Semester* now, string id, string s1, string s2, Course*cur, string s3, string s4)
+bool issamesession(Semester* now, string id, string s1, string s2, Course* cur, string s3, string s4)
 {
     Course* current = now->course_cur;
     while (current)
@@ -182,7 +186,7 @@ bool issamesession(Semester* now, string id, string s1, string s2, Course*cur, s
         while (pcur)
         {
             if (pcur->id == id && current->ses1 == s1 &&
-                current->ses2 == s2 && current != cur && current->day1!=s3 && current->day2!=s4)
+                current->ses2 == s2 && current != cur && current->day1 != s3 && current->day2 != s4)
             {
                 return true;
             }
@@ -195,7 +199,7 @@ bool issamesession(Semester* now, string id, string s1, string s2, Course*cur, s
 //  kiem tra hoc sinh da co trong lop hoc nay chua
 bool isstudentexisted(Course* cur, string id)
 {
-    student_list *pcur = cur->student;
+    student_list* pcur = cur->student;
     while (pcur)
     {
         if (pcur->id == id)
@@ -282,13 +286,13 @@ void printdateafterenrolling(string course, string id)
     fout << course << endl;
     fout.close();
     // ghi them diem vao trong mark.txt trong students
-    path = "data/cache/Semester/students/" + id + "/" + course +"_mark.txt";
+    path = "data/cache/Semester/students/" + id + "/" + course + "_mark.txt";
     fout.open(path);
     for (int i = 0; i < 4; ++i)
         fout << "0" << endl;
     fout.close();
 }
-void printoutdataafterremoving(Course *cur, string id){
+void printoutdataafterremoving(Course* cur, string id) {
     ifstream fin;
     ofstream fout;
     string path = "data/cache/Semester/coureses/" + cur->id + "/studentList.txt";
@@ -316,7 +320,7 @@ void printoutdataafterremoving(Course *cur, string id){
         string course_id;
         node* ptr = nullptr;
     };
-    node* ptrhead = nullptr, *phead=ptrhead;
+    node* ptrhead = nullptr, * phead = ptrhead;
     path = "data/cache/Semester/students/" + id + "/course.txt";
     fin.open(path);
     string input;
@@ -351,6 +355,7 @@ void printoutdataafterremoving(Course *cur, string id){
 void enrolledcoure(Semester* now, string id)
 {
     displaymenuforcourseregistration(now);
+    student_list* phead = nullptr;
     while (true)
     {
         int i = 0;
@@ -366,6 +371,7 @@ void enrolledcoure(Semester* now, string id)
             if (!pcur)
             {
                 pcur = new student_list;
+                phead = pcur;
                 pcur->id = id;
                 pcur->name = getnameofstudent(id);
             }
@@ -384,6 +390,7 @@ void enrolledcoure(Semester* now, string id)
         }
         else cout << "could not enroll this course" << endl;
     }
+
 }
 // in ra cac khoa da dang ki
 void viewenrolledcourse(Semester* now, string id)
@@ -436,25 +443,25 @@ void removedenrolledcourse(Semester* now, string id)
                 pcur = dummy->next;
                 find->student = pcur;
                 printoutdataafterremoving(find, id);
-             
+                return;
             }
             else pcur = pcur->next;
         }
-       
+
     }
 }
-void displaylogin(string &user, string &password)
+void displaylogin(string& user, string& password)
 {
     user = "";
     password = "";
     cout << "> user: "; cin >> user;
-    cout << "> password: "; 
+    cout << "> password: ";
 
-   
+
 
     char ch;
     ch = _getch();
-    while (ch != 13) 
+    while (ch != 13)
     {//character 13 is enter
         if (ch != 8)
         {
@@ -472,7 +479,7 @@ void displaylogin(string &user, string &password)
                 for (int i = 0; i < password.size(); ++i)
                     cout << "*";
             }
-        
+
         ch = _getch();
     }
     cout << endl;
@@ -525,7 +532,7 @@ int displaymenu(int isStudent)
     }
     return isStudent;
 }
-Semester* getdatafromcache(Date &startreg, Date &endreg)
+Semester* getdatafromcache(Date& startreg, Date& endreg)
 {
     Semester* s = new Semester;
     Course* head = nullptr;
@@ -542,7 +549,7 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
             head = s->course_cur;
             s->course_cur->id = id;
             fin.ignore();
-            getline(fin, s->course_cur->name) ;
+            //getline(fin, s->course_cur->name) ;
         }
         else
         {
@@ -550,14 +557,14 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
             s->course_cur = s->course_cur->next;
             s->course_cur->id = id;
             fin.ignore();
-            getline(fin, s->course_cur->name);
+            //getline(fin, s->course_cur->name);
         }
     }
     fin.close();
     path = "data/cache/Semester/info_Of_Semester.txt";
     fin.open(path);
     // doc nam hoc, doc hoc ki
-    fin >> s->year>>s->term;
+    fin >> s->year >> s->term;
     // doc ngay bat dau hoc ki
     fin >> s->startDate.day >> s->startDate.month >> s->startDate.year;
     // doc ngay ket thuc hoc ki
@@ -571,61 +578,63 @@ Semester* getdatafromcache(Date &startreg, Date &endreg)
     fin.close();
     // doc thong tin trong cac khoa hoc
     s->course_cur = head;
-    Course *cur = head;
-    student_list* phead = nullptr;
+    Course* cur = head;
+
     while (cur)
     {
+        student_list* phead = nullptr;
         // doc co thong tin trong khoa hoc
-            path = "data/cache/Semester/coureses/" + cur->id + "/info_Of_Course.txt";
-            fin.open(path);
-            getline(fin, cur->teacher);
-            fin >> cur->nCredits >> cur->maxCapacity >> cur->day1>>cur->ses1 >> cur->day2>> cur->ses2;
-            fin.close();
+        path = "data/cache/Semester/coureses/" + cur->id + "/info_Of_Course.txt";
+        fin.open(path);
+        getline(fin, cur->name);
+        getline(fin, cur->teacher);
+        fin >> cur->nCredits >> cur->maxCapacity >> cur->day1 >> cur->ses1 >> cur->day2 >> cur->ses2;
+        fin.close();
         // doc student list trong khoa hoc
-            path = "data/cache/Semester/coureses/" + cur->id + "/studentList.txt";
-            fin.open(path);
-                string input;
-                string name; // doc ten nhung khong luu vao 
-                student_list *in = cur->student;
-                if (fin >> input)
-                {
-                    in = new student_list;
-                    phead = in;
-                    in->id = input; 
-                    fin.ignore();
-                    getline(fin, name);
-                    in->name = name;
-                    while (fin >> input)
-                    {
-                        fin.ignore();
-                        getline(fin, name);
-                       
-                            in->next = new student_list;
-                            in = in->next;
-                            in->id = input;
-                            in->name = name;
-                    }
-                }
-            fin.close();
-        // doc mark cua student neu co
-            path = "data/cache/Semester/coureses/" + cur->id + "/mark.txt";
-            fin.open(path);
-            cur->student = phead;
-            student_list* t = cur->student;
-            while (t)
+        path = "data/cache/Semester/coureses/" + cur->id + "/studentList.txt";
+        fin.open(path);
+        string input;
+        string name; // doc ten nhung khong luu vao 
+        student_list* in = cur->student;
+        if (fin >> input)
+        {
+            in = new student_list;
+            phead = in;
+            in->id = input;
+            fin.ignore();
+            getline(fin, name);
+            in->name = name;
+            while (fin >> input)
             {
-                string nul;
-                if (fin >> nul)
-                {
-                    fin >> t->mark.totalMark >> t->mark.finalMark >> t->mark.midtermMark >> t->mark.otherMark;
-                }
-                else break;
-                t = t->next;
+                fin.ignore();
+                getline(fin, name);
+
+                in->next = new student_list;
+                in = in->next;
+                in->id = input;
+                in->name = name;
             }
-            fin.close();
-            
-            cur = cur->next;
-       
-    }  
+        }
+        fin.close();
+        // doc mark cua student neu co
+        path = "data/cache/Semester/coureses/" + cur->id + "/mark.txt";
+        fin.open(path);
+        cur->student = phead;
+        student_list* t = cur->student;
+        while (t)
+        {
+            string nul;
+            if (fin >> nul)
+            {
+                fin >> t->mark.totalMark >> t->mark.finalMark >> t->mark.midtermMark >> t->mark.otherMark;
+            }
+            else break;
+            t = t->next;
+        }
+        fin.close();
+
+        cur = cur->next;
+
+    }
     return s;
 }
