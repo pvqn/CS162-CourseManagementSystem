@@ -371,7 +371,7 @@ void enrolledcoure(Semester* now, string id)
             if (!pcur)
             {
                 pcur = new student_list;
-                phead = pcur;
+                find->student = pcur;
                 pcur->id = id;
                 pcur->name = getnameofstudent(id);
             }
@@ -387,6 +387,7 @@ void enrolledcoure(Semester* now, string id)
                 pcur->name = getnameofstudent(id);
             }
             printdateafterenrolling(find->id, id);
+            return;
         }
         else cout << "could not enroll this course" << endl;
     }
