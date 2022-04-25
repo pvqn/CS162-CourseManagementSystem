@@ -78,7 +78,7 @@ void copyDir_(const char* inputDir, string outDir)
 
     if (is_dir(inputDir) == false)
     {
-        cout << "This is not a folder " << endl;
+        //cout << "This is not a folder " << endl;
         return;
     }
 
@@ -99,7 +99,7 @@ void copyDir_(const char* inputDir, string outDir)
                 cout << entry->d_name;
                 if (is_dir(tmpStrPath.c_str()))
                 {
-                    cout << "--> It's a folder" << "\n";
+                    //cout << "--> It's a folder" << "\n";
                     // Create Folder on the destination path
                     outStrPath = outDir;
                     outStrPath.append("\\");
@@ -110,7 +110,7 @@ void copyDir_(const char* inputDir, string outDir)
                 }
                 else
                 {
-                    cout << "--> It's a file" << "\n";
+                    //cout << "--> It's a file" << "\n";
                     // copy file on the destination path
                     outStrPath = outDir;
                     outStrPath.append("\\");

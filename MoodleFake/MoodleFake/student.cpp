@@ -49,7 +49,7 @@ void viewScoreboard()
         cout << setw(6) << left << Final; cout << '|';
         cout << setw(6) << left << Mid; cout << '|';
         cout << setw(6) << left << Other; cout << '|';
-
+        cout << '\n';
     }
     fin.close();
 }

@@ -525,8 +525,8 @@ void viewScoreinClass()
 			fin_mark.open(path_mark);
 			if (fin_mark.fail())
 			{
-				cout << setw(10) << "N/A"; cout << '|';
-				getline(fin_course, course_name);
+				cout << setw(10) << "False"; cout << '|';
+				//getline(fin_course, course_name);
 				continue;
 			}
 			fin_mark >> Total;
@@ -540,6 +540,7 @@ void viewScoreinClass()
 			fin_credit >> credit;
 			fin_credit.close();
 			total_credit += credit;
+			//cout << credit << endl;
 			if (0 <= Total && Total <= 3.9) total_score += 0;
 			if (4.0 <= Total && Total <= 5.4) total_score += 1 * credit;
 			if (5.5 <= Total && Total <= 6.9) total_score += 2 * credit;
@@ -549,8 +550,10 @@ void viewScoreinClass()
 		}
 
 		fin_course.close();
-		cout << setw(5) << right << total_score / total_credit; cout << '|' << '\n';
-		total_GPA += total_score / total_credit;
+		float gpa;
+		if (total_score) gpa = total_score / total_credit; else gpa = 0;
+		cout << setw(5) << right << gpa; cout << '|' << '\n';
+		total_GPA += gpa;
 		//cout << '\n';
 	}
 	fin.close();
