@@ -7,11 +7,13 @@
 #include "course.h"
 #include "schoolYear.h"
 #include "student.h"
+#include "support.h"
 
 using namespace std;
 
 int main()
 {
+	Pull();
 	User* account = NULL;
 	Class* classes = NULL;
 	Student* student = NULL;
@@ -50,5 +52,5 @@ int main()
 			// start menu
 		}
 	} while (logOut != 0 && (userRole != 0 || userRole != 1));
-
+	Push();
 }
