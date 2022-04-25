@@ -480,7 +480,7 @@ void viewScoreinClass()
 		if (course_name.size() == 0) break;
 		cout << setw(10) << right << course_name; cout << '|';
 		++course_cnt;
-		getline(fin, course_name);
+		/*getline(fin, course_name);*/
 	}
 	fin.close();
 	cout << setw(5) << right << "GPA"; cout << '|' << '\n';
@@ -536,7 +536,7 @@ void viewScoreinClass()
 			string path_credit = "data/cache/Semester/coureses/" + course_name + "/info_Of_Course.txt";
 			ifstream fin_credit;
 			fin_credit.open(path_credit);
-			string current; getline(fin_credit, current);
+			string current; getline(fin_credit, current); getline(fin_credit, current);
 			fin_credit >> credit;
 			fin_credit.close();
 			total_credit += credit;
@@ -545,7 +545,7 @@ void viewScoreinClass()
 			if (5.5 <= Total && Total <= 6.9) total_score += 2 * credit;
 			if (7.0 <= Total && Total <= 8.4) total_score += 3 * credit;
 			if (8.0 <= Total && Total <= 10 ) total_score += 4 * credit;
-			getline(fin_course, course_name);
+			//getline(fin_course, course_name);
 		}
 
 		fin_course.close();
