@@ -525,7 +525,7 @@ void viewScoreinClass()
 			fin_mark.open(path_mark);
 			if (fin_mark.fail())
 			{
-				cout << setw(10) << "False"; cout << '|';
+				cout << setw(10) << "N/A"; cout << '|';
 				//getline(fin_course, course_name);
 				continue;
 			}
