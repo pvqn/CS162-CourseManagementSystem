@@ -328,7 +328,7 @@ bool staffChoice(int& choice, User*& account, string& username, string& password
 			addCourse(courseCur);
 			break;
 		case 9: //View the list of courses in the semester
-			cout << "The list of courses in the semester: ";
+			cout << "The list of courses in the semester: \n\n";
 			view_Course(courseCur);
 			break;
 		case 10: //Update course information
@@ -406,7 +406,7 @@ void viewScoreboardOfCourse() // In bang diem mon hoc
 	cout << setw(12) << left << "Student ID"; cout << '|';
 	cout << setw(30) << right << "Full name"; cout << '|';
 	cout << setw(6) << right << "Total"; cout << '|';
-	cout << setw(6) << right << "Fianl"; cout << '|';
+	cout << setw(6) << right << "Final"; cout << '|';
 	cout << setw(6) << right << "Mid"; cout << '|';
 	cout << setw(6) << right << "Other"; cout << '\n';
 	cout << setfill('-');		// set fill bang ky tu '-' thay vi ' '

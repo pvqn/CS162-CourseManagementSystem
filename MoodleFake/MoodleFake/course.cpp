@@ -154,14 +154,14 @@ void view_Course(Course* pCur)
 
 		if (STR.size() == 0) break;
 
-		cout << "CHECK CHECK" << endl;
+		//cout << "CHECK CHECK" << endl;
 		cout << STR << endl;
 		string PATH = "data/" + to_string(s->year) + "/" + to_string(s->term) + "/coureses/" + STR + "/info_Of_Course.txt";
 		ifstream FIN;
 		FIN.open(PATH, ios::in);
 		Course* cCur = new Course;
 
-		cout << STR << endl;
+		//cout << STR << endl;
 		getline(FIN, cCur->name); cout << cCur->name << endl;
 		getline(FIN, cCur->teacher); cout << cCur->teacher << endl;
 		FIN >> cCur->nCredits; cout << cCur->nCredits << endl;
@@ -176,7 +176,7 @@ void view_Course(Course* pCur)
 		string str2 = displaysession(cCur->day2 + cCur->ses2);
 		//cout << "CHECK" << endl;
 		cout << str1 << endl;
-		cout << str2 << endl;
+		cout << str2 << endl << endl;
 
 		FIN.close();
 	}
